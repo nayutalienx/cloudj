@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CloudJ.Contracts.DTOs
+namespace CloudJ.Contracts.SolutionDtos.DTOs
 {
-    class ReviewDto
+    public class ReviewDto
     {
         public string Header { get; set; }
         public string Text { get; set; }

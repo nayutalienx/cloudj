@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Models
 {
-    public class Class1
+    public class Solution : BaseEntity
     {
     }
 }
