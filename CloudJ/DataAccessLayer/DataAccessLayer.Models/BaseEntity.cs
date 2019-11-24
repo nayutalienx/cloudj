@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CloudJ.Contracts.DTOs
+namespace DataAccessLayer.Models
 {
-    class PhotoDto
+    public class BaseEntity
     {
         public long Id { get; set; }
-        public byte[] Data { get; set; }
     }
 }
