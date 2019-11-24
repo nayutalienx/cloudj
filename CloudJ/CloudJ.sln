@@ -7,9 +7,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccessLayer", "DataAcce
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogicLayer", "BusinessLogicLayer", "{DF39AD60-6C0E-4123-838E-ED64208253F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer.Abstraction", "BusinessLogicLayer\BusinessLogicLayer.Abstraction\BusinessLogicLayer.Abstraction.csproj", "{145C2DFA-70F0-4D07-980A-F959C2550A41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicLayer.Abstraction", "BusinessLogicLayer\BusinessLogicLayer.Abstraction\BusinessLogicLayer.Abstraction.csproj", "{145C2DFA-70F0-4D07-980A-F959C2550A41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer.Implementation", "BusinessLogicLayer\BusinessLogicLayer.Implementation\BusinessLogicLayer.Implementation.csproj", "{24C0D2B2-FB32-4C80-A106-9B51C4B7FE46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicLayer.Implementation", "BusinessLogicLayer\BusinessLogicLayer.Implementation\BusinessLogicLayer.Implementation.csproj", "{24C0D2B2-FB32-4C80-A106-9B51C4B7FE46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer.Abstraction", "DataAccessLayer\DataAccessLayer.Abstraction\DataAccessLayer.Abstraction.csproj", "{A6CE89EC-A580-46DD-A215-66B06D394216}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer.Models", "DataAccessLayer\DataAccessLayer.Models\DataAccessLayer.Models.csproj", "{4D3440AC-7378-4035-B82F-C247B7D98765}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer.Repositories", "DataAccessLayer\DataAccessLayer.Repositories\DataAccessLayer.Repositories.csproj", "{17534B5C-F328-4DB8-AB38-A9A7723AD7FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer.EntityFramework", "DataAccessLayer\DataAccessLayer.EntityFramework\DataAccessLayer.EntityFramework.csproj", "{CC0CA7FF-6393-4A40-9CE3-6750A78A48EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudJ.Contracts", "Contracts\CloudJ.Contracts\CloudJ.Contracts.csproj", "{AB7554A1-3645-48DF-A56C-012298774513}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +35,26 @@ Global
 		{24C0D2B2-FB32-4C80-A106-9B51C4B7FE46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24C0D2B2-FB32-4C80-A106-9B51C4B7FE46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24C0D2B2-FB32-4C80-A106-9B51C4B7FE46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6CE89EC-A580-46DD-A215-66B06D394216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6CE89EC-A580-46DD-A215-66B06D394216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6CE89EC-A580-46DD-A215-66B06D394216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6CE89EC-A580-46DD-A215-66B06D394216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D3440AC-7378-4035-B82F-C247B7D98765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D3440AC-7378-4035-B82F-C247B7D98765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D3440AC-7378-4035-B82F-C247B7D98765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D3440AC-7378-4035-B82F-C247B7D98765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17534B5C-F328-4DB8-AB38-A9A7723AD7FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17534B5C-F328-4DB8-AB38-A9A7723AD7FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17534B5C-F328-4DB8-AB38-A9A7723AD7FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17534B5C-F328-4DB8-AB38-A9A7723AD7FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC0CA7FF-6393-4A40-9CE3-6750A78A48EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC0CA7FF-6393-4A40-9CE3-6750A78A48EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC0CA7FF-6393-4A40-9CE3-6750A78A48EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC0CA7FF-6393-4A40-9CE3-6750A78A48EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB7554A1-3645-48DF-A56C-012298774513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB7554A1-3645-48DF-A56C-012298774513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB7554A1-3645-48DF-A56C-012298774513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB7554A1-3645-48DF-A56C-012298774513}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +62,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{145C2DFA-70F0-4D07-980A-F959C2550A41} = {DF39AD60-6C0E-4123-838E-ED64208253F0}
 		{24C0D2B2-FB32-4C80-A106-9B51C4B7FE46} = {DF39AD60-6C0E-4123-838E-ED64208253F0}
+		{A6CE89EC-A580-46DD-A215-66B06D394216} = {43B9D12D-5C1B-4F29-AF01-210DD3FBEDB2}
+		{4D3440AC-7378-4035-B82F-C247B7D98765} = {43B9D12D-5C1B-4F29-AF01-210DD3FBEDB2}
+		{17534B5C-F328-4DB8-AB38-A9A7723AD7FC} = {43B9D12D-5C1B-4F29-AF01-210DD3FBEDB2}
+		{CC0CA7FF-6393-4A40-9CE3-6750A78A48EC} = {43B9D12D-5C1B-4F29-AF01-210DD3FBEDB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7C3437C-8615-4076-920C-8EDDF877B56A}
