@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessLayer.Models
+namespace DataAccessLayer.Billing.Models
 {
-    public class Category : BaseEntity
+    public class Order : BaseEntity
     {
     }
 }
