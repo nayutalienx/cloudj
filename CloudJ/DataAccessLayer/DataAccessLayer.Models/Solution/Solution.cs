@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Models;
 using System;
+using System.Collections.Generic;
 
 namespace DataAccessLayer.Solution.Models
 {
@@ -10,5 +11,10 @@ namespace DataAccessLayer.Solution.Models
         public byte Rate { get; set; }
         public DateTime CreatedTime { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<Plan> Plans { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        public long CategoryId { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual ICollection<SolutionLink> SolutionLinks { get; set; }
     }
 }
