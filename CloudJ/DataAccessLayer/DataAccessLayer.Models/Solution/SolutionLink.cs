@@ -1,8 +1,9 @@
-﻿using System;
+﻿using DataAccessLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessLayer.Models
+namespace DataAccessLayer.Solution.Models
 {
     public class SolutionLink : BaseEntity
     {
