@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer.EntityFrame
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudJ.Contracts", "Contracts\CloudJ.Contracts\CloudJ.Contracts.csproj", "{AB7554A1-3645-48DF-A56C-012298774513}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudJ.API", "CloudJ.API\CloudJ.API.csproj", "{134C96F2-68D9-4756-999C-6373E349C9C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudJ.Client", "CloudJ.Client\CloudJ.Client.csproj", "{A74C0645-E604-43D4-9A58-40881308F23B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,14 @@ Global
 		{AB7554A1-3645-48DF-A56C-012298774513}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB7554A1-3645-48DF-A56C-012298774513}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB7554A1-3645-48DF-A56C-012298774513}.Release|Any CPU.Build.0 = Release|Any CPU
+		{134C96F2-68D9-4756-999C-6373E349C9C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{134C96F2-68D9-4756-999C-6373E349C9C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{134C96F2-68D9-4756-999C-6373E349C9C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{134C96F2-68D9-4756-999C-6373E349C9C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A74C0645-E604-43D4-9A58-40881308F23B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A74C0645-E604-43D4-9A58-40881308F23B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A74C0645-E604-43D4-9A58-40881308F23B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A74C0645-E604-43D4-9A58-40881308F23B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
