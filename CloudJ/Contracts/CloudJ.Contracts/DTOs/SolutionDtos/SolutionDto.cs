@@ -9,6 +9,7 @@ namespace CloudJ.Contracts.DTOs.SolutionDtos
         public string Name { get; set; }
         public string Description { get; set; }
         public byte Rate { get; set; }
+        public string UserId { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime ExpireTime { get; set; }
         public PhotoDto Logo { get; set; }
@@ -17,6 +18,7 @@ namespace CloudJ.Contracts.DTOs.SolutionDtos
         public ReviewDto[] Reviews { get; set; }
         public CategoryDto Category { get; set; }
         public SoluitonLink[] InfoLinks { get; set; }
+        public CloudDto Cloud { get; set; }
 
     }
 }

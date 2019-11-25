@@ -5,7 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataAccessLayer\DataAccessLayer.Abstraction\DataAccessLayer.Abstraction.csproj" />
     <ProjectReference Include="..\BusinessLogicLayer.Abstraction\BusinessLogicLayer.Abstraction.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AutoMapperProfiles\" />
   </ItemGroup>
 
 </Project>
