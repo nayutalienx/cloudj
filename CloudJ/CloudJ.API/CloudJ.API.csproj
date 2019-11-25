@@ -12,9 +12,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="4.5.5" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.Abstraction\BusinessLogicLayer.Abstraction.csproj" />
+    <ProjectReference Include="..\CloudJ.Infrastructure\CloudJ.Infrastructure.csproj" />
+    <ProjectReference Include="..\Contracts\CloudJ.Contracts\CloudJ.Contracts.csproj" />
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.EntityFramework\DataAccessLayer.EntityFramework.csproj" />
   </ItemGroup>
 

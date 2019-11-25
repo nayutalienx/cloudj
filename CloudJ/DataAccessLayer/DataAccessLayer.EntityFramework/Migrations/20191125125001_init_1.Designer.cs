@@ -3,14 +3,16 @@ using System;
 using DataAccessLayer.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.EntityFramework.Migrations
 {
     [DbContext(typeof(CloudjContext))]
-    partial class CloudjContextModelSnapshot : ModelSnapshot
+    [Migration("20191125125001_init_1")]
+    partial class init_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,8 +165,6 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.Property<string>("Name");
 
                     b.Property<byte>("Rate");
-
-                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 

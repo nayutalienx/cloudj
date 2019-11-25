@@ -9,6 +9,7 @@ namespace DataAccessLayer.Models.Solution
         public string Name { get; set; }
         public string Description { get; set; }
         public byte Rate { get; set; }
+        public string UserId { get; set; }
         public DateTime CreatedTime { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Plan> Plans { get; set; }
@@ -16,6 +17,7 @@ namespace DataAccessLayer.Models.Solution
         public long CategoryId { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<SolutionLink> SolutionLinks { get; set; }
+        public long CloudId { get; set; }
         public virtual Cloud Cloud { get; set; }
     }
 }
