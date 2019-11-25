@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccessLayer.Abstraction
 {
-    public interface ISolutionRepository : IRepository<Solution.Models.Solution>
+    public interface ISolutionRepository : IRepository<Models.Solution.Solution>
     {
     }
 }

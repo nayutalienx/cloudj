@@ -4,9 +4,8 @@ using System.Text;
 
 namespace CloudJ.Contracts.DTOs.SolutionDtos
 {
-    public class SoluitonLink
+    public class DockerImageDto
     {
-        public string Name { get; set; }
-        public string Url { get; set; }
+        public byte[] Image { get; set; }
     }
 }

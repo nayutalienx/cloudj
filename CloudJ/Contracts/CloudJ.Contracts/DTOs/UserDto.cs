@@ -1,4 +1,5 @@
-﻿using CloudJ.Contracts.SolutionDtos.DTOs;
+﻿
+using CloudJ.Contracts.DTOs.SolutionDtos;
 using System;
 using System.Collections.Generic;
 using System.Text;

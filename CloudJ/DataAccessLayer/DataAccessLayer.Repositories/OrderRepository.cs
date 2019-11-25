@@ -1,5 +1,5 @@
 ﻿using DataAccessLayer.Abstraction;
-using DataAccessLayer.Billing.Models;
+using DataAccessLayer.Models.Billing;
 using DataAccessLayer.EntityFramework;
 using System;
 using System.Collections.Generic;

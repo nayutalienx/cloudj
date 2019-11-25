@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccessLayer.Repositories
 {
-    public class SolutionRepository : BaseRepository<Solution.Models.Solution>, ISolutionRepository
+    public class SolutionRepository : BaseRepository<Models.Solution.Solution>, ISolutionRepository
     {
         public SolutionRepository(CloudjContext context) : base(context)
         {
