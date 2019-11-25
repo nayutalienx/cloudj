@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CloudJ.Contracts.SolutionDtos.DTOs
+namespace CloudJ.Contracts.DTOs.SolutionDtos
 {
     public class SolutionDto
     {

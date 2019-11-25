@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessLayer.Solution.Models
+namespace DataAccessLayer.Models.Solution
 {
     public class Review : BaseEntity
     {

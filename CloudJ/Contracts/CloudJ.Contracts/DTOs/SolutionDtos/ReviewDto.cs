@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CloudJ.Contracts.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CloudJ.Contracts.SolutionDtos.DTOs
+namespace CloudJ.Contracts.DTOs.SolutionDtos
 {
     public class ReviewDto
     {

@@ -1,4 +1,4 @@
-﻿using DataAccessLayer.Billing.Models;
+﻿using DataAccessLayer.Models.Billing;
 using System;
 using System.Collections.Generic;
 using System.Text;

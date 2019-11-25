@@ -1,6 +1,6 @@
 ﻿using DataAccessLayer.Abstraction;
 using DataAccessLayer.EntityFramework;
-using DataAccessLayer.Solution.Models;
+using DataAccessLayer.Models.Solution;
 using System;
 using System.Collections.Generic;
 using System.Text;

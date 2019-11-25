@@ -1,8 +1,8 @@
-﻿using DataAccessLayer.Models;
+﻿
 using System;
 using System.Collections.Generic;
 
-namespace DataAccessLayer.Solution.Models
+namespace DataAccessLayer.Models.Solution
 {
     public class Solution : BaseEntity
     {
@@ -16,5 +16,6 @@ namespace DataAccessLayer.Solution.Models
         public long CategoryId { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<SolutionLink> SolutionLinks { get; set; }
+        public virtual Cloud Cloud { get; set; }
     }
 }
