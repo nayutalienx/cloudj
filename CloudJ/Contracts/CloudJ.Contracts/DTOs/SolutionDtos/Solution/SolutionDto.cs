@@ -1,8 +1,13 @@
-﻿using System;
+﻿using CloudJ.Contracts.DTOs.SolutionDtos.Category;
+using CloudJ.Contracts.DTOs.SolutionDtos.Cloud;
+using CloudJ.Contracts.DTOs.SolutionDtos.Photo;
+using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
+using CloudJ.Contracts.DTOs.SolutionDtos.Review;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CloudJ.Contracts.DTOs.SolutionDtos
+namespace CloudJ.Contracts.DTOs.SolutionDtos.Solution
 {
     public class SolutionDto
     {
@@ -17,7 +22,7 @@ namespace CloudJ.Contracts.DTOs.SolutionDtos
         public PlanDto[] Plans { get; set; }
         public ReviewDto[] Reviews { get; set; }
         public CategoryDto Category { get; set; }
-        public SoluitonLink[] InfoLinks { get; set; }
+        public SolutionLink[] InfoLinks { get; set; }
         public CloudDto Cloud { get; set; }
 
     }

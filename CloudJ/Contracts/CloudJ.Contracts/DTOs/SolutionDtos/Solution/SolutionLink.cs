@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CloudJ.Contracts.DTOs.SolutionDtos
+namespace CloudJ.Contracts.DTOs.SolutionDtos.Solution
 {
-    public class SoluitonLink
+    public class SolutionLink
     {
         public string Name { get; set; }
         public string Url { get; set; }

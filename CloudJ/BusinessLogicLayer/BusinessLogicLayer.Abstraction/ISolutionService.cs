@@ -1,4 +1,7 @@
 ﻿using CloudJ.Contracts.DTOs.SolutionDtos;
+using CloudJ.Contracts.DTOs.SolutionDtos.Category;
+using CloudJ.Contracts.DTOs.SolutionDtos.Review;
+using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -47,7 +50,7 @@ namespace BusinessLogicLayer.Abstraction
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<CategoryDto> AddCategoryAsync(CategoryDto dto);
+        Task<CategoryDto> AddCategoryAsync(NewCategoryDto dto);
         /// <summary>
         /// Получить все категории
         /// </summary>

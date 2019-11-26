@@ -13,8 +13,4 @@
     <ProjectReference Include="..\BusinessLogicLayer.Abstraction\BusinessLogicLayer.Abstraction.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="AutoMapperProfiles\" />
-  </ItemGroup>
-
 </Project>

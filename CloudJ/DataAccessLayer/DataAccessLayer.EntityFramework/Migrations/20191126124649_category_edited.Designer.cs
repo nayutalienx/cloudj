@@ -3,14 +3,16 @@ using System;
 using DataAccessLayer.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.EntityFramework.Migrations
 {
     [DbContext(typeof(CloudjContext))]
-    partial class CloudjContextModelSnapshot : ModelSnapshot
+    [Migration("20191126124649_category_edited")]
+    partial class category_edited
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +44,7 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("LogoId");
+                    b.Property<long>("LogoId");
 
                     b.Property<string>("Name");
 
@@ -214,7 +216,8 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 {
                     b.HasOne("DataAccessLayer.Models.Solution.Photo", "Logo")
                         .WithMany()
-                        .HasForeignKey("LogoId");
+                        .HasForeignKey("LogoId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DataAccessLayer.Models.Solution.Category", "ParentCategory")
                         .WithMany("SubCategories")

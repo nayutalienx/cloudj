@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CloudJ.Contracts.DTOs.SolutionDtos
+namespace CloudJ.Contracts.DTOs.SolutionDtos.Review
 {
     public class ReviewDto
     {
