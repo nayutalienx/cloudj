@@ -1,5 +1,9 @@
-﻿using BusinessLogicLayer.Abstraction;
+﻿using AutoMapper;
+using BusinessLogicLayer.Abstraction;
 using BusinessLogicLayer.Implementation;
+using BusinessLogicLayer.Implementation.AutoMapperProfiles;
+using DataAccessLayer.Abstraction;
+using DataAccessLayer.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -26,7 +30,16 @@ namespace CloudJ.Infrastructure
             //    .AddTransient<IPhotoRepository, PhotoRepository>()
             //    //.AddDbContext<AdboardContext>(ServiceLifetime.Transient)
             //    .AddSingleton(mapperConfiguration.CreateMapper());
-            serviceCollection.AddTransient<ISolutionService, SolutionService>();
+            var mapperConfiguration = new MapperConfiguration(config =>
+            {
+                config.AddProfile(new CategoryProfile());
+            });
+            
+            serviceCollection.AddTransient<ISolutionService, SolutionService>()
+                .AddTransient<ICategoryRepository, CategoryRepository>()
+                .AddTransient<IOrderRepository, OrderRepository>()
+                .AddTransient<ISolutionRepository, SolutionRepository>()
+                .AddSingleton(mapperConfiguration.CreateMapper());
             return serviceCollection;
 
         }

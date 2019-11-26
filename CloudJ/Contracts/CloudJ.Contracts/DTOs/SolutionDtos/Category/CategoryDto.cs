@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CloudJ.Contracts.DTOs.SolutionDtos.Photo;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CloudJ.Contracts.DTOs.SolutionDtos
+namespace CloudJ.Contracts.DTOs.SolutionDtos.Category
 {
     public class CategoryDto
     {

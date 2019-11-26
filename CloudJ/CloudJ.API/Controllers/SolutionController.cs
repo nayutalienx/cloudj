@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer.Abstraction;
 using CloudJ.Contracts.DTOs.SolutionDtos;
+using CloudJ.Contracts.DTOs.SolutionDtos.Category;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,30 @@ namespace CloudJ.API.Controllers
         {
             _solutionService = solutionService;
         }
+
+        /// <summary>
+        /// Добавить категорию
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         [HttpPost]
+        [Route("categories")]
         public async Task<IActionResult> AddCategoryAsync([FromBody] CategoryDto category)
         {
-            return ApiResult(_solutionService.AddCategoryAsync(category));
+            var cat = await _solutionService.AddCategoryAsync(category);
+            return ApiResult(cat);
+        }
+
+        /// <summary>
+        /// Получить категорию
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("categories")]
+        public async Task<IActionResult> GetAllCategoriesAsync()
+        {
+            var cats = await _solutionService.GetAllCategoriesAsync();
+            return ApiResult(cats);
         }
     }
 }

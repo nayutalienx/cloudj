@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CloudJ.Contracts.DTOs.SolutionDtos
+namespace CloudJ.Contracts.DTOs.SolutionDtos.Photo
 {
-    public class PhotoDto
+    public class NewPhotoDto
     {
-        public long Id { get; set; }
         public byte[] Data { get; set; }
+        public string Type { get; set; }
     }
 }

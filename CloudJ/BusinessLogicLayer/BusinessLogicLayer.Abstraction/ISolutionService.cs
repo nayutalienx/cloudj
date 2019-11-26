@@ -1,4 +1,7 @@
 ﻿using CloudJ.Contracts.DTOs.SolutionDtos;
+using CloudJ.Contracts.DTOs.SolutionDtos.Category;
+using CloudJ.Contracts.DTOs.SolutionDtos.Review;
+using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

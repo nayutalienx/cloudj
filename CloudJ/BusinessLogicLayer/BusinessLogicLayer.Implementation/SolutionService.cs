@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.Abstraction;
 using CloudJ.Contracts.DTOs.SolutionDtos;
+using CloudJ.Contracts.DTOs.SolutionDtos.Category;
+using CloudJ.Contracts.DTOs.SolutionDtos.Review;
+using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using DataAccessLayer.Abstraction;
 using DataAccessLayer.Models.Solution;
 using System;
@@ -77,9 +80,10 @@ namespace BusinessLogicLayer.Implementation
         /// Получение всех категорий
         /// </summary>
         /// <returns></returns>
-        public Task<IReadOnlyCollection<CategoryDto>> GetAllCategoriesAsync()
+        public async Task<IReadOnlyCollection<CategoryDto>> GetAllCategoriesAsync()
         {
-            throw new NotImplementedException();
+            var cats = await _categoryRepository.GetAllAsync();
+            return _mapper.Map<IReadOnlyCollection<CategoryDto>>(cats);
         }
 
         /// <summary>

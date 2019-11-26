@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CloudJ.API</name>
+    </assembly>
+    <members>
+        <member name="M:CloudJ.API.Controllers.SolutionController.AddCategoryAsync(CloudJ.Contracts.DTOs.SolutionDtos.Category.CategoryDto)">
+            <summary>
+            Добавить категорию
+            </summary>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CloudJ.API.Controllers.SolutionController.GetAllCategoriesAsync">
+            <summary>
+            Получить категорию
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
