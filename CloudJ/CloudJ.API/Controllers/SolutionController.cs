@@ -28,7 +28,7 @@ namespace CloudJ.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("categories")]
-        public async Task<IActionResult> AddCategoryAsync([FromBody] CategoryDto category)
+        public async Task<IActionResult> AddCategoryAsync([FromBody] NewCategoryDto category)
         {
             var cat = await _solutionService.AddCategoryAsync(category);
             return ApiResult(cat);

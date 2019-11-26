@@ -4,7 +4,7 @@
         <name>CloudJ.API</name>
     </assembly>
     <members>
-        <member name="M:CloudJ.API.Controllers.SolutionController.AddCategoryAsync(CloudJ.Contracts.DTOs.SolutionDtos.Category.CategoryDto)">
+        <member name="M:CloudJ.API.Controllers.SolutionController.AddCategoryAsync(CloudJ.Contracts.DTOs.SolutionDtos.Category.NewCategoryDto)">
             <summary>
             Добавить категорию
             </summary>

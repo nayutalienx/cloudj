@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
+using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
 using DataAccessLayer.Models.Solution;
 using System;
 using System.Collections.Generic;
@@ -7,11 +7,11 @@ using System.Text;
 
 namespace BusinessLogicLayer.Implementation.AutoMapperProfiles
 {
-    public class SolutionProfile : Profile
+    public class PlanProfile : Profile
     {
-        public SolutionProfile() {
-            CreateMap<SolutionDto, Solution>().ReverseMap();
+        public PlanProfile()
+        {
+            CreateMap<PlanDto, Plan>().ReverseMap();
         }
-
     }
 }

@@ -40,7 +40,7 @@ namespace BusinessLogicLayer.Implementation
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public async Task<CategoryDto> AddCategoryAsync(CategoryDto dto)
+        public async Task<CategoryDto> AddCategoryAsync(NewCategoryDto dto)
         {
             var result = await _categoryRepository.AddAsync(_mapper.Map<Category>(dto));
             await _categoryRepository.SaveChangesAsync();

@@ -8,7 +8,7 @@ namespace DataAccessLayer.Models.Solution
     public class Category : BaseEntity
     {
         public string Name { get; set; }
-        public long LogoId { get; set; }
+        public long? LogoId { get; set; }
         public virtual Photo Logo { get; set; }
         public long? ParentCategoryId { get; set; }
         public virtual Category ParentCategory { get; set; }

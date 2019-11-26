@@ -33,6 +33,11 @@ namespace CloudJ.Infrastructure
             var mapperConfiguration = new MapperConfiguration(config =>
             {
                 config.AddProfile(new CategoryProfile());
+                config.AddProfile(new PhotoProfile());
+                config.AddProfile(new CloudProfile());
+                config.AddProfile(new PlanProfile());
+                config.AddProfile(new ReviewProfile());
+                config.AddProfile(new SolutionProfile());
             });
             
             serviceCollection.AddTransient<ISolutionService, SolutionService>()

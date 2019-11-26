@@ -50,7 +50,7 @@ namespace BusinessLogicLayer.Abstraction
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<CategoryDto> AddCategoryAsync(CategoryDto dto);
+        Task<CategoryDto> AddCategoryAsync(NewCategoryDto dto);
         /// <summary>
         /// Получить все категории
         /// </summary>
