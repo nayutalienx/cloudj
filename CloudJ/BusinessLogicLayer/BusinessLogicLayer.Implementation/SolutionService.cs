@@ -2,6 +2,7 @@
 using BusinessLogicLayer.Abstraction;
 using CloudJ.Contracts.DTOs.SolutionDtos;
 using CloudJ.Contracts.DTOs.SolutionDtos.Category;
+using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
 using CloudJ.Contracts.DTOs.SolutionDtos.Review;
 using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using DataAccessLayer.Abstraction;
@@ -62,7 +63,27 @@ namespace BusinessLogicLayer.Implementation
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public Task<SolutionDto> CreateAsync(SolutionDto dto)
+        public async Task<SolutionDto> CreateAsync(NewSolutionDto dto)
+        {
+            var result = await _solutionRepository.AddAsync(_mapper.Map<Solution>(dto));
+            await _solutionRepository.SaveChangesAsync();
+            return _mapper.Map<SolutionDto>(result);
+        }
+        /// <summary>
+        /// Добавить план к решению
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public async Task<PlanDto> AddPlanAsync(NewPlanDto dto)
+        {
+            throw new NotImplementedException();
+        }
+        /// <summary>
+        /// Добавление ссылок от разработчика для решения
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public async Task<SolutionLinkDto> AddSolutionLink(NewSolutionLinkDto dto)
         {
             throw new NotImplementedException();
         }
@@ -71,9 +92,10 @@ namespace BusinessLogicLayer.Implementation
         /// Получение всех солюшнов
         /// </summary>
         /// <returns></returns>
-        public Task<IReadOnlyCollection<SolutionDto>> GetAllAsync()
+        public async Task<IReadOnlyCollection<SolutionDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var result = await _solutionRepository.GetAllAsync();
+            return _mapper.Map<IReadOnlyCollection<SolutionDto>>(result);
         }
 
         /// <summary>

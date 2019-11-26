@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Models.Billing;
+﻿
+using DataAccessLayer.Models.Billing;
 using DataAccessLayer.Models.Solution;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,7 +16,7 @@ namespace DataAccessLayer.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            
         }
 
         DbSet<Order> Orders { get; set; }
@@ -26,6 +27,8 @@ namespace DataAccessLayer.EntityFramework
         DbSet<Plan> Plans { get; set; }
         DbSet<Review> Reviews { get; set; }
         DbSet<Solution> Solutions { get; set; }
-        DbSet<SolutionLink> SolutionLinks { get; set; }
+        DbSet<SolutionLink> SolutionLinks { get; set; } 
+
+       
     }
 }

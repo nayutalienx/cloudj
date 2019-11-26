@@ -4,6 +4,19 @@
         <name>CloudJ.API</name>
     </assembly>
     <members>
+        <member name="M:CloudJ.API.Controllers.SolutionController.GetAllSolutions">
+            <summary>
+            Получить все решения    
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CloudJ.API.Controllers.SolutionController.AddSolutionAsync(CloudJ.Contracts.DTOs.SolutionDtos.Solution.NewSolutionDto)">
+            <summary>
+            Добавить решение
+            </summary>
+            <param name="solution"></param>
+            <returns></returns>
+        </member>
         <member name="M:CloudJ.API.Controllers.SolutionController.AddCategoryAsync(CloudJ.Contracts.DTOs.SolutionDtos.Category.NewCategoryDto)">
             <summary>
             Добавить категорию
@@ -13,9 +26,17 @@
         </member>
         <member name="M:CloudJ.API.Controllers.SolutionController.GetAllCategoriesAsync">
             <summary>
-            Получить категорию
+            Получить все категории
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:CloudJ.API.ExtensionMethods.CreateDatabase``1(Microsoft.AspNetCore.Hosting.IWebHost)">
+            <summary>  
+            Migrates the database.  
+            </summary>  
+            <typeparam name="T"></typeparam>  
+            <param name="webHost">The web host.</param>  
+            <returns>IWebHost.</returns>  
         </member>
     </members>
 </doc>

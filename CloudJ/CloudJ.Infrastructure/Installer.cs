@@ -3,6 +3,7 @@ using BusinessLogicLayer.Abstraction;
 using BusinessLogicLayer.Implementation;
 using BusinessLogicLayer.Implementation.AutoMapperProfiles;
 using DataAccessLayer.Abstraction;
+using DataAccessLayer.EntityFramework;
 using DataAccessLayer.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -44,6 +45,7 @@ namespace CloudJ.Infrastructure
                 .AddTransient<ICategoryRepository, CategoryRepository>()
                 .AddTransient<IOrderRepository, OrderRepository>()
                 .AddTransient<ISolutionRepository, SolutionRepository>()
+                //.AddDbContext<CloudjContext>(ServiceLifetime.Transient)
                 .AddSingleton(mapperConfiguration.CreateMapper());
             return serviceCollection;
 

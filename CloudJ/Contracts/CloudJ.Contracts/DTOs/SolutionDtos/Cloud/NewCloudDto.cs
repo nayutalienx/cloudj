@@ -4,11 +4,10 @@ using System.Text;
 
 namespace CloudJ.Contracts.DTOs.SolutionDtos.Cloud
 {
-    public class CloudDto
+    public class NewCloudDto
     {
-        public long Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
-        public DockerImageDto Container { get; set; }
+        public NewDockerImageDto Container { get; set; }
     }
 }

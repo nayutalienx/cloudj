@@ -12,6 +12,7 @@ namespace BusinessLogicLayer.Implementation.AutoMapperProfiles
         public CloudProfile() 
         {
             CreateMap<CloudDto, Cloud>().ReverseMap();
+            CreateMap<NewCloudDto, Cloud>().ReverseMap();
         }
     }
 }
