@@ -31,6 +31,13 @@
             <param name="category"></param>
             <returns></returns>
         </member>
+        <member name="M:CloudJ.API.Controllers.SolutionController.UpdateCategoryAsync(CloudJ.Contracts.DTOs.SolutionDtos.Solution.UpdateSolutionDto)">
+            <summary>
+            Обновить решение
+            </summary>
+            <param name="solution"></param>
+            <returns></returns>
+        </member>
         <member name="M:CloudJ.API.Controllers.SolutionController.GetAllCategoriesAsync">
             <summary>
             Получить все категории

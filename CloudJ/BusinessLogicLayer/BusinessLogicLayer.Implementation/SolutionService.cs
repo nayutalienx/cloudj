@@ -18,6 +18,7 @@ namespace BusinessLogicLayer.Implementation
     {
         private readonly ISolutionRepository _solutionRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IPhotoRepository _photoRepository;
         private readonly IMapper _mapper;
 
         /// <summary>
@@ -29,10 +30,12 @@ namespace BusinessLogicLayer.Implementation
         public SolutionService(
             ISolutionRepository solutionRepository,
             ICategoryRepository categoryRepository,
+            IPhotoRepository photoRepository,
             IMapper mapper)
         {
             _solutionRepository = solutionRepository;
             _categoryRepository = categoryRepository;
+            _photoRepository = photoRepository;
             _mapper = mapper;
         }
         
@@ -134,9 +137,60 @@ namespace BusinessLogicLayer.Implementation
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public Task<SolutionDto> UpdateAsync(SolutionDto dto)
+        public async Task<SolutionDto> UpdateAsync(UpdateSolutionDto dto)
         {
-            throw new NotImplementedException();
+            var sol = await _solutionRepository.GetAsync(dto.Id);
+            if(dto.Name != null)
+                sol.Name = dto.Name;
+            if(dto.Description != null)
+                sol.Description = dto.Description;
+            if(dto.CategoryId != null)
+                sol.CategoryId = (long)dto.CategoryId;
+            if (dto.Cloud != null)
+            {
+                sol.Cloud.Name = dto.Cloud.Name;
+                sol.Cloud.Url = dto.Cloud.Url;
+                if(dto.Cloud.Container != null)
+                {
+                    sol.Cloud.Container.Image = dto.Cloud.Container.Image;
+                }
+            }
+
+            ICollection<Photo> photos = new List<Photo>();
+
+            if (dto.Photos?.Length > 0)
+            {
+                if (sol.Photos?.Count > 0)
+                {
+                    foreach (Photo ph in sol.Photos)
+                        photos.Add(new Photo 
+                        {
+                            Id = ph.Id,
+                            Solution = ph.Solution,
+                            SolutionId = ph.SolutionId,
+                            Data = ph.Data,
+                            Type = ph.Type
+                        });
+                }
+                sol.Photos = _mapper.Map<ICollection<Photo>>(dto.Photos);
+                //await _solutionRepository.UpdateAsync(sol);
+            }
+
+            await _solutionRepository.SaveChangesAsync();
+
+            if (photos.Count > 0)
+            {
+                try
+                {
+                    foreach (Photo ph in photos)
+                        await _photoRepository.RemoveAsync(ph);
+                    await _photoRepository.SaveChangesAsync();
+                }
+                catch (Exception ex) { }
+            }
+            return _mapper.Map<SolutionDto>(sol);
+
+
         }
     }
 }
