@@ -17,6 +17,13 @@
             <param name="solution"></param>
             <returns></returns>
         </member>
+        <member name="M:CloudJ.API.Controllers.SolutionController.DeleteSolutionAsync(CloudJ.Contracts.DTOs.SolutionDtos.Solution.RemoveSolutionDto)">
+            <summary>
+            Удалить решение
+            </summary>
+            <param name="solution"></param>
+            <returns></returns>
+        </member>
         <member name="M:CloudJ.API.Controllers.SolutionController.AddCategoryAsync(CloudJ.Contracts.DTOs.SolutionDtos.Category.NewCategoryDto)">
             <summary>
             Добавить категорию

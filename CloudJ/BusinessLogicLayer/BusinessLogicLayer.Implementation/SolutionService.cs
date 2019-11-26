@@ -123,9 +123,10 @@ namespace BusinessLogicLayer.Implementation
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public Task RemoveAsync(SolutionDto dto)
+        public async Task RemoveAsync(RemoveSolutionDto dto)
         {
-            throw new NotImplementedException();
+            await _solutionRepository.RemoveAsync(_mapper.Map<Solution>(dto));
+            await _solutionRepository.SaveChangesAsync();
         }
 
         /// <summary>
