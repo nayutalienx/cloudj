@@ -16,6 +16,8 @@ namespace BusinessLogicLayer.Implementation.AutoMapperProfiles
                 .ReverseMap();
             CreateMap<RemoveSolutionDto, Solution>().ReverseMap();
             CreateMap<UpdateSolutionDto, Solution>().ReverseMap();
+            CreateMap<NewSolutionLinkDto, SolutionLink>().ReverseMap();
+            CreateMap<SolutionLinkDto, SolutionLink>().ReverseMap();
         }
 
     }

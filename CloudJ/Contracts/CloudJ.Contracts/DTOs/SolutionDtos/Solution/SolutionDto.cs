@@ -21,7 +21,7 @@ namespace CloudJ.Contracts.DTOs.SolutionDtos.Solution
         public PlanDto[] Plans { get; set; }
         public ReviewDto[] Reviews { get; set; }
         public CategoryDto Category { get; set; }
-        public SolutionLinkDto[] InfoLinks { get; set; }
+        public SolutionLinkDto[] SolutionLinks { get; set; }
         public CloudDto Cloud { get; set; }
 
     }
