@@ -12,6 +12,7 @@ namespace BusinessLogicLayer.Implementation.AutoMapperProfiles
         public PlanProfile()
         {
             CreateMap<PlanDto, Plan>().ReverseMap();
+            CreateMap<NewPlanDto, Plan>().ReverseMap();
         }
     }
 }

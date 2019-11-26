@@ -79,7 +79,11 @@ namespace BusinessLogicLayer.Implementation
         /// <returns></returns>
         public async Task<PlanDto> AddPlanAsync(NewPlanDto dto)
         {
-            throw new NotImplementedException();
+            var sol = await _solutionRepository.GetAsync(dto.SolutionId);
+            var plan = _mapper.Map<Plan>(dto);
+            sol.Plans.Add(plan);
+            await _solutionRepository.SaveChangesAsync();
+            return _mapper.Map<PlanDto>(plan);
         }
         /// <summary>
         /// Добавление ссылок от разработчика для решения

@@ -1,6 +1,7 @@
 ﻿using BusinessLogicLayer.Abstraction;
 using CloudJ.Contracts.DTOs.SolutionDtos;
 using CloudJ.Contracts.DTOs.SolutionDtos.Category;
+using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
 using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -75,7 +76,7 @@ namespace CloudJ.API.Controllers
         /// <param name="solution"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> UpdateCategoryAsync([FromBody] UpdateSolutionDto solution)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateSolutionDto solution)
         {
             return ApiResult(await _solutionService.UpdateAsync(solution));
         }
@@ -102,6 +103,19 @@ namespace CloudJ.API.Controllers
         public async Task<IActionResult> AddSolutionLink([FromBody] NewSolutionLinkDto link)
         {
             var result = await _solutionService.AddSolutionLink(link);
+            return ApiResult(result);
+        }
+
+        /// <summary>
+        /// Добавить тарифный план для решения
+        /// </summary>
+        /// <param name="plan"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("plans")]
+        public async Task<IActionResult> AddSolutionPlan([FromBody] NewPlanDto plan)
+        {
+            var result = await _solutionService.AddPlanAsync(plan);
             return ApiResult(result);
         }
     }

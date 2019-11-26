@@ -31,7 +31,7 @@
             <param name="category"></param>
             <returns></returns>
         </member>
-        <member name="M:CloudJ.API.Controllers.SolutionController.UpdateCategoryAsync(CloudJ.Contracts.DTOs.SolutionDtos.Solution.UpdateSolutionDto)">
+        <member name="M:CloudJ.API.Controllers.SolutionController.UpdateAsync(CloudJ.Contracts.DTOs.SolutionDtos.Solution.UpdateSolutionDto)">
             <summary>
             Обновить решение
             </summary>
@@ -42,6 +42,20 @@
             <summary>
             Получить все категории
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CloudJ.API.Controllers.SolutionController.AddSolutionLink(CloudJ.Contracts.DTOs.SolutionDtos.Solution.NewSolutionLinkDto)">
+            <summary>
+            Добавить ссылку на решение
+            </summary>
+            <param name="link"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CloudJ.API.Controllers.SolutionController.AddSolutionPlan(CloudJ.Contracts.DTOs.SolutionDtos.Plan.NewPlanDto)">
+            <summary>
+            Добавить тарифный план для решения
+            </summary>
+            <param name="plan"></param>
             <returns></returns>
         </member>
         <member name="M:CloudJ.API.ExtensionMethods.CreateDatabase``1(Microsoft.AspNetCore.Hosting.IWebHost)">
