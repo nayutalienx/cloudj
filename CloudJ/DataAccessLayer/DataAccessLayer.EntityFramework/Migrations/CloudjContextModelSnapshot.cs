@@ -62,15 +62,16 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("ContainerId");
-
                     b.Property<string>("Name");
+
+                    b.Property<long>("SolutionId");
 
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContainerId");
+                    b.HasIndex("SolutionId")
+                        .IsUnique();
 
                     b.ToTable("Clouds");
                 });
@@ -80,9 +81,14 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<long>("CloudId");
+
                     b.Property<byte[]>("Image");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CloudId")
+                        .IsUnique();
 
                     b.ToTable("DockerImages");
                 });
@@ -158,8 +164,6 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
                     b.Property<long>("CategoryId");
 
-                    b.Property<long>("CloudId");
-
                     b.Property<DateTime>("CreatedTime");
 
                     b.Property<string>("Description");
@@ -173,8 +177,6 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CloudId");
 
                     b.ToTable("Solutions");
                 });
@@ -223,9 +225,17 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Cloud", b =>
                 {
-                    b.HasOne("DataAccessLayer.Models.Solution.DockerImage", "Container")
-                        .WithMany()
-                        .HasForeignKey("ContainerId")
+                    b.HasOne("DataAccessLayer.Models.Solution.Solution", "Solution")
+                        .WithOne("Cloud")
+                        .HasForeignKey("DataAccessLayer.Models.Solution.Cloud", "SolutionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Solution.DockerImage", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Solution.Cloud", "Cloud")
+                        .WithOne("Container")
+                        .HasForeignKey("DataAccessLayer.Models.Solution.DockerImage", "CloudId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -258,11 +268,6 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.HasOne("DataAccessLayer.Models.Solution.Category", "Category")
                         .WithMany("Solutions")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DataAccessLayer.Models.Solution.Cloud", "Cloud")
-                        .WithMany()
-                        .HasForeignKey("CloudId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

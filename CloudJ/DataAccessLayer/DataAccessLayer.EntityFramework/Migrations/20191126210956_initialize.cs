@@ -4,28 +4,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.EntityFramework.Migrations
 {
-    public partial class init : Migration
+    public partial class initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "Clouds",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    ParentCategoryId = table.Column<long>(nullable: true)
+                    Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Categories_Categories_ParentCategoryId",
-                        column: x => x.ParentCategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Clouds", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,27 +36,6 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clouds",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Url = table.Column<string>(nullable: true),
-                    ContainerId = table.Column<long>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clouds", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Clouds_DockerImages_ContainerId",
-                        column: x => x.ContainerId,
-                        principalTable: "DockerImages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Solutions",
                 columns: table => new
                 {
@@ -71,25 +44,13 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Rate = table.Column<byte>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     CreatedTime = table.Column<DateTime>(nullable: false),
-                    CategoryId = table.Column<long>(nullable: false),
-                    CloudId = table.Column<long>(nullable: true)
+                    CategoryId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Solutions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Solutions_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Solutions_Clouds_CloudId",
-                        column: x => x.CloudId,
-                        principalTable: "Clouds",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,6 +143,33 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    LogoId = table.Column<long>(nullable: true),
+                    ParentCategoryId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Categories_Photos_LogoId",
+                        column: x => x.LogoId,
+                        principalTable: "Photos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Categories_Categories_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -209,14 +197,14 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Categories_LogoId",
+                table: "Categories",
+                column: "LogoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Categories_ParentCategoryId",
                 table: "Categories",
                 column: "ParentCategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clouds_ContainerId",
-                table: "Clouds",
-                column: "ContainerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_PlanId",
@@ -253,19 +241,29 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 table: "Solutions",
                 column: "CategoryId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Solutions_CloudId",
+            migrationBuilder.AddForeignKey(
+                name: "FK_Solutions_Categories_CategoryId",
                 table: "Solutions",
-                column: "CloudId");
+                column: "CategoryId",
+                principalTable: "Categories",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Orders");
+            migrationBuilder.DropForeignKey(
+                name: "FK_Categories_Photos_LogoId",
+                table: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Photos");
+                name: "Clouds");
+
+            migrationBuilder.DropTable(
+                name: "DockerImages");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Reviews");
@@ -277,16 +275,13 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 name: "Plans");
 
             migrationBuilder.DropTable(
+                name: "Photos");
+
+            migrationBuilder.DropTable(
                 name: "Solutions");
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Clouds");
-
-            migrationBuilder.DropTable(
-                name: "DockerImages");
         }
     }
 }

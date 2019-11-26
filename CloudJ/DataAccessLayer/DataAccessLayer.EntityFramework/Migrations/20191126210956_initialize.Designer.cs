@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.EntityFramework.Migrations
 {
     [DbContext(typeof(CloudjContext))]
-    [Migration("20191125125001_init_1")]
-    partial class init_1
+    [Migration("20191126210956_initialize")]
+    partial class initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,11 +44,15 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<long?>("LogoId");
+
                     b.Property<string>("Name");
 
                     b.Property<long?>("ParentCategoryId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LogoId");
 
                     b.HasIndex("ParentCategoryId");
 
@@ -60,15 +64,11 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("ContainerId");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContainerId");
 
                     b.ToTable("Clouds");
                 });
@@ -156,8 +156,6 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
                     b.Property<long>("CategoryId");
 
-                    b.Property<long>("CloudId");
-
                     b.Property<DateTime>("CreatedTime");
 
                     b.Property<string>("Description");
@@ -166,11 +164,11 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
                     b.Property<byte>("Rate");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CloudId");
 
                     b.ToTable("Solutions");
                 });
@@ -208,17 +206,13 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Category", b =>
                 {
+                    b.HasOne("DataAccessLayer.Models.Solution.Photo", "Logo")
+                        .WithMany()
+                        .HasForeignKey("LogoId");
+
                     b.HasOne("DataAccessLayer.Models.Solution.Category", "ParentCategory")
                         .WithMany("SubCategories")
                         .HasForeignKey("ParentCategoryId");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Solution.Cloud", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.Solution.DockerImage", "Container")
-                        .WithMany()
-                        .HasForeignKey("ContainerId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Photo", b =>
@@ -250,11 +244,6 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.HasOne("DataAccessLayer.Models.Solution.Category", "Category")
                         .WithMany("Solutions")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DataAccessLayer.Models.Solution.Cloud", "Cloud")
-                        .WithMany()
-                        .HasForeignKey("CloudId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

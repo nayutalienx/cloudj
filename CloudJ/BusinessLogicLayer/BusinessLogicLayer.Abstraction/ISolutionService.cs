@@ -1,5 +1,6 @@
 ﻿using CloudJ.Contracts.DTOs.SolutionDtos;
 using CloudJ.Contracts.DTOs.SolutionDtos.Category;
+using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
 using CloudJ.Contracts.DTOs.SolutionDtos.Review;
 using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using System;
@@ -15,7 +16,7 @@ namespace BusinessLogicLayer.Abstraction
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<SolutionDto> CreateAsync(SolutionDto dto);
+        Task<SolutionDto> CreateAsync(NewSolutionDto dto);
         /// <summary>
         /// Получить все решения
         /// </summary>
@@ -39,6 +40,18 @@ namespace BusinessLogicLayer.Abstraction
         /// <param name="filter"></param>
         /// <returns></returns>
         Task<IReadOnlyCollection<SolutionDto>> GetByFilter(SolutionFilter filter);
+        /// <summary>
+        /// Добавить план к решению
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        Task<PlanDto> AddPlanAsync(NewPlanDto dto);
+        /// <summary>
+        /// Добавление дополнительных ссылок от разработчика для решенеия
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        Task<SolutionLinkDto> AddSolutionLink(NewSolutionLinkDto dto);
         /// <summary>
         /// Добавить отзыв 
         /// </summary>

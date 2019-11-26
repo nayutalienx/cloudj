@@ -4,9 +4,8 @@ using System.Text;
 
 namespace CloudJ.Contracts.DTOs.SolutionDtos.Cloud
 {
-    public class DockerImageDto
+    public class NewDockerImageDto
     {
-        public long Id { get; set; }
         public byte[] Image { get; set; }
     }
 }

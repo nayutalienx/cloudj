@@ -17,12 +17,11 @@ namespace CloudJ.Contracts.DTOs.SolutionDtos.Solution
         public string UserId { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime ExpireTime { get; set; }
-        public PhotoDto Logo { get; set; }
         public PhotoDto[] Photos { get; set; }
         public PlanDto[] Plans { get; set; }
         public ReviewDto[] Reviews { get; set; }
         public CategoryDto Category { get; set; }
-        public SolutionLink[] InfoLinks { get; set; }
+        public SolutionLinkDto[] InfoLinks { get; set; }
         public CloudDto Cloud { get; set; }
 
     }
