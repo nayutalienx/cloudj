@@ -44,6 +44,17 @@ namespace CloudJ.API.Controllers
             var sol = await _solutionService.CreateAsync(solution);
             return ApiResult(sol);
         }
+        /// <summary>
+        /// Удалить решение
+        /// </summary>
+        /// <param name="solution"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<IActionResult> DeleteSolutionAsync([FromBody] RemoveSolutionDto solution)
+        {
+            await _solutionService.RemoveAsync(solution);
+            return ApiResult("Deleted");
+        }
 
         /// <summary>
         /// Добавить категорию

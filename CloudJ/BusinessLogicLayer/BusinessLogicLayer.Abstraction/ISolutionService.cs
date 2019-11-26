@@ -33,7 +33,7 @@ namespace BusinessLogicLayer.Abstraction
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task RemoveAsync(SolutionDto dto);
+        Task RemoveAsync(RemoveSolutionDto dto);
         /// <summary>
         /// Получить по фильтру
         /// </summary>

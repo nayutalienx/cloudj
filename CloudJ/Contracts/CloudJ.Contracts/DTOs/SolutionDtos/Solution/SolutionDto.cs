@@ -11,6 +11,7 @@ namespace CloudJ.Contracts.DTOs.SolutionDtos.Solution
 {
     public class SolutionDto
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public byte Rate { get; set; }
