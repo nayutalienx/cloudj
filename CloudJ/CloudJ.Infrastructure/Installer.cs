@@ -45,6 +45,7 @@ namespace CloudJ.Infrastructure
                 .AddTransient<ICategoryRepository, CategoryRepository>()
                 .AddTransient<IOrderRepository, OrderRepository>()
                 .AddTransient<ISolutionRepository, SolutionRepository>()
+                .AddTransient<IPhotoRepository, PhotoRepository>()
                 //.AddDbContext<CloudjContext>(ServiceLifetime.Transient)
                 .AddSingleton(mapperConfiguration.CreateMapper());
             return serviceCollection;

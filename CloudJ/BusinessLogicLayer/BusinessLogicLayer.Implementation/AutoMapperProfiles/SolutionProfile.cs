@@ -15,6 +15,7 @@ namespace BusinessLogicLayer.Implementation.AutoMapperProfiles
                 .ForMember(dest => dest.CreatedTime, options => options.MapFrom(source => System.DateTime.Now))
                 .ReverseMap();
             CreateMap<RemoveSolutionDto, Solution>().ReverseMap();
+            CreateMap<UpdateSolutionDto, Solution>().ReverseMap();
         }
 
     }

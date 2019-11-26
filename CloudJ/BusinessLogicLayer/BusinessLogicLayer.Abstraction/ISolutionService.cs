@@ -27,7 +27,7 @@ namespace BusinessLogicLayer.Abstraction
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<SolutionDto> UpdateAsync(SolutionDto dto);
+        Task<SolutionDto> UpdateAsync(UpdateSolutionDto dto);
         /// <summary>
         /// Удалить решение
         /// </summary>

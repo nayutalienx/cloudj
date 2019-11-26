@@ -70,6 +70,17 @@ namespace CloudJ.API.Controllers
         }
 
         /// <summary>
+        /// Обновить решение
+        /// </summary>
+        /// <param name="solution"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<IActionResult> UpdateCategoryAsync([FromBody] UpdateSolutionDto solution)
+        {
+            return ApiResult(await _solutionService.UpdateAsync(solution));
+        }
+
+        /// <summary>
         /// Получить все категории
         /// </summary>
         /// <returns></returns>

@@ -17,7 +17,6 @@ namespace CloudJ.Contracts.DTOs.SolutionDtos.Solution
         public byte Rate { get; set; }
         public string UserId { get; set; }
         public DateTime CreatedTime { get; set; }
-        public DateTime ExpireTime { get; set; }
         public PhotoDto[] Photos { get; set; }
         public PlanDto[] Plans { get; set; }
         public ReviewDto[] Reviews { get; set; }
