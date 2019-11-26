@@ -88,7 +88,11 @@ namespace BusinessLogicLayer.Implementation
         /// <returns></returns>
         public async Task<SolutionLinkDto> AddSolutionLink(NewSolutionLinkDto dto)
         {
-            throw new NotImplementedException();
+            var sol = await _solutionRepository.GetAsync(dto.SolutionId);
+            var link = _mapper.Map<SolutionLink>(dto);
+            sol.SolutionLinks.Add(link);
+            await _solutionRepository.SaveChangesAsync();
+            return _mapper.Map<SolutionLinkDto>(link);
         }
 
         /// <summary>

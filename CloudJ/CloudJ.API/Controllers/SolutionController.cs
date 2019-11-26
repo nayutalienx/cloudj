@@ -91,5 +91,18 @@ namespace CloudJ.API.Controllers
             var cats = await _solutionService.GetAllCategoriesAsync();
             return ApiResult(cats);
         }
+
+        /// <summary>
+        /// Добавить ссылку на решение
+        /// </summary>
+        /// <param name="link"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("links")]
+        public async Task<IActionResult> AddSolutionLink([FromBody] NewSolutionLinkDto link)
+        {
+            var result = await _solutionService.AddSolutionLink(link);
+            return ApiResult(result);
+        }
     }
 }
