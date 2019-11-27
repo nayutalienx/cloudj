@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CloudJ.Client.Clients;
+using CloudJ.Client.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,23 +17,64 @@ namespace CloudJ.Client
 {
     public class Startup
     {
+        public IConfiguration _configuration { get; }
+        private readonly ApiClientOptions _apiClientOptions;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
+            _apiClientOptions = _configuration.GetSection("ApiClient").Get<ApiClientOptions>();
         }
 
-        public IConfiguration Configuration { get; }
+       
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
+            services.AddHttpContextAccessor();
+            services.Configure<ApiClientOptions>(_configuration.GetSection("ApiClient"));
+            services.Configure<SolutionApiClientOptions>(_configuration.GetSection("SolutionApiClient"));
+            services.Configure<BillingApiClientOptions>(_configuration.GetSection("BillingApiClient"));
+
+            services.AddAuthentication(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+            })
+            .AddCookie(options =>
+            {
+                options.Cookie.Name = "cloudj-app";
+            })
+            .AddOpenIdConnect("oidc", options =>
+            {
+                //options.Authority = _openIdConnectOptions.Authority;
+                options.RequireHttpsMetadata = false;
+
+                //options.ClientId = _openIdConnectOptions.ClientId;
+                //options.ClientSecret = _openIdConnectOptions.ClientSecret;
+                //options.ResponseType = _openIdConnectOptions.ResponseType;
+
+                options.SaveTokens = true;
+
+
+                options.Scope.Add("cloudj-api");
+                options.Scope.Add("role");
+                options.Scope.Add("offline_access");
             });
 
+            services.AddHttpClient<ISolutionApiClient, SolutionApiClient>(options =>
+            {
+                options.Timeout = TimeSpan.FromMinutes(1);
+                options.BaseAddress = new Uri(_apiClientOptions.BaseUrl);
+                options.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
+
+            services.AddHttpClient<IBillingApiClient, BillingApiClient>(options =>
+            {
+                options.Timeout = TimeSpan.FromMinutes(1);
+                options.BaseAddress = new Uri(_apiClientOptions.BaseUrl);
+                options.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

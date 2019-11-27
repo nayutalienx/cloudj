@@ -5,13 +5,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CloudJ.Client.Models;
+using CloudJ.Client.Clients;
 
 namespace CloudJ.Client.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ISolutionApiClient _solutionApiClient;
+
+        public HomeController(ISolutionApiClient solutionApiClient)
         {
+            _solutionApiClient = solutionApiClient;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var response = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = response.Data;
             return View();
         }
 

@@ -47,9 +47,9 @@ namespace CloudJ.API.Controllers
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Route("filter")]
-        public async Task<IActionResult> GetOrdersByFilterAsync([FromQuery] OrderFilter filter)
+        public async Task<IActionResult> GetOrdersByFilterAsync([FromBody] OrderFilter filter)
         {
             var result = await _billingService.GetByFilterAsync(filter);
             return ApiResult(result);
