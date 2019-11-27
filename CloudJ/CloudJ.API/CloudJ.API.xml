@@ -4,6 +4,13 @@
         <name>CloudJ.API</name>
     </assembly>
     <members>
+        <member name="M:CloudJ.API.Controllers.BillingController.MakeOrderAsync(CloudJ.Contracts.DTOs.OrderDtos.NewOrderDto)">
+            <summary>
+            Сделать заказ
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
         <member name="M:CloudJ.API.Controllers.SolutionController.GetAllSolutionsAsync">
             <summary>
             Получить все решения    

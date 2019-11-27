@@ -13,7 +13,7 @@ namespace BusinessLogicLayer.Abstraction
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<OrderDto> MakeOrderAsync(OrderDto dto);
+        Task<OrderDto> MakeOrderAsync(NewOrderDto dto);
         /// <summary>
         /// Получить все заказы
         /// </summary>
