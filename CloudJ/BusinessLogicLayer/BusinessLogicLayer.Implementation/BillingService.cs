@@ -5,6 +5,7 @@ using DataAccessLayer.Abstraction;
 using DataAccessLayer.Models.Billing;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Implementation
@@ -35,9 +36,16 @@ namespace BusinessLogicLayer.Implementation
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public Task<IReadOnlyCollection<OrderDto>> GetByFilterAsync(OrderFilter filter)
+        public async Task<IReadOnlyCollection<OrderDto>> GetByFilterAsync(OrderFilter filter)
         {
-            throw new NotImplementedException();
+            var orders = await _orderRepository.GetAllAsync();
+            if (filter.OrderId != null)
+                orders = orders.Where(x => x.Id == filter.OrderId);
+            if (filter.CustomerId != null)
+                orders = orders.Where(x => x.CustomerId.Equals(filter.CustomerId));
+            if (filter.SolutionId != null)
+                orders = orders.Where(x => x.SolutionId == filter.SolutionId);
+            return _mapper.Map<IReadOnlyCollection<OrderDto>>(orders);
         }
 
         /// <summary>

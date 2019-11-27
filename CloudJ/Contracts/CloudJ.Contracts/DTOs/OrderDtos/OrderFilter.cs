@@ -9,7 +9,8 @@ namespace CloudJ.Contracts.DTOs.OrderDtos
 {
     public class OrderFilter
     {
-        public UserDto Customer { get; set; }
-        public SolutionDto Solution { get; set; }
+        public string CustomerId { get; set; }
+        public long? SolutionId { get; set; }
+        public long? OrderId { get; set; }
     }
 }

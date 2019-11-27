@@ -41,5 +41,18 @@ namespace CloudJ.API.Controllers
             var result = await _billingService.GetAllAsync();
             return ApiResult(result);
         }
+
+        /// <summary>
+        /// Получить заказы по фильтру
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("filter")]
+        public async Task<IActionResult> GetOrdersByFilterAsync([FromQuery] OrderFilter filter)
+        {
+            var result = await _billingService.GetByFilterAsync(filter);
+            return ApiResult(result);
+        }
     }
 }

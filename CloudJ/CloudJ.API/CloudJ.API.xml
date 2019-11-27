@@ -17,6 +17,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CloudJ.API.Controllers.BillingController.GetOrdersByFilterAsync(CloudJ.Contracts.DTOs.OrderDtos.OrderFilter)">
+            <summary>
+            Получить заказы по фильтру
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
         <member name="M:CloudJ.API.Controllers.SolutionController.GetAllSolutionsAsync">
             <summary>
             Получить все решения    
