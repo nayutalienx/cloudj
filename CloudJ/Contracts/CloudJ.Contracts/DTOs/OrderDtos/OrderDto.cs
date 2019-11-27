@@ -10,7 +10,7 @@ namespace CloudJ.Contracts.DTOs.OrderDtos
 {
     public class OrderDto
     {
-        public UserDto Customer { get; set; }
+        public string CustomerId { get; set; }
         public SolutionDto Solution { get; set; }
         public PlanDto Plan { get; set; }
     }

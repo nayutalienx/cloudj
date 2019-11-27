@@ -39,9 +39,12 @@ namespace CloudJ.Infrastructure
                 config.AddProfile(new PlanProfile());
                 config.AddProfile(new ReviewProfile());
                 config.AddProfile(new SolutionProfile());
+                config.AddProfile(new OrderProfile());
             });
             
-            serviceCollection.AddTransient<ISolutionService, SolutionService>()
+            serviceCollection
+                .AddTransient<ISolutionService, SolutionService>()
+                .AddTransient<IBillingService, BillingService>()
                 .AddTransient<ICategoryRepository, CategoryRepository>()
                 .AddTransient<IOrderRepository, OrderRepository>()
                 .AddTransient<ISolutionRepository, SolutionRepository>()
