@@ -11,6 +11,12 @@
             <param name="order"></param>
             <returns></returns>
         </member>
+        <member name="M:CloudJ.API.Controllers.BillingController.GetAllOrdersAsync">
+            <summary>
+            Получить все заказы
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CloudJ.API.Controllers.SolutionController.GetAllSolutionsAsync">
             <summary>
             Получить все решения    

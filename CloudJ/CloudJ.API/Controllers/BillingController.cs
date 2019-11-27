@@ -30,5 +30,16 @@ namespace CloudJ.API.Controllers
             var result = await _billingService.MakeOrderAsync(order);
             return ApiResult(result);
         }
+
+        /// <summary>
+        /// Получить все заказы
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAllOrdersAsync()
+        {
+            var result = await _billingService.GetAllAsync();
+            return ApiResult(result);
+        }
     }
 }

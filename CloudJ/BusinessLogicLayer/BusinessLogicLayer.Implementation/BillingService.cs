@@ -24,9 +24,10 @@ namespace BusinessLogicLayer.Implementation
         /// Получить все заказы
         /// </summary>
         /// <returns></returns>
-        public Task<IReadOnlyCollection<OrderDto>> GetAllAsync()
+        public async Task<IReadOnlyCollection<OrderDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var orders = await _orderRepository.GetAllAsync();
+            return _mapper.Map<IReadOnlyCollection<OrderDto>>(orders);
         }
 
         /// <summary>
