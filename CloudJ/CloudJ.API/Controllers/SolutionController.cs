@@ -138,9 +138,9 @@ namespace CloudJ.API.Controllers
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Route("filter")]
-        public async Task<IActionResult> GetSolutionsByFilterAsync([FromQuery] SolutionFilter filter)
+        public async Task<IActionResult> GetSolutionsByFilterAsync([FromBody] SolutionFilter filter)
         {
             var sols = await _solutionService.GetByFilterAsync(filter);
             return ApiResult(sols);
