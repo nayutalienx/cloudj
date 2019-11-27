@@ -4,7 +4,7 @@
         <name>CloudJ.API</name>
     </assembly>
     <members>
-        <member name="M:CloudJ.API.Controllers.SolutionController.GetAllSolutions">
+        <member name="M:CloudJ.API.Controllers.SolutionController.GetAllSolutionsAsync">
             <summary>
             Получить все решения    
             </summary>
@@ -44,25 +44,32 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CloudJ.API.Controllers.SolutionController.AddSolutionLink(CloudJ.Contracts.DTOs.SolutionDtos.Solution.NewSolutionLinkDto)">
+        <member name="M:CloudJ.API.Controllers.SolutionController.AddSolutionLinkAsync(CloudJ.Contracts.DTOs.SolutionDtos.Solution.NewSolutionLinkDto)">
             <summary>
             Добавить ссылку на решение
             </summary>
             <param name="link"></param>
             <returns></returns>
         </member>
-        <member name="M:CloudJ.API.Controllers.SolutionController.AddSolutionPlan(CloudJ.Contracts.DTOs.SolutionDtos.Plan.NewPlanDto)">
+        <member name="M:CloudJ.API.Controllers.SolutionController.AddSolutionPlanAsync(CloudJ.Contracts.DTOs.SolutionDtos.Plan.NewPlanDto)">
             <summary>
             Добавить тарифный план для решения
             </summary>
             <param name="plan"></param>
             <returns></returns>
         </member>
-        <member name="M:CloudJ.API.Controllers.SolutionController.AddSolutionReview(CloudJ.Contracts.DTOs.SolutionDtos.Review.NewReviewDto)">
+        <member name="M:CloudJ.API.Controllers.SolutionController.AddSolutionReviewAsync(CloudJ.Contracts.DTOs.SolutionDtos.Review.NewReviewDto)">
             <summary>
             Добавление отзыва к решению
             </summary>
             <param name="review"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CloudJ.API.Controllers.SolutionController.GetSolutionsByFilterAsync(CloudJ.Contracts.DTOs.SolutionDtos.Solution.SolutionFilter)">
+            <summary>
+            Получить решения по фильтру
+            </summary>
+            <param name="filter"></param>
             <returns></returns>
         </member>
         <member name="M:CloudJ.API.ExtensionMethods.CreateDatabase``1(Microsoft.AspNetCore.Hosting.IWebHost)">

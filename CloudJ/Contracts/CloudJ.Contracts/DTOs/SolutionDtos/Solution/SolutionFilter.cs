@@ -7,10 +7,11 @@ namespace CloudJ.Contracts.DTOs.SolutionDtos.Solution
 {
     public class SolutionFilter
     {
-        public int Size { get; set; }
+        public int Size { get; set; } = 5;
+        public int Page { get; set; } = 1;
         public long? SolutionId { get; set; }
         public long? DeveloperId { get; set; }
-        public CategoryDto Category { get; set; }
+        public long? CategoryId { get; set; }
 
     }
 }

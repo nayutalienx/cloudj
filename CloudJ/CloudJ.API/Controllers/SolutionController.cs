@@ -29,7 +29,7 @@ namespace CloudJ.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllSolutions()
+        public async Task<IActionResult> GetAllSolutionsAsync()
         {
             var sols = await _solutionService.GetAllAsync();
             return ApiResult(sols);
@@ -101,7 +101,7 @@ namespace CloudJ.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("links")]
-        public async Task<IActionResult> AddSolutionLink([FromBody] NewSolutionLinkDto link)
+        public async Task<IActionResult> AddSolutionLinkAsync([FromBody] NewSolutionLinkDto link)
         {
             var result = await _solutionService.AddSolutionLink(link);
             return ApiResult(result);
@@ -114,7 +114,7 @@ namespace CloudJ.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("plans")]
-        public async Task<IActionResult> AddSolutionPlan([FromBody] NewPlanDto plan)
+        public async Task<IActionResult> AddSolutionPlanAsync([FromBody] NewPlanDto plan)
         {
             var result = await _solutionService.AddPlanAsync(plan);
             return ApiResult(result);
@@ -127,10 +127,23 @@ namespace CloudJ.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("reviews")]
-        public async Task<IActionResult> AddSolutionReview([FromBody] NewReviewDto review)
+        public async Task<IActionResult> AddSolutionReviewAsync([FromBody] NewReviewDto review)
         {
             var result = await _solutionService.AddReviewAsync(review);
             return ApiResult(result);
+        }
+
+        /// <summary>
+        /// Получить решения по фильтру
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("filter")]
+        public async Task<IActionResult> GetSolutionsByFilterAsync([FromQuery] SolutionFilter filter)
+        {
+            var sols = await _solutionService.GetByFilterAsync(filter);
+            return ApiResult(sols);
         }
     }
 }

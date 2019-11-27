@@ -9,6 +9,7 @@ using DataAccessLayer.Abstraction;
 using DataAccessLayer.Models.Solution;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -138,9 +139,20 @@ namespace BusinessLogicLayer.Implementation
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public Task<IReadOnlyCollection<SolutionDto>> GetByFilter(SolutionFilter filter)
+        public async Task<IReadOnlyCollection<SolutionDto>> GetByFilterAsync(SolutionFilter filter)
         {
-            throw new NotImplementedException();
+            var sols = await _solutionRepository.GetAllAsync();
+
+            if (filter.CategoryId != null)
+                sols = sols.Where(s => s.CategoryId == filter.CategoryId);
+            if (filter.DeveloperId != null)
+                sols = sols.Where(s => s.UserId.Equals(filter.DeveloperId));
+            if (filter.SolutionId != null)
+                sols = sols.Where(s => s.Id == filter.SolutionId);
+
+
+            sols = sols.Skip((filter.Page - 1) * filter.Size).Take(filter.Size);
+            return _mapper.Map<IReadOnlyCollection<SolutionDto>>(sols.ToArray());
         }
 
         /// <summary>
