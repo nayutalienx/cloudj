@@ -56,9 +56,23 @@ namespace BusinessLogicLayer.Implementation
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public Task<ReviewDto> AddReviewAsync(ReviewDto dto)
+        public async Task<ReviewDto> AddReviewAsync(NewReviewDto dto)
         {
-            throw new NotImplementedException();
+            var sol = await _solutionRepository.GetAsync(dto.SolutionId);
+            var review = _mapper.Map<Review>(dto);
+            sol.Reviews.Add(review);
+            if(sol.Rate == 0)
+            {
+                sol.Rate = review.Rate;
+            }
+            else
+            {
+                byte temp = (byte)(sol.Rate + dto.Rate);
+                temp = (byte)(temp / 2);
+                sol.Rate = temp;
+            }
+            await _solutionRepository.SaveChangesAsync();
+            return _mapper.Map<ReviewDto>(review);
         }
 
         /// <summary>

@@ -2,6 +2,7 @@
 using CloudJ.Contracts.DTOs.SolutionDtos;
 using CloudJ.Contracts.DTOs.SolutionDtos.Category;
 using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
+using CloudJ.Contracts.DTOs.SolutionDtos.Review;
 using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -116,6 +117,19 @@ namespace CloudJ.API.Controllers
         public async Task<IActionResult> AddSolutionPlan([FromBody] NewPlanDto plan)
         {
             var result = await _solutionService.AddPlanAsync(plan);
+            return ApiResult(result);
+        }
+
+        /// <summary>
+        /// Добавление отзыва к решению
+        /// </summary>
+        /// <param name="review"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("reviews")]
+        public async Task<IActionResult> AddSolutionReview([FromBody] NewReviewDto review)
+        {
+            var result = await _solutionService.AddReviewAsync(review);
             return ApiResult(result);
         }
     }

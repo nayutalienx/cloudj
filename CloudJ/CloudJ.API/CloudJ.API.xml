@@ -58,6 +58,13 @@
             <param name="plan"></param>
             <returns></returns>
         </member>
+        <member name="M:CloudJ.API.Controllers.SolutionController.AddSolutionReview(CloudJ.Contracts.DTOs.SolutionDtos.Review.NewReviewDto)">
+            <summary>
+            Добавление отзыва к решению
+            </summary>
+            <param name="review"></param>
+            <returns></returns>
+        </member>
         <member name="M:CloudJ.API.ExtensionMethods.CreateDatabase``1(Microsoft.AspNetCore.Hosting.IWebHost)">
             <summary>  
             Migrates the database.  

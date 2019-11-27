@@ -57,7 +57,7 @@ namespace BusinessLogicLayer.Abstraction
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<ReviewDto> AddReviewAsync(ReviewDto dto);
+        Task<ReviewDto> AddReviewAsync(NewReviewDto dto);
         /// <summary>
         /// Добавить категорию
         /// </summary>
