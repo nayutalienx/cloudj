@@ -39,7 +39,7 @@ namespace BusinessLogicLayer.Abstraction
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        Task<IReadOnlyCollection<SolutionDto>> GetByFilter(SolutionFilter filter);
+        Task<IReadOnlyCollection<SolutionDto>> GetByFilterAsync(SolutionFilter filter);
         /// <summary>
         /// Добавить план к решению
         /// </summary>
@@ -57,7 +57,7 @@ namespace BusinessLogicLayer.Abstraction
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<ReviewDto> AddReviewAsync(ReviewDto dto);
+        Task<ReviewDto> AddReviewAsync(NewReviewDto dto);
         /// <summary>
         /// Добавить категорию
         /// </summary>

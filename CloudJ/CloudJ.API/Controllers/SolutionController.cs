@@ -1,6 +1,8 @@
 ﻿using BusinessLogicLayer.Abstraction;
 using CloudJ.Contracts.DTOs.SolutionDtos;
 using CloudJ.Contracts.DTOs.SolutionDtos.Category;
+using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
+using CloudJ.Contracts.DTOs.SolutionDtos.Review;
 using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,7 +29,7 @@ namespace CloudJ.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllSolutions()
+        public async Task<IActionResult> GetAllSolutionsAsync()
         {
             var sols = await _solutionService.GetAllAsync();
             return ApiResult(sols);
@@ -75,7 +77,7 @@ namespace CloudJ.API.Controllers
         /// <param name="solution"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> UpdateCategoryAsync([FromBody] UpdateSolutionDto solution)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateSolutionDto solution)
         {
             return ApiResult(await _solutionService.UpdateAsync(solution));
         }
@@ -99,10 +101,49 @@ namespace CloudJ.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("links")]
-        public async Task<IActionResult> AddSolutionLink([FromBody] NewSolutionLinkDto link)
+        public async Task<IActionResult> AddSolutionLinkAsync([FromBody] NewSolutionLinkDto link)
         {
             var result = await _solutionService.AddSolutionLink(link);
             return ApiResult(result);
+        }
+
+        /// <summary>
+        /// Добавить тарифный план для решения
+        /// </summary>
+        /// <param name="plan"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("plans")]
+        public async Task<IActionResult> AddSolutionPlanAsync([FromBody] NewPlanDto plan)
+        {
+            var result = await _solutionService.AddPlanAsync(plan);
+            return ApiResult(result);
+        }
+
+        /// <summary>
+        /// Добавление отзыва к решению
+        /// </summary>
+        /// <param name="review"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("reviews")]
+        public async Task<IActionResult> AddSolutionReviewAsync([FromBody] NewReviewDto review)
+        {
+            var result = await _solutionService.AddReviewAsync(review);
+            return ApiResult(result);
+        }
+
+        /// <summary>
+        /// Получить решения по фильтру
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("filter")]
+        public async Task<IActionResult> GetSolutionsByFilterAsync([FromQuery] SolutionFilter filter)
+        {
+            var sols = await _solutionService.GetByFilterAsync(filter);
+            return ApiResult(sols);
         }
     }
 }

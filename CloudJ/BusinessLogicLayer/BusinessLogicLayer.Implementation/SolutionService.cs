@@ -9,6 +9,7 @@ using DataAccessLayer.Abstraction;
 using DataAccessLayer.Models.Solution;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,9 +57,23 @@ namespace BusinessLogicLayer.Implementation
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public Task<ReviewDto> AddReviewAsync(ReviewDto dto)
+        public async Task<ReviewDto> AddReviewAsync(NewReviewDto dto)
         {
-            throw new NotImplementedException();
+            var sol = await _solutionRepository.GetAsync(dto.SolutionId);
+            var review = _mapper.Map<Review>(dto);
+            sol.Reviews.Add(review);
+            if(sol.Rate == 0)
+            {
+                sol.Rate = review.Rate;
+            }
+            else
+            {
+                byte temp = (byte)(sol.Rate + dto.Rate);
+                temp = (byte)(temp / 2);
+                sol.Rate = temp;
+            }
+            await _solutionRepository.SaveChangesAsync();
+            return _mapper.Map<ReviewDto>(review);
         }
 
         /// <summary>
@@ -79,7 +94,11 @@ namespace BusinessLogicLayer.Implementation
         /// <returns></returns>
         public async Task<PlanDto> AddPlanAsync(NewPlanDto dto)
         {
-            throw new NotImplementedException();
+            var sol = await _solutionRepository.GetAsync(dto.SolutionId);
+            var plan = _mapper.Map<Plan>(dto);
+            sol.Plans.Add(plan);
+            await _solutionRepository.SaveChangesAsync();
+            return _mapper.Map<PlanDto>(plan);
         }
         /// <summary>
         /// Добавление ссылок от разработчика для решения
@@ -120,9 +139,20 @@ namespace BusinessLogicLayer.Implementation
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public Task<IReadOnlyCollection<SolutionDto>> GetByFilter(SolutionFilter filter)
+        public async Task<IReadOnlyCollection<SolutionDto>> GetByFilterAsync(SolutionFilter filter)
         {
-            throw new NotImplementedException();
+            var sols = await _solutionRepository.GetAllAsync();
+
+            if (filter.CategoryId != null)
+                sols = sols.Where(s => s.CategoryId == filter.CategoryId);
+            if (filter.DeveloperId != null)
+                sols = sols.Where(s => s.UserId.Equals(filter.DeveloperId));
+            if (filter.SolutionId != null)
+                sols = sols.Where(s => s.Id == filter.SolutionId);
+
+
+            sols = sols.Skip((filter.Page - 1) * filter.Size).Take(filter.Size);
+            return _mapper.Map<IReadOnlyCollection<SolutionDto>>(sols.ToArray());
         }
 
         /// <summary>

@@ -12,6 +12,9 @@ namespace BusinessLogicLayer.Implementation.AutoMapperProfiles
         public ReviewProfile()
         {
             CreateMap<ReviewDto, Review>().ReverseMap();
+            CreateMap<NewReviewDto, Review>()
+                .ForMember(dest => dest.PostedTime, options => options.MapFrom(x => DateTime.Now))
+                .ReverseMap();
         }
     }
 }
