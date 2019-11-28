@@ -1,15 +1,159 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    Layout = null;
 }
 
-@using CloudJ.Contracts.DTOs.SolutionDtos.Category
+@{
 
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        @foreach (CategoryDto c in ViewBag.Categories)
-        {
-            <h1 class="display-4">@c.Name</h1>
-        }
-    </div>
+    string Name = User.Claims?.Where(x => x.Type.Equals("name")).FirstOrDefault()?.Value ?? "";
+    string Role = User.Claims?.Where(x => x.Type.Contains("role")).FirstOrDefault()?.Value ?? "";
+    bool IsAuthenticated = Context.User.Identity.IsAuthenticated;
 
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style.css">
+    <title>CloudJ IT-MarketPlace</title>
+</head>
+
+<body>
+    <header id="header" class="header bg">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <img src="img/logo.png" alt="cloudj" class="logo">
+                </div>
+                <div class="col-lg-10 ml-auto">
+                    <nav>
+                        <ul class="menu d-flex justify-content-center">
+                            <li class="menu__item">
+                                <a asp-controller="Home" asp-action="Index">Обзор</a>
+                            </li>
+                            <li class="menu__item">
+                                <a asp-controller="Home" asp-action="Category">Категории</a>
+                            </li>
+                            <li class="menu__item">
+                                <a asp-controller="Home" asp-action="MarketPlace">MarketPlace</a>
+                            </li>
+                            <li class="menu__item">
+                                <a asp-controller="Home" asp-action="Support">Поддержка</a>
+                            </li>
+                            @if (IsAuthenticated)
+                            {
+                                <li class="menu__item">
+                                    <a asp-controller="Home" asp-action="Login">@Name</a>
+                                </li>
+                                
+                                <a asp-controller="Home" asp-action="Logout"> ВЫЙТИ</a>
+                            }
+                            else
+                            {
+                                <li class="menu__item">
+                                    <a asp-controller="Home" asp-action="Login">Войти</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <section id="cloudj" class="cloudj">
+                <div class="container">
+                    <div class="row justify-content-center">
+
+                        <div class="col-lg-6 welcome">
+                            <img src="img/CloudJ.png" class="cloudj">
+                            <h1 class="welcome__h1">Добро пожаловать в CloudJ</h1>
+                            <p class="welcome__p">
+                                Откройте для себя мир облачных вычислений и узнайте, чем CloudJ
+                                отличается
+                                от других поставщиков облачных служб
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </header>
+    <section id="intro" class="intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 intro__h">Введение в облачные вычислений</div>
+            </div>
+            <div class="row ">
+                <div class="col-lg-6 intro__p ">
+                    Под облачными вычислениями подразумеваются вычислительные службы
+                    (серверы,
+                    хранилище, сеть, программное обеспечение), доступные через Интернет (облако) и предоставляемые
+                    поставщиком, к примеру CloudJ. Например, чтобы не хранить личные документы и фотографии на
+                    жестком диске персонального компьютера, большинство пользователей сейчас хранят их в Интернете.
+                    Это и есть облачные вычисления.
+                </div>
+                <div class="col-lg-4 ml-auto intro__p">
+                    <img src="img/web-hosting.png" alt="web-hosting">
+                </div>
+                <div class="col-lg-4 intro__p">
+                    <img src="img/web-hosting.png" alt="web-hosting">
+                </div>
+                <div class="col-lg-6 intro__p ml-auto">
+                    Как правило, платформы облачных вычислений, например CloudJ,
+                    обходятся дешевле, лучше защищены, являются более надежными и гибкими, чем локальные серверы.
+                    При использовании облака практически отсутствует риск повреждения, кражи и простоя оборудования
+                    во время обслуживания.
+                </div>
+
+                <div class="col-lg-6 intro__p">
+                    В CloudJ можно почти мгновенно масштабировать вычислительные ресурсы и
+                    ресурсы хранилища в случае изменения требований. Кроме того, плата обычно взимается только за
+                    используемые службы. Это обеспечивает определенное удобство и возможность управлять затратами,
+                    чего практически невозможно достичь в локальной инфраструктуре.
+                </div>
+                <div class="col-lg-4 ml-auto intro__p">
+                    <img src="img/web-hosting.png" alt="web-hosting">
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </section>
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <ul>
+                        <li>
+                            <a href="#"><img src="img/vk.png">Вконтакте</a>
+                        </li>
+                        <li> <a href="#"><img src="img/fb.png">Facebook</a></li>
+                        <li> <a href="#"><img src="img/ok.png">OK.ru</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <ul>
+                        <li><a href="#">Продукты</a></li>
+                        <li><a href="#">Документация</a></li>
+                        <li><a href="#">Примеры</a></li>
+                        <li><a href="#">Связаться с нами</a></li>
+                        <li><a href="#">Пользовательское соглашение</a></li>
+                        <li><a href="#">Поддержка</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 ml-auto">
+                    <img src="img/CloudJlogo.png" alt="CloudJlogo">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

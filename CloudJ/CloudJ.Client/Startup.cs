@@ -19,11 +19,15 @@ namespace CloudJ.Client
     {
         public IConfiguration _configuration { get; }
         private readonly ApiClientOptions _apiClientOptions;
+        private readonly IdentityClientOptions _identityClientOptions;
+        private readonly OpenIdConnectOptions _openIdConnectOptions;
 
         public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
             _apiClientOptions = _configuration.GetSection("ApiClient").Get<ApiClientOptions>();
+            _identityClientOptions = _configuration.GetSection("IdentityClient").Get<IdentityClientOptions>();
+            _openIdConnectOptions = _configuration.GetSection("OpenIdConnect").Get<OpenIdConnectOptions>();
         }
 
        
@@ -35,6 +39,9 @@ namespace CloudJ.Client
             services.Configure<ApiClientOptions>(_configuration.GetSection("ApiClient"));
             services.Configure<SolutionApiClientOptions>(_configuration.GetSection("SolutionApiClient"));
             services.Configure<BillingApiClientOptions>(_configuration.GetSection("BillingApiClient"));
+            services.Configure<IdentityClientOptions>(_configuration.GetSection("IdentityClient"));
+            services.Configure<OpenIdConnectOptions>(_configuration.GetSection("OpenIdConnect"));
+
 
             services.AddAuthentication(options =>
             {
@@ -47,12 +54,12 @@ namespace CloudJ.Client
             })
             .AddOpenIdConnect("oidc", options =>
             {
-                //options.Authority = _openIdConnectOptions.Authority;
+                options.Authority = _openIdConnectOptions.Authority;
                 options.RequireHttpsMetadata = false;
 
-                //options.ClientId = _openIdConnectOptions.ClientId;
-                //options.ClientSecret = _openIdConnectOptions.ClientSecret;
-                //options.ResponseType = _openIdConnectOptions.ResponseType;
+                options.ClientId = _openIdConnectOptions.ClientId;
+                options.ClientSecret = _openIdConnectOptions.ClientSecret;
+                options.ResponseType = _openIdConnectOptions.ResponseType;
 
                 options.SaveTokens = true;
 
@@ -76,6 +83,13 @@ namespace CloudJ.Client
                 options.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
+            services.AddHttpClient<IIdentityClient, IdentityClient>(options =>
+            {
+                options.Timeout = TimeSpan.FromMinutes(1);
+                options.BaseAddress = new Uri(_identityClientOptions.BaseUrl);
+                options.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -96,6 +110,8 @@ namespace CloudJ.Client
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

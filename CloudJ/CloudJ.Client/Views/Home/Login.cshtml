@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+@{
+    var props = (await Context.AuthenticateAsync()).Properties.Items;
+}
+
+<dl>
+    @foreach (var claim in User.Claims)
+    {
+        <dt>@claim.Type</dt>
+        <dd>@claim.Value</dd>
+    }
+</dl>
+
+<h2>Properties</h2>
+
+<dl>
+    @foreach (var (key, value) in props)
+    {
+        <dt>@key</dt>
+        <dd>@value</dd>
+    }
+</dl>
+

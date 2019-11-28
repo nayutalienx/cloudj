@@ -1,0 +1,29 @@
+﻿@using IdentityServer.Objects;
+@model IEnumerable<RoleViewModel>
+@{
+    ViewData["Title"] = "RolePanel";
+}
+
+<h1>Role Panel</h1>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Role</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td scope="row">@role.Id</td>
+                <td>@role.Name</td>
+                <td><a class="btn btn-primary" href="~/Account/DeleteRole/@role.Id" role="button">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" href="~/Account/CreateRole" role="button">Add new role</a>

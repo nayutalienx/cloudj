@@ -14,5 +14,9 @@ namespace CloudJ.Contracts.DTOs
         public SolutionDto[] PurchasedSolutions { get; set; }
         public SolutionDto[] PostedSolutions { get; set; }
         public SolutionDto[] FavoriteSolutions { get; set; }
+
+        // for identity
+        public string Id { get; set; }
+        public string PhoneNumber { get; set; }
     } 
 }

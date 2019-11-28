@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CloudJ.Client.Models;
 using CloudJ.Client.Clients;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CloudJ.Client.Controllers
 {
@@ -18,17 +19,70 @@ namespace CloudJ.Client.Controllers
             _solutionApiClient = solutionApiClient;
         }
 
+        /// <summary>
+        /// Главная страницы
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
+            // пример запроса к апи
             var response = await _solutionApiClient.GetAllCategoriesAsync();
             ViewBag.Categories = response.Data;
             return View();
+        }
+
+        /// <summary>
+        /// Страница категорий
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Category()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Страница маркетплейса
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> MarketPlace()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Страница поддержки
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Support()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Редирект на страницу входа IdentityServer
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Редирект на выход + выход с площадки
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Logout()
+        {
+            return SignOut("Cookies", "oidc");
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
