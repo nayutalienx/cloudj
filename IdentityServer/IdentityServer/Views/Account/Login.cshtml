@@ -1,0 +1,94 @@
+﻿@model IdentityServer.Objects.LoginViewModel
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+
+    <title>Signin Template for Bootstrap</title>
+
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/css/signin.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+    @if (Model.EnableLocalLogin)
+    {
+    <div class="form-signin">
+        <form  asp-route="Login">
+            @if (Model.MessageFromRegistration != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @Model.MessageFromRegistration
+                </div>
+            }
+
+            @if(Model.LoginError != null) 
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Model.LoginError
+                </div>
+            }
+
+            <input type="hidden" asp-for="ReturnUrl" />
+            <img class="mb-4" src="~/sale.png" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Войдите</h1>
+            <label for="inputEmail" asp-for="Username" class="sr-only">Никнейм</label>
+            <input type="text" asp-for="Username" id="inputEmail" class="form-control" placeholder="Никнейм" required autofocus>
+            
+            <label for="inputPassword" asp-for="Password" class="sr-only">Пароль</label>
+            <input asp-for="Password" type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
+            @if (Model.AllowRememberLogin)
+            {
+                <div class="checkbox mb-3">
+                    <label asp-for="RememberLogin">
+                        <input type="checkbox" asp-for="RememberLogin"> Запомнить
+                    </label>
+                </div>
+            }
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="button" value="login">Войти</button>
+
+
+
+
+
+        </form>
+        <div style="margin-top: 10px;" >
+            <form asp-action="Register" class="d-flex" method="post">
+                <input type="hidden" asp-for="ReturnUrl" />
+                <button class="btn btn-default btn-sm" name="regbutton" value="reg">Регистрация</button>
+                @foreach (var provider in Model.VisibleExternalProviders)
+                {
+
+                    <a class="btn btn-default pl-1 btn-sm"
+                       asp-controller="External"
+                       asp-action="Challenge"
+                       asp-route-provider="@provider.AuthenticationScheme"
+                       asp-route-returnUrl="@Model.ReturnUrl">
+                        @provider.DisplayName
+                    </a>
+
+                }
+            </form>
+            
+        </div>
+    </div>
+    }
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿@model IdentityServer.Objects.RegisterViewModel;
+@{
+    ViewData["Title"] = "CreateUser";
+}
+
+<h1>CreateUser</h1>
+
+
+
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Local register</h3>
+        </div>
+        <div class="panel-body">
+
+            <form asp-route="CreateUser">
+
+                <fieldset>
+                    <div class="form-group">
+                        <label asp-for="Username"></label>
+                        <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input class="form-control" placeholder="Email" asp-for="Email" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" name="button" value="register">Register</button>
+                        <button class="btn btn-default" name="button" value="cancel">Cancel</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+

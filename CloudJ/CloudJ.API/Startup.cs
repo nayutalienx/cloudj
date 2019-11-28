@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using CloudJ.API.Options;
 using CloudJ.Infrastructure;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Builder;
@@ -21,9 +22,13 @@ namespace CloudJ.API
 {
     public class Startup
     {
+        private readonly JwtBearerOptions _jwtBearerOptions;
+        private readonly UiOptions _uiOptions;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _jwtBearerOptions = configuration.GetSection("JwtBearer").Get<JwtBearerOptions>();
+            _uiOptions = configuration.GetSection("UiOptions").Get<UiOptions>();
         }
 
         public IConfiguration Configuration { get; }
@@ -32,6 +37,17 @@ namespace CloudJ.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    options.Authority = _jwtBearerOptions.Authority;
+                    options.RequireHttpsMetadata = false;
+                    options.Audience = _jwtBearerOptions.Audience;
+                });
+
+            
+
 
             //dependency injection
             services.Install();
@@ -67,6 +83,16 @@ namespace CloudJ.API
                 });
 
                 //x.OperationFilter<SecurityRequirementsOperationFilter>(); to show access in swagger UI (may be the reason of not sending token)
+                services.AddCors(options =>
+                {
+                    options.AddPolicy(_uiOptions.Name, policy =>
+                    {
+                        policy.WithOrigins(_uiOptions.Url)
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+
+                    });
+                });
 
             });
         }
@@ -84,6 +110,9 @@ namespace CloudJ.API
                 app.UseHsts();
             }
 
+
+            app.UseAuthentication();
+            app.UseCors(_uiOptions.Name);
             ConfigureSwagger(app);
             app.UseMiddleware<ExceptionHandler>();
             app.UseHttpsRedirection();

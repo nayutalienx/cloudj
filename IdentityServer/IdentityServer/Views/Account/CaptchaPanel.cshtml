@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "CaptchaPanel";
+}
+
+<h1>CaptchaPanel</h1>
+
+<form asp-route="CaptchaPanel" enctype="multipart/form-data" method="post">
+    @model IdentityServer.Objects.CaptchaModelView
+    <div class="form-group">
+        <label asp-for="Answer"></label>
+        <input required class="form-control" placeholder="answer on captcha" asp-for="Answer" autofocus>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Photo"></label>
+        <input type="file" multiple class="form-control-file" placeholder="Photo" asp-for="Photo" autocomplete="off">
+    </div>
+
+    <div class="row d-flex flex-row-reverse">
+        <button class="btn btn-primary" name="button" value="add">Add</button>
+    </div>
+</form>
+
+
+@{
+    @using IdentityServer.DataAccessLayer
+    if (ViewBag.Photo != null)
+    {
+
+        IReadOnlyCollection<PhotoCaptcha> photos = ViewBag.Photo;
+
+        foreach (PhotoCaptcha p in photos)
+        {
+
+<p>@p.Answer</p>
+            <img class="card-img-top thumb-post" style="object-fit: cover" height="286" src="data:image/jpeg;base64,@Convert.ToBase64String(p.Data)" alt="Card image cap">
+
+
+
+        }
+
+    }
+
+}
