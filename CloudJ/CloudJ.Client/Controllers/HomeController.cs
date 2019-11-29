@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CloudJ.Client.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ISolutionApiClient _solutionApiClient;
@@ -76,6 +77,8 @@ namespace CloudJ.Client.Controllers
         {
             return SignOut("Cookies", "oidc");
         }
+
+       
 
         public IActionResult Privacy()
         {
