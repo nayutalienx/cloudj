@@ -147,8 +147,22 @@ namespace BusinessLogicLayer.Implementation
                 sols = sols.Where(s => s.CategoryId == filter.CategoryId);
             if (filter.DeveloperId != null)
                 sols = sols.Where(s => s.UserId.Equals(filter.DeveloperId));
+
             if (filter.SolutionId != null)
+            {
                 sols = sols.Where(s => s.Id == filter.SolutionId);
+            }
+            else
+            {
+                sols = sols.Select(s =>
+                    new Solution
+                    {
+                        Id = s.Id,
+                        Name = s.Name,
+                        Photos = (s.Photos.Any()) ? new List<Photo> { s.Photos.FirstOrDefault(x => x.Type.Equals("Logo")) } : null
+                    }
+                );
+            }
 
 
             sols = sols.Skip((filter.Page - 1) * filter.Size).Take(filter.Size);

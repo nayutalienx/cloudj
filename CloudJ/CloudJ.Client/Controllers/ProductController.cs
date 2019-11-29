@@ -32,6 +32,11 @@ namespace CloudJ.Client.Controllers
         [Route("{id:long}")]
         public async Task<IActionResult> GetProductById(long id)
         {
+            var response = await _solutionApiClient.GetByFilterAsync(new SolutionFilter
+            {
+                SolutionId = id
+            });
+            return Ok(response);
             return View();
         }
 
@@ -136,7 +141,65 @@ namespace CloudJ.Client.Controllers
         [Route("addDocker")]
         public async Task<IActionResult> AddDocker()
         {
+            var categories = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = categories.Data;
             return View();
+        }
+
+        /// <summary>
+        /// Запрос к апи на добавление решения с помощью докера
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("addDocker")]
+        public async Task<IActionResult> AddDocker(DockerSolutionModel model)
+        {
+            model.UserId = User.Claims.FirstOrDefault(c => c.Type.Contains("nameidentifier")).Value;
+            NewSolutionDto dto = new NewSolutionDto
+            {
+                UserId = model.UserId,
+                Name = model.Name,
+                Description = model.Description,
+                CategoryId = model.CategoryId,
+                Cloud = new NewCloudDto
+                {
+                    Name = model.CloudName,
+                    Container = new NewDockerImageDto { Image = model.DockerUrl}
+                }
+            };
+            List<NewPhotoDto> photoList = new List<NewPhotoDto>();
+
+            var ph = model.Logo;
+            byte[] p1 = null;
+            using (var fs1 = ph.OpenReadStream())
+            using (var ms1 = new MemoryStream())
+            {
+                fs1.CopyTo(ms1);
+                p1 = ms1.ToArray();
+            }
+
+            photoList.Add(new NewPhotoDto { Data = p1, Type = "Logo" });
+
+            foreach (var photo in model.Photos)
+            {
+                p1 = null;
+                using (var fs1 = photo.OpenReadStream())
+                using (var ms1 = new MemoryStream())
+                {
+                    fs1.CopyTo(ms1);
+                    p1 = ms1.ToArray();
+                }
+
+                photoList.Add(new NewPhotoDto { Data = p1, Type = "Description" });
+            }
+            dto.Photos = photoList.ToArray();
+
+            var response = await _solutionApiClient.AddSolutionAsync(dto);
+
+            long id = response.Data.Id;
+
+            return Redirect($"~/Product/{id}");
         }
     }
 }

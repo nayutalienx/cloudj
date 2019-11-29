@@ -8,7 +8,7 @@ namespace DataAccessLayer.Models.Solution
     {
         public long CloudId { get; set; }
         public virtual Cloud Cloud { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
         
     }
 }

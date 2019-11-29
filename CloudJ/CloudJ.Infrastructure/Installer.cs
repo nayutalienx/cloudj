@@ -40,6 +40,7 @@ namespace CloudJ.Infrastructure
                 config.AddProfile(new ReviewProfile());
                 config.AddProfile(new SolutionProfile());
                 config.AddProfile(new OrderProfile());
+                config.AddProfile(new ContainerProfile());
             });
             
             serviceCollection

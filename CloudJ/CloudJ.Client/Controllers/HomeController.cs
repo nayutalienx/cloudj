@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using CloudJ.Client.Models;
 using CloudJ.Client.Clients;
 using Microsoft.AspNetCore.Authorization;
+using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 
 namespace CloudJ.Client.Controllers
 {
@@ -66,6 +67,9 @@ namespace CloudJ.Client.Controllers
         [Authorize]
         public async Task<IActionResult> Login()
         {
+            string id = User.Claims.FirstOrDefault(c => c.Type.Contains("nameidentifier")).Value;
+            var response = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { DeveloperId = id });
+            ViewBag.PushedSolutions = response.Data;
             return View();
         }
 

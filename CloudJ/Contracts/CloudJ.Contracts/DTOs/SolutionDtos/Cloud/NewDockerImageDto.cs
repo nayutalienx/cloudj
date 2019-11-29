@@ -6,6 +6,6 @@ namespace CloudJ.Contracts.DTOs.SolutionDtos.Cloud
 {
     public class NewDockerImageDto
     {
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
     }
 }
