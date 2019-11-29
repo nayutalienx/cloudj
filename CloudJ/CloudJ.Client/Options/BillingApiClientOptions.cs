@@ -9,5 +9,8 @@ namespace CloudJ.Client.Options
     {
         public string MakeOrderUrl { get; set; }
         public string GetOrdersByFilterUrl { get; set; }
+        public string AddBalanceUrl { get; set; }
+        public string UpdateBalanceUrl { get; set; }
+        public string GetBalanceByFilterUrl { get; set; }
     }
 }

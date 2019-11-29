@@ -14,6 +14,9 @@ namespace CloudJ.Client.Clients
     {
         Task<ApiResponse<OrderDto>> AddOrderAsync(NewOrderDto dto);
         Task<ApiResponse<IReadOnlyCollection<OrderDto>>> GetByFilterAsync(OrderFilter filter);
+        Task<ApiResponse<BalanceDto>> AddBalanceAsync(NewBalanceDto dto);
+        Task<ApiResponse<BalanceDto>> UpdateBalanceAsync(UpdateBalanceDto dto);
+        Task<ApiResponse<IReadOnlyCollection<BalanceDto>>> GetBalanceByFilterAsync(BalanceFilter filter);
     }
     public class BillingApiClient : ApiClient , IBillingApiClient
     {
@@ -23,14 +26,29 @@ namespace CloudJ.Client.Clients
             _clientOptions = clientOptions;
         }
 
+        public Task<ApiResponse<BalanceDto>> AddBalanceAsync(NewBalanceDto dto)
+        {
+            return PostAsync<NewBalanceDto, ApiResponse<BalanceDto>>(_clientOptions.AddBalanceUrl, dto);
+        }
+
         public Task<ApiResponse<OrderDto>> AddOrderAsync(NewOrderDto dto)
         {
             return PostAsync<NewOrderDto, ApiResponse<OrderDto>>(_clientOptions.MakeOrderUrl, dto);
         }
 
+        public Task<ApiResponse<IReadOnlyCollection<BalanceDto>>> GetBalanceByFilterAsync(BalanceFilter filter)
+        {
+            return GetAsync<ApiResponse<IReadOnlyCollection<BalanceDto>>>($"{_clientOptions.GetBalanceByFilterUrl}?id={filter.Id}&userid={filter.UserId}");
+        }
+
         public Task<ApiResponse<IReadOnlyCollection<OrderDto>>> GetByFilterAsync(OrderFilter filter)
         {
             return PostAsync<OrderFilter, ApiResponse<IReadOnlyCollection<OrderDto>>>(_clientOptions.GetOrdersByFilterUrl, filter);
+        }
+
+        public Task<ApiResponse<BalanceDto>> UpdateBalanceAsync(UpdateBalanceDto dto)
+        {
+            return PutAsync<UpdateBalanceDto, ApiResponse<BalanceDto>>(_clientOptions.UpdateBalanceUrl, dto);
         }
     }
 }
