@@ -1,94 +1,155 @@
 ﻿@model IdentityServer.Objects.LoginViewModel
 
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-
-    <title>Signin Template for Bootstrap</title>
-
-    
-
-    <!-- Bootstrap core CSS -->
-    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="~/css/signin.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <title>CloudJ IT-MarketPlace</title>
 </head>
 
-<body class="text-center">
-    @if (Model.EnableLocalLogin)
-    {
-    <div class="form-signin">
-        <form  asp-route="Login">
-            @if (Model.MessageFromRegistration != null)
-            {
-                <div class="alert alert-success" role="alert">
-                    @Model.MessageFromRegistration
+<body>
+    <header id="header" class="header back">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <img src="~/img/logo.png" alt="cloudj" class="logo">
                 </div>
-            }
-
-            @if(Model.LoginError != null) 
-            {
-                <div class="alert alert-danger" role="alert">
-                    @Model.LoginError
+                <div class="col-lg-10">
+                    <nav>
+                        <ul class="menu d-flex">
+                            <li class="menu__item">
+                                <a href="index.html">Обзор</a>
+                            </li>
+                            <li class="menu__item">
+                                <a href="category.html">Категории</a>
+                            </li>
+                            <li class="menu__item">
+                                <a href="marketplace.html">MarketPlace</a>
+                            </li>
+                            <li class="menu__item">
+                                <a href="support.html">Поддержка</a>
+                            </li>
+                            <li class="menu__item">
+                                <a href="register.html">Войти</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-            }
-
-            <input type="hidden" asp-for="ReturnUrl" />
-            <img class="mb-4" src="~/sale.png" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">Войдите</h1>
-            <label for="inputEmail" asp-for="Username" class="sr-only">Никнейм</label>
-            <input type="text" asp-for="Username" id="inputEmail" class="form-control" placeholder="Никнейм" required autofocus>
-            
-            <label for="inputPassword" asp-for="Password" class="sr-only">Пароль</label>
-            <input asp-for="Password" type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
-            @if (Model.AllowRememberLogin)
-            {
-                <div class="checkbox mb-3">
-                    <label asp-for="RememberLogin">
-                        <input type="checkbox" asp-for="RememberLogin"> Запомнить
-                    </label>
-                </div>
-            }
-            <button class="btn btn-lg btn-primary btn-block" type="submit" name="button" value="login">Войти</button>
-
-
-
-
-
-        </form>
-        <div style="margin-top: 10px;" >
-            <form asp-action="Register" class="d-flex" method="post">
-                <input type="hidden" asp-for="ReturnUrl" />
-                <button class="btn btn-default btn-sm" name="regbutton" value="reg">Регистрация</button>
-                @foreach (var provider in Model.VisibleExternalProviders)
-                {
-
-                    <a class="btn btn-default pl-1 btn-sm"
-                       asp-controller="External"
-                       asp-action="Challenge"
-                       asp-route-provider="@provider.AuthenticationScheme"
-                       asp-route-returnUrl="@Model.ReturnUrl">
-                        @provider.DisplayName
-                    </a>
-
-                }
-            </form>
-            
+            </div>
         </div>
-    </div>
-    }
+    </header>
+    <section class="intro intro__marg">
+        <div class="container">
 
 
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2>Вход</h2>
+                    <form asp-route="Login">
+                        @if (Model.MessageFromRegistration != null)
+                        {
+                            <div class="alert alert-success" role="alert">
+                                @Model.MessageFromRegistration
+                            </div>
+                        }
 
+                        @if (Model.LoginError != null)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @Model.LoginError
+                            </div>
+                        }
+                        <input type="hidden" asp-for="ReturnUrl" />
+                        <fieldset>
+                            <div class="form-group">
+                                <label asp-for="Username" for="exampleInputEmail1">Email address</label>
+                                <input asp-for="Username" type="email" required class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="Enter email" style="width: 370px;">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password" for="exampleInputPassword1">Password</label>
+                                <input type="password" asp-for="Password" required class="form-control" id="exampleInputPassword1"
+                                       placeholder="Password" style="width: 370px;">
+                            </div>
 
+                            @if (Model.AllowRememberLogin)
+                            {
+                                <div class="checkbox mb-3">
+                                    <label asp-for="RememberLogin">
+                                        <input type="checkbox" asp-for="RememberLogin"> Запомнить
+                                    </label>
+                                </div>
+                            }
 
+                            <button type="submit" name="button" value="login" class="btn btn-primary">Войти</button>
+                        </fieldset>
+                    </form>
+                    <div style="margin-top: 10px;">
+                        <form asp-action="Register" class="d-flex" method="post">
+                            <input type="hidden" asp-for="ReturnUrl" />
+                            <button class="btn btn-default btn-sm" name="regbutton" value="reg">Регистрация</button>
+                            @foreach (var provider in Model.VisibleExternalProviders)
+                            {
 
+                                <a class="btn btn-default pl-1 btn-sm"
+                                   asp-controller="External"
+                                   asp-action="Challenge"
+                                   asp-route-provider="@provider.AuthenticationScheme"
+                                   asp-route-returnUrl="@Model.ReturnUrl">
+                                    @provider.DisplayName
+                                </a>
+
+                            }
+                        </form>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <ul>
+                        <li>
+                            <a href="#"><img src="~/img/vk.png">Вконтакте</a>
+                        </li>
+                        <li> <a href="#"><img src="~/img/fb.png">Facebook</a></li>
+                        <li> <a href="#"><img src="~/img/ok.png">OK.ru</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <ul>
+                        <li><a href="#">Продукты</a></li>
+                        <li><a href="#">Документация</a></li>
+                        <li><a href="#">Примеры</a></li>
+                        <li><a href="#">Связаться с нами</a></li>
+                        <li><a href="#">Пользовательское соглашение</a></li>
+                        <li><a href="#">Поддержка</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 ml-auto">
+                    <img src="~/img/CloudJlogo.png" alt="CloudJlogo">
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
