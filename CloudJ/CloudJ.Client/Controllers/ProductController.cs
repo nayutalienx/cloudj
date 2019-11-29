@@ -36,8 +36,8 @@ namespace CloudJ.Client.Controllers
             {
                 SolutionId = id
             });
-            return Ok(response);
-            return View();
+            
+            return View(response.Data.FirstOrDefault());
         }
 
         /// <summary>
@@ -45,8 +45,15 @@ namespace CloudJ.Client.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("{id:long}/links")]
-        public async Task<IActionResult> AddLink(long id)
+        [Route("links")]
+        public async Task<IActionResult> AddLink([FromQuery]long id)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Route("plan")]
+        public async Task<IActionResult> AddPlan([FromQuery]long id)
         {
             return View();
         }

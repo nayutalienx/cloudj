@@ -41,6 +41,7 @@ namespace CloudJ.Infrastructure
                 config.AddProfile(new SolutionProfile());
                 config.AddProfile(new OrderProfile());
                 config.AddProfile(new ContainerProfile());
+                config.AddProfile(new BalanceProfile());
             });
             
             serviceCollection
@@ -48,6 +49,7 @@ namespace CloudJ.Infrastructure
                 .AddTransient<IBillingService, BillingService>()
                 .AddTransient<ICategoryRepository, CategoryRepository>()
                 .AddTransient<IOrderRepository, OrderRepository>()
+                .AddTransient<IBalanceRepository, BalanceRepository>()
                 .AddTransient<ISolutionRepository, SolutionRepository>()
                 .AddTransient<IPhotoRepository, PhotoRepository>()
                 //.AddDbContext<CloudjContext>(ServiceLifetime.Transient)

@@ -2,22 +2,27 @@
 @{
     ViewData["Title"] = "GetSolutionById";
 }
+@using CloudJ.Contracts.DTOs.SolutionDtos.Review
+@using CloudJ.Contracts.DTOs.SolutionDtos.Plan
+@model CloudJ.Contracts.DTOs.SolutionDtos.Solution.SolutionDto
 
     <section class="intro intro__marg">
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-2">
-                    <img src="~/img/Large2.png" alt="Large2">
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photos.Where(p => p.Type.Equals("Logo")).FirstOrDefault().Data)" alt="Large2">
                     <button type="button" class="btn btn-primary mt-3 rounded-0">Получить</button>
                     <button type="button" class="btn btn-outline-primary rounded-0">В избранное</button>
                     <p>
                         Категории<br>
-                        <a href="marketplace.html">Базы данных</a>
+
+                        <a href="marketplace.html">@Model.Category.Name</a>
+                        
                     </p>
                 </div>
                 <div class="col-lg-10">
-                    <h1>Oracle Database 12.1.0.2 Enterprise Edition</h1>
+                    <h1>@Model.Name</h1>
                     <p>Oracle</p>
                     <div class="row">
                         <div class="rating">
@@ -57,171 +62,67 @@
                     </ul>
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane fade active show" id="view">
-                            <h3 class="view__h3">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) это база данных
-                                следующего
-                                поколения, разработанная для облака.
-                            </h3>
+                            
                             <p>
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) - это база данных следующего
-                                поколения, разработанная для облака. Она предлагает более 500 новых функций, включая
-                                новую мультитенантную архитектуру, которая упрощает консолидацию баз данных в облаке и
-                                позволяет клиентам управлять многими базами данных как одной без изменения их
-                                приложений. Клиенты могут выбрать широкий спектр опций Oracle Database Enterprise
-                                Edition, чтобы обеспечить производительность, безопасность, большие данные, облако и
-                                доступность ожиданий уровня обслуживания бизнес-пользователей. Этот образ является
-                                образом Bring-Your-Own-License, который предполагает, что вы уже приобрели
-                                соответствующие лицензии с Oracle и должным образом лицензированы для запуска этого
-                                образа в CloudJ.
+                                @Model.Description
                             </p>
                         </div>
                         <div class="tab-pane fade" id="comment">
-                            <h3 class="view__h3" style="margin-bottom: 50px;">
-                                Отзывы пользователей об Oracle Database
-                                12c Enterprise Edition
-                                (12.1.0.2.0)
-                            </h3>
+                            
                             <div class="row" style="margin-bottom: 10px;">
-                                <div class="col-3">
-                                    <div class="row">
-                                        <div class="rating">
-                                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                                5
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                                4
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                                3
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                                2
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                                1
-                                                star
-                                            </label>
+                                @foreach (ReviewDto r in Model.Reviews)
+                                {
+                                <div class="row" style="margin-bottom: 10px;">
+                                    <div class="col-3">
+                                        <div class="row">
+                                            <div class="rating">
+                                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
+                                                    5
+                                                    stars
+                                                </label>
+                                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
+                                                    4
+                                                    stars
+                                                </label>
+                                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
+                                                    3
+                                                    stars
+                                                </label>
+                                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
+                                                    2
+                                                    stars
+                                                </label>
+                                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
+                                                    1
+                                                    star
+                                                </label>
+                                            </div>
+                                            <p class="col-2-otzuv">16 ноября 2019г.</p>
+                                            <p class="col-2-otzuv">Пользователь CloudJ</p>
                                         </div>
-                                        <p class="col-2-otzuv">16 ноября 2019г.</p>
-                                        <p class="col-2-otzuv">Пользователь CloudJ</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="tab-pane-p" style="margin-top:-12px;">@r.AuthorId</p>
+                                        <p class="tab-pane-p-2">
+                                            @r.Text
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <p class="tab-pane-p" style="margin-top:-12px;">Никита Малютин</p>
-                                    <p class="tab-pane-p-2">
-                                        Отличное программное решение, если вам необходимо работать с
-                                        объемными базами данных. Данное решение считаю очень успешным с точки зрения
-                                        функционала и удобства использования.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-bottom: 10px;">
-                                <div class="col-3">
-                                    <div class="row">
-                                        <div class="rating">
-                                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                                5
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                                4
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                                3
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                                2
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                                1
-                                                star
-                                            </label>
-                                        </div>
-                                        <p class="col-2-otzuv">16 ноября 2019г.</p>
-                                        <p class="col-2-otzuv">Пользователь CloudJ</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <p class="tab-pane-p" style="margin-top:-12px;">Никита Малютин</p>
-                                    <p class="tab-pane-p-2">
-                                        Отличное программное решение, если вам необходимо работать с
-                                        объемными базами данных. Данное решение считаю очень успешным с точки зрения
-                                        функционала и удобства использования.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-bottom: 10px;">
-                                <div class="col-3">
-                                    <div class="row">
-                                        <div class="rating">
-                                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                                5
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                                4
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                                3
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                                2
-                                                stars
-                                            </label>
-                                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                                1
-                                                star
-                                            </label>
-                                        </div>
-                                        <p class="col-2-otzuv">16 ноября 2019г.</p>
-                                        <p class="col-2-otzuv">Пользователь CloudJ</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <p class="tab-pane-p" style="margin-top:-12px;">Никита Малютин</p>
-                                    <p class="tab-pane-p-2">
-                                        Отличное программное решение, если вам необходимо работать с
-                                        объемными базами данных. Данное решение считаю очень успешным с точки зрения
-                                        функционала и удобства использования.
-                                    </p>
-                                </div>
-                            </div>
+                                }
+
                         </div>
                         <div class="tab-pane fade active" id="plan">
-                            <h3 class="view__h3">
-                                Выберите план подписки на Oracle Database 12c Enterprise Edition
-                                (12.1.0.2.0)
-                            </h3>
+                            @foreach (PlanDto p in Model.Plans)
+                            {
                             <div class="row col__plan align-items-center">
-                                <div class="col-lg-2 plan__p">3 месяца</div>
-                                <div class="col-lg-2 ml-auto plan__p">119$</div>
+                                <div class="col-lg-2 plan__p">@p.Time</div>
+                                <div class="col-lg-2 ml-auto plan__p">@p.Price</div>
                                 <div class="col-lg-2">
                                     <button type="button" class="btn btn-primary rounded-0 plan__btn">Получить</button>
                                 </div>
                             </div>
-                            <div class="row col__plan align-items-center">
-                                <div class="col-lg-2 plan__p">3 месяца</div>
-                                <div class="col-lg-2 ml-auto plan__p">119$</div>
-                                <div class="col-lg-2">
-                                    <button type="button" class="btn btn-primary rounded-0 plan__btn">Получить</button>
-                                </div>
-                            </div>
-                            <div class="row col__plan align-items-center">
-                                <div class="col-lg-2 plan__p">3 месяца</div>
-                                <div class="col-lg-2 ml-auto plan__p">119$</div>
-                                <div class="col-lg-2">
-                                    <button type="button" class="btn btn-primary rounded-0 plan__btn">Получить</button>
-                                </div>
-                            </div>
+                            }
+                            
 
                         </div>
                     </div>

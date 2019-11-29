@@ -145,7 +145,7 @@
                     <div class="col-lg-3 product" style="margin: 0;">
                         <div class="media">
                             <div class="media-body">
-                                <h5 class="mt-1 mb-1 product__h5">@s.Name</h5>
+                                <h5 class="mt-1 mb-1 product__h5"><a href="~/Product/@s.Id">@s.Name</a></h5>
                             </div>
                             @if (s.Photos.Length > 0)
                             {
@@ -158,8 +158,9 @@
                             }
                         </div>
                         <p class="product__p">Действует до:<br>02.12.2019</p>
-                        <form action="add_plus.html">
-                            <button type="submit" class="btn btn-outline-primary rounded-0">Добавить ссылки</button>
+                        <form action="add_plus.html" method="get">
+                            <input hidden="true" name="id" value="@s.Id" />
+                            <button type="submit" asp-controller="Product" asp-action="AddLink" class="btn btn-outline-primary rounded-0">Добавить ссылки</button>
                         </form>
                         <form action="add_plan.html">
                             <button type="submit" class="btn btn-primary rounded-0">Создать план</button>
