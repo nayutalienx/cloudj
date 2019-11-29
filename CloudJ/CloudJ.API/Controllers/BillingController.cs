@@ -54,5 +54,44 @@ namespace CloudJ.API.Controllers
             var result = await _billingService.GetByFilterAsync(filter);
             return ApiResult(result);
         }
+
+        /// <summary>
+        /// Добавить баланс пользователя
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("balance")]
+        public async Task<IActionResult> AddBalanceAsync([FromBody] NewBalanceDto dto)
+        {
+            var result = await _billingService.AddBalanceAsync(dto);
+            return ApiResult(result);
+        }
+
+        /// <summary>
+        /// Обновить баланс пользователя
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("balance")]
+        public async Task<IActionResult> UpdateBalanceAsync([FromBody] UpdateBalanceDto dto)
+        {
+            var result = await _billingService.UpdateBalanceAsync(dto);
+            return ApiResult(result);
+        }
+
+        /// <summary>
+        /// Получить балансы по фильтру
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("balance")]
+        public async Task<IActionResult> GetBalancesByFilterAsync([FromQuery] BalanceFilter filter)
+        {
+            var result = await _billingService.GetBalanceByFilterAsync(filter);
+            return ApiResult(result);
+        }
     }
 }

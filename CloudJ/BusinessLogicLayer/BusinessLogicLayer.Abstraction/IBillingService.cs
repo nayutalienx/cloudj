@@ -26,6 +26,25 @@ namespace BusinessLogicLayer.Abstraction
         /// <returns></returns>
         Task<IReadOnlyCollection<OrderDto>> GetByFilterAsync(OrderFilter filter);
 
+        /// <summary>
+        /// Получение балансов по фильтру
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        Task<IReadOnlyCollection<BalanceDto>> GetBalanceByFilterAsync(BalanceFilter filter);
+        /// <summary>
+        /// Добавление нового баланса
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        Task<BalanceDto> AddBalanceAsync(NewBalanceDto dto);
+        /// <summary>
+        /// Обновление баланса пользователя
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        Task<BalanceDto> UpdateBalanceAsync(UpdateBalanceDto dto);
+
 
     }
 }

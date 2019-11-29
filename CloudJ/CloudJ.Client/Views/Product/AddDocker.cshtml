@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "AddPersonalSolution";
+}
+@model CloudJ.Client.Models.DockerSolutionModel
+@using CloudJ.Contracts.DTOs.SolutionDtos.Category
+
+<section class="intro intro__marg">
+    <div class="container">
+        <h1>Добавление нового решения</h1>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <form method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <input type="hidden" asp-for="UserId" />
+                        <div class="form-group">
+
+                            <label asp-for="CategoryId">Категория</label>
+                            <select required size="10" class="form-control" id="CategoryId" name="CategoryId" asp-for="CategoryId">
+                                @foreach (CategoryDto cat in ViewBag.Categories)
+                                {
+                                    @if (cat.ParentCategory != null)
+                                    {
+                                        <option value="@cat.Id">@cat.ParentCategory.Name -> @cat.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@cat.Id">@cat.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Name" for="exampleInputEmail1">Название</label>
+                            <input asp-for="Name" type="theme" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" placeholder="Введите название">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" for="exampleTextarea">Описание</label>
+                            <textarea asp-for="Description" class="form-control" id="exampleTextarea" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Logo">Логотип</label>
+                            <input type="file" class="form-control-file" placeholder="Логотип" asp-for="Logo" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Photos">Фото описание</label>
+                            <input type="file" multiple class="form-control-file" placeholder="Фото описание" asp-for="Photos" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CloudName" for="exampleInputEmail1">Название облака</label>
+                            <input asp-for="CloudName" type="text" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" placeholder="Введите название">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DockerUrl" for="exampleInputEmail1">Ссылка на контейнкер в DockerHub</label>
+                            <input asp-for="DockerUrl" type="text" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" placeholder="Введите url">
+                        </div>
+
+                    </fieldset>
+                    <button type="submit" class="btns btn-primary rounded-0"
+                            style="margin-top: 30px;">
+                        Добавить
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>

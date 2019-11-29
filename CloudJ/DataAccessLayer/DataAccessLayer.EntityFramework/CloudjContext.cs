@@ -20,6 +20,7 @@ namespace DataAccessLayer.EntityFramework
         }
 
         DbSet<Order> Orders { get; set; }
+        DbSet<Balance> Balances { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Cloud> Clouds { get; set; }
         DbSet<DockerImage> DockerImages { get; set; }

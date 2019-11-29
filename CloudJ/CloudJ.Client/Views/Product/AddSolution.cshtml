@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "AddSolution";
+}
+
+    <section class="intro intro__marg">
+        <div class="container">
+            <h1>Добавление нового решения</h1>
+            <p>Способ размещения</p>
+            <div class="row">
+                <div class="col-lg-6">
+                    <form action="add.html">
+                        <button type="submit" class="btn btn-outline-primary rounded-0" asp-controller="Product" asp-action="AddPersonalSolution">По нашей спецификации</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <form action="add_docker.html">
+                        <button type="submit" class="btn btn-outline-primary rounded-0" asp-controller="Product" asp-action="AddDocker">Docker</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
