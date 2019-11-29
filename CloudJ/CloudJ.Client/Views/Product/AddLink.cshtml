@@ -3,43 +3,57 @@
     ViewData["Title"] = "AddLink";
 }
 
+@using CloudJ.Contracts.DTOs.SolutionDtos.Solution
+@model CloudJ.Contracts.DTOs.SolutionDtos.Solution.NewSolutionLinkDto
+
     <section class="intro intro__marg">
         <div class="container">
 
-            <h1>Еще немного информации</h1>
+            
             <div class="row">
                 <div class="col-lg-6">
-                    <form>
+                    <form asp-controller="Product" asp-action="AddLink">
                         <fieldset>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Ссылка на сервер</label>
-                                <input type="theme" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="Выберите ссылку на сервер">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Полезные ссылки</label>
-                                <input type="theme" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="Выберите ссылку">
-                                <input type="theme" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="Выберите ссылку">
-                            </div>
+                                
+                                <div>
 
+                                    <div class="input-group">
+                                        <input hidden="true" asp-for="SolutionId" value="@Model.SolutionId" />
+                                        <input asp-for="Name" type="text" class="form-control" placeholder="Название ссылки" value="" />
+                                        <input asp-for="Url" type="text" class="form-control" placeholder="Url" value="" />
+                                        <button type="submit" class="input-group-addon btn btn-outline-primary rounded-0">Добавить</button>
+                                    </div>
+                                </div>
+                                <label for="exampleInputPassword1" style="margin-top: 10px;">Список всех ссыллок</label>
+                                <table>
+                                    <colgroup>
+                                        <col span="2">
+                                        <col>
+                                    </colgroup>
+                                    <tr>
+                                        <th>Название</th>
+                                        <th>Ссылка</th>
+
+                                    </tr>
+                                    @foreach (SolutionLinkDto l in ViewBag.Links)
+                                    {
+                                        <tr>
+                                            <td>@l.Name</td>
+                                            <td><a href="@l.Url">@l.Url</a></td>
+                                        </tr>
+                                    }
+
+                                    
+                                </table>
+                            </div>
                         </fieldset>
                     </form>
 
                 </div>
-                <p>
-                    Нажимая кнопку завершить вы соглашаетесь с <a href="#">условиями пользования</a> сервисом CloudJ
-                </p>
+
 
             </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <button type="submit" class="btns btn-primary rounded-0">
-                        Завершить
-                    </button>
-                </div>
-            </div>
+
         </div>
     </section>
-

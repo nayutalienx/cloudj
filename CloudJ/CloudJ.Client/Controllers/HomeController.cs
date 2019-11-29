@@ -48,6 +48,8 @@ namespace CloudJ.Client.Controllers
         /// <returns></returns>
         public async Task<IActionResult> MarketPlace()
         {
+            var response = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = response.Data;
             return View();
         }
 

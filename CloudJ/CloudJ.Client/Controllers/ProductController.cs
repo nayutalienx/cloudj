@@ -48,9 +48,31 @@ namespace CloudJ.Client.Controllers
         [Route("links")]
         public async Task<IActionResult> AddLink([FromQuery]long id)
         {
-            return View();
+            var solution = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { SolutionId = id });
+            ViewBag.Links = solution.Data.FirstOrDefault().SolutionLinks;
+            return View(new NewSolutionLinkDto { SolutionId = id});
         }
 
+        /// <summary>
+        /// Запрос к апи на добавление ссылки решения
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("links")]
+        public async Task<IActionResult> AddLink(NewSolutionLinkDto dto)
+        {
+            var response = await _solutionApiClient.AddSolutionLinkAsync(dto);
+            var solution = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { SolutionId = dto.SolutionId});
+            ViewBag.Links = solution.Data.FirstOrDefault().SolutionLinks;
+            return View(dto);
+        }
+
+        /// <summary>
+        /// Страница добавления плана
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("plan")]
         public async Task<IActionResult> AddPlan([FromQuery]long id)

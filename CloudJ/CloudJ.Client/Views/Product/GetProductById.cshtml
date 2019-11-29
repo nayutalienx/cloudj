@@ -4,6 +4,7 @@
 }
 @using CloudJ.Contracts.DTOs.SolutionDtos.Review
 @using CloudJ.Contracts.DTOs.SolutionDtos.Plan
+@using CloudJ.Contracts.DTOs.SolutionDtos.Solution
 @model CloudJ.Contracts.DTOs.SolutionDtos.Solution.SolutionDto
 
     <section class="intro intro__marg">
@@ -15,10 +16,23 @@
                     <button type="button" class="btn btn-primary mt-3 rounded-0">Получить</button>
                     <button type="button" class="btn btn-outline-primary rounded-0">В избранное</button>
                     <p>
-                        Категории<br>
+                        <b>Категории</b>
+                        <br>
 
                         <a href="marketplace.html">@Model.Category.Name</a>
-                        
+                        @if (Model.SolutionLinks.Length > 0)
+                        {
+                            
+                            
+                    <br>
+                    <b>Ссылки</b>
+                    <br />
+                    @foreach (SolutionLinkDto l in Model.SolutionLinks)
+                    {
+                        <a href="@l.Url">@l.Name</a>
+                        <br />
+                    }
+                }
                     </p>
                 </div>
                 <div class="col-lg-10">

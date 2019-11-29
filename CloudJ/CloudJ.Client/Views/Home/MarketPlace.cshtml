@@ -3,17 +3,26 @@
     ViewData["Title"] = "MarketPlace";
 }
 
+@using CloudJ.Contracts.DTOs.SolutionDtos.Category
+
     <section id="intro" class="intro intro__marg">
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-3">
-                    <button type="button" class="btn btn-outline-primary">Аналитика</button>
+                    @foreach (CategoryDto c in ViewBag.Categories)
+                    {
+                        if (c.ParentCategory == null)
+                        {
+                        <button type="button" class="btn btn-outline-primary">@c.Name</button>
+                        }
+                    }
+                    @*<button type="button" class="btn btn-outline-primary">Аналитика</button>
                     <button type="button" class="btn btn-outline-primary">Базы данных</button>
                     <button type="button" class="btn btn-outline-primary">Блокчейн</button>
                     <button type="button" class="btn btn-outline-primary">ИИ + машинное обучение</button>
                     <button type="button" class="btn btn-outline-primary">Интеграция</button>
-                    <button type="button" class="btn btn-outline-primary">Мобильные приложения</button>
+                    <button type="button" class="btn btn-outline-primary">Мобильные приложения</button>*@
 
                 </div>
                 <div class="col-lg-9">
