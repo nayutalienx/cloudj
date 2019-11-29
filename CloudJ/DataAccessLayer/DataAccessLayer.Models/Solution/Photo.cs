@@ -9,7 +9,7 @@ namespace DataAccessLayer.Models.Solution
     {
         public byte[] Data { get; set; }
         public string Type { get; set; }
-        public long SolutionId { get; set; }
+        public long? SolutionId { get; set; }
         public virtual Solution Solution { get; set; }
     }
 }

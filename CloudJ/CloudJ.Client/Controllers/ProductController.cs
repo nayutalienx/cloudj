@@ -1,5 +1,6 @@
 ﻿using CloudJ.Client.Clients;
 using CloudJ.Client.Models;
+using CloudJ.Contracts.DTOs.SolutionDtos.Category;
 using CloudJ.Contracts.DTOs.SolutionDtos.Cloud;
 using CloudJ.Contracts.DTOs.SolutionDtos.Photo;
 using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
@@ -247,6 +248,54 @@ namespace CloudJ.Client.Controllers
             long id = response.Data.Id;
 
             return Redirect($"~/Product/{id}");
+        }
+
+        /// <summary>
+        /// [Администратор] Страница добавления категории
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("addCategory")]
+        public async Task<IActionResult> AddCategory()
+        {
+            var categories = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = categories.Data;
+            return View();
+        }
+
+        /// <summary>
+        /// [Администратор] Запрос к апи на добавление категории
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("addCategory")]
+        public async Task<IActionResult> AddCategory(NewCategoryModel model)
+        {
+            var categories = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = categories.Data;
+            var dto = new NewCategoryDto 
+            {
+                Name = model.Name,
+                Description = model.Description,
+                ParentCategoryId = model.ParentCategoryId
+            };
+
+            
+
+            var ph = model.Logo;
+            byte[] p1 = null;
+            using (var fs1 = ph.OpenReadStream())
+            using (var ms1 = new MemoryStream())
+            {
+                fs1.CopyTo(ms1);
+                p1 = ms1.ToArray();
+            }
+            dto.Logo = new NewPhotoDto { Data = p1, Type = "Logo" };
+
+            await _solutionApiClient.AddCategoryAsync(dto);
+
+            return Redirect("addCategory");
         }
     }
 }
