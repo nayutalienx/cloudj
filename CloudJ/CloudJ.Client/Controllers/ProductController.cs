@@ -2,6 +2,7 @@
 using CloudJ.Client.Models;
 using CloudJ.Contracts.DTOs.SolutionDtos.Cloud;
 using CloudJ.Contracts.DTOs.SolutionDtos.Photo;
+using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
 using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -77,7 +78,24 @@ namespace CloudJ.Client.Controllers
         [Route("plan")]
         public async Task<IActionResult> AddPlan([FromQuery]long id)
         {
-            return View();
+            var response = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { SolutionId = id});
+            ViewBag.Plans = response.Data.FirstOrDefault().Plans;
+            return View(new NewPlanDto { SolutionId = id });
+        }
+
+        /// <summary>
+        /// Запрос к апи на добавление плана к решению
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("plan")]
+        public async Task<IActionResult> AddPlan(NewPlanDto dto)
+        {
+            var response = await _solutionApiClient.AddSolutionPlanAsync(dto);
+            var sols = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { SolutionId = dto.SolutionId });
+            ViewBag.Plans = sols.Data.FirstOrDefault().Plans;
+            return View(dto);
         }
 
         /// <summary>

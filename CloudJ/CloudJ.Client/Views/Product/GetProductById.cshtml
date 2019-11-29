@@ -82,53 +82,55 @@
                             </p>
                         </div>
                         <div class="tab-pane fade" id="comment">
-                            
+
                             <div class="row" style="margin-bottom: 10px;">
                                 @foreach (ReviewDto r in Model.Reviews)
                                 {
-                                <div class="row" style="margin-bottom: 10px;">
-                                    <div class="col-3">
-                                        <div class="row">
-                                            <div class="rating">
-                                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                                    5
-                                                    stars
-                                                </label>
-                                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                                    4
-                                                    stars
-                                                </label>
-                                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                                    3
-                                                    stars
-                                                </label>
-                                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                                    2
-                                                    stars
-                                                </label>
-                                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                                    1
-                                                    star
-                                                </label>
+                                    <div class="row" style="margin-bottom: 10px;">
+                                        <div class="col-3">
+                                            <div class="row">
+                                                <div class="rating">
+                                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
+                                                        5
+                                                        stars
+                                                    </label>
+                                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
+                                                        4
+                                                        stars
+                                                    </label>
+                                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
+                                                        3
+                                                        stars
+                                                    </label>
+                                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
+                                                        2
+                                                        stars
+                                                    </label>
+                                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
+                                                        1
+                                                        star
+                                                    </label>
+                                                </div>
+                                                <p class="col-2-otzuv">16 ноября 2019г.</p>
+                                                <p class="col-2-otzuv">Пользователь CloudJ</p>
                                             </div>
-                                            <p class="col-2-otzuv">16 ноября 2019г.</p>
-                                            <p class="col-2-otzuv">Пользователь CloudJ</p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="tab-pane-p" style="margin-top:-12px;">@r.AuthorId</p>
+                                            <p class="tab-pane-p-2">
+                                                @r.Text
+                                            </p>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <p class="tab-pane-p" style="margin-top:-12px;">@r.AuthorId</p>
-                                        <p class="tab-pane-p-2">
-                                            @r.Text
-                                        </p>
-                                    </div>
-                                </div>
                                 }
 
+                            </div>
                         </div>
                         <div class="tab-pane fade active" id="plan">
                             @foreach (PlanDto p in Model.Plans)
                             {
                             <div class="row col__plan align-items-center">
+                                <div class="col-lg-2 plan__p">@p.Name</div>
                                 <div class="col-lg-2 plan__p">@p.Time</div>
                                 <div class="col-lg-2 ml-auto plan__p">@p.Price</div>
                                 <div class="col-lg-2">
@@ -139,7 +141,7 @@
                             
 
                         </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
