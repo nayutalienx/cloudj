@@ -13,5 +13,6 @@ namespace DataAccessLayer.Models.Billing
         public virtual Solution.Solution Solution { get; set; }
         public long PlanId { get; set; }
         public virtual Plan Plan { get; set; }
+        public DateTime CreatedTime { get; set; }
     }
 }

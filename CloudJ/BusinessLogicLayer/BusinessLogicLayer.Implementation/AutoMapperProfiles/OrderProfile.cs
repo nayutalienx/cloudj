@@ -12,7 +12,9 @@ namespace BusinessLogicLayer.Implementation.AutoMapperProfiles
         public OrderProfile()
         {
             CreateMap<OrderDto, Order>().ReverseMap();
-            CreateMap<NewOrderDto, Order>().ReverseMap();
+            CreateMap<NewOrderDto, Order>()
+                 .ForMember(dest => dest.CreatedTime, options => options.MapFrom(source => System.DateTime.Now))
+                .ReverseMap();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace CloudJ.Contracts.DTOs.OrderDtos
     {
         public string CustomerId { get; set; }
         public SolutionDto Solution { get; set; }
+        public DateTime CreatedTime { get; set; }
         public PlanDto Plan { get; set; }
     }
 }

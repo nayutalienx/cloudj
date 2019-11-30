@@ -2,12 +2,16 @@
 @{
     ViewData["Title"] = "FillBalance";
 }
-
+@model CloudJ.Client.Models.BalanceModel
 <section class="intro intro__marg">
     <div class="container">
         <div class="row">
             <div class="col-lg-5">
+
+                
+
                 <div class="form-container">
+                    
                     <div class="field-container">
                         <label for="name">Name</label>
                         <input id="name" maxlength="20" type="text">
@@ -29,7 +33,10 @@
                         <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
                     </div>
                 </div>
-                <button type="submit" class="btns btn-primary rounded-0" style="margin-left: 35px;">Далее</button>
+                <form method="post">
+                    <input hidden="true" asp-for="BalanceValue" value="@Model.BalanceValue"/>
+                    <button type="submit" class="btns btn-primary rounded-0" style="margin-left: 35px;"><a style="color:white">Оплатить</a></button>
+                </form>
             </div>
             <div class="col-lg-4">
                 <div class="container__credit preload">

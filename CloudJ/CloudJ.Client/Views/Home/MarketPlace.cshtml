@@ -11,6 +11,7 @@
 
             <div class="row">
                 <div class="col-lg-3">
+                    <h5>Баланс: @ViewBag.Balance р.</h5>
                     @foreach (CategoryDto c in ViewBag.Categories)
                     {
                         if (c.ParentCategory == null)
@@ -54,7 +55,7 @@
 
                                 <p class="product__p">Рейтинг: @s.Rate.0</p>
 
-                                <a href="page_product.html" class="buy">Получить</a>
+                                <a href="~/Product/@s.Id" class="buy">Получить</a>
 
                             </div>
 

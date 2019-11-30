@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "UpBalance";
+}
+
+    <form method="get" class="mt-2">
+
+        <div class="form-group">
+            <label for="money">Пополнить на</label>
+            <br>
+            <input type="number" name="balance" id="money" placeholder="Количество в руб." />
+        </div>
+
+        <button type="submit" asp-controller="Store" asp-action="FillBalance" class="btns btn-primary rounded-0 m-0" style="margin-left: 35px;">Далее</button>
+
+
+    </form>
+

@@ -18,17 +18,21 @@
                     }
                     @if (logo != null)
                     {
-                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(logo)"  class="mt-1 product__img" alt="Large">
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(logo)" class="mt-1 product__img" alt="Large">
                     }
                     else
                     {
-                        <img src="~/img/DB.png"  class="mt-1 product__img" alt="Large">
+                        <img src="~/img/DB.png" class="mt-1 product__img" alt="Large">
 
                     }
 
 
-                    
-                    <button type="button" class="btn btn-primary mt-3 rounded-0">Получить</button>
+
+
+                    <button type="button" class="btn btn-primary mt-3 rounded-0" data-toggle="modal"
+                            data-target="#exampleModalCenter">
+                        Получить
+                    </button>
                     <button type="button" class="btn btn-outline-primary rounded-0">В избранное</button>
                     <p>
                         <b>Категории</b>
@@ -52,7 +56,7 @@
                 </div>
                 <div class="col-lg-10">
                     <h1>@Model.Name</h1>
-                   
+
                     <div class="row">
                         <p>Рейтинг: @Model.Rate.0</p>
                     </div>
@@ -70,7 +74,7 @@
                     </ul>
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane fade active show" id="view">
-                            
+
                             <p>
                                 @Model.Description
                             </p>
@@ -113,7 +117,7 @@
                             @foreach (ReviewDto r in Model.Reviews)
                             {
                                 <hr />
-                                
+
 
 
 
@@ -143,21 +147,77 @@
                         <div class="tab-pane fade active" id="plan">
                             @foreach (PlanDto p in Model.Plans)
                             {
-                            <div class="row col__plan align-items-center">
-                                <div class="col-lg-2 plan__p">@p.Name</div>
-                                <div class="col-lg-2 plan__p">@p.Time</div>
-                                <div class="col-lg-2 ml-auto plan__p">@p.Price</div>
-                                <div class="col-lg-2">
-                                    <button type="button" class="btn btn-primary rounded-0 plan__btn">Получить</button>
+                                <div class="row col__plan align-items-center">
+                                    <div class="col-lg-2 plan__p">@p.Name</div>
+                                    <div class="col-lg-2 plan__p">@p.Time</div>
+                                    <div class="col-lg-2 ml-auto plan__p">@p.Price</div>
+                                    <div class="col-lg-2">
+                                        <button type="button" class="btn btn-primary rounded-0 plan__btn">Получить</button>
+                                    </div>
                                 </div>
-                            </div>
                             }
-                            
+
 
                         </div>
-                    
+
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <h1>Выберите план</h1>
+
+
+                            @foreach (PlanDto p in Model.Plans)
+                            {
+                               
+
+
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-11">
+                                        <div class="row col__plan align-items-center">
+                                            <div class="col-lg-2 plan__p">@p.Name</div>
+                                            <div class="col-lg-5">
+                                                <div style="word-break: break-all;">
+                                                    @p.Description
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 plan__p">@p.Time</div>
+                                            <div class="col-lg-1 ml-auto plan__p">@p.Price</div>
+                                            <div class="col-lg-2">
+                                                <form method="post" asp-controller="Store" asp-action="MakeOrder">
+                                                    <input name="PlanId" value="@p.Id" hidden="true">
+                                                    <input name="SolutionId" value="@Model.Id" hidden="true">
+                                                    <button type="submit"
+                                                            class="btn btn-primary rounded-0 plan__btn"
+                                                            style="width: 100%;">
+                                                        Купить
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            }
+
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+</section>
 

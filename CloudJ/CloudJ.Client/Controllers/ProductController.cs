@@ -28,6 +28,7 @@ namespace CloudJ.Client.Controllers
             _solutionApiClient = solutionApiClient;
             _billingApiClient = billingApiClient;
             _identityClient = identityClient;
+            
         }
 
         /// <summary>
@@ -385,6 +386,9 @@ namespace CloudJ.Client.Controllers
                 ParentCategoryId = cat.ParentCategory?.Id
             });
         }
+
+        
+
         /// <summary>
         /// [Администратор] запрос к апи на изменение категории
         /// </summary>
