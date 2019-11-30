@@ -7,6 +7,7 @@ using CloudJ.Client.Options;
 using CloudJ.Contracts;
 using CloudJ.Contracts.DTOs.OrderDtos;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 
 namespace CloudJ.Client.Clients
 {
@@ -21,9 +22,9 @@ namespace CloudJ.Client.Clients
     public class BillingApiClient : ApiClient , IBillingApiClient
     {
         private readonly BillingApiClientOptions _clientOptions;
-        public BillingApiClient(HttpClient client, IHttpContextAccessor accessor, BillingApiClientOptions clientOptions) : base(client, accessor)
+        public BillingApiClient(HttpClient client, IHttpContextAccessor accessor, IOptions<BillingApiClientOptions> clientOptions) : base(client, accessor)
         {
-            _clientOptions = clientOptions;
+            _clientOptions = clientOptions.Value;
         }
 
         public Task<ApiResponse<BalanceDto>> AddBalanceAsync(NewBalanceDto dto)

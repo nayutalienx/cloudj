@@ -17,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="~/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/style.css">
+    <link href="css/credit.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -26,6 +27,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js"></script>
+    <script src="~/js/credit.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Rock+Salt|Source+Code+Pro:300,400,600" rel="stylesheet">
+
+
 </head>
 <body>
     <header id="header" class="header back">
@@ -51,10 +57,34 @@
                             </li>
                             @if (IsAuthenticated)
                             {
-                                <li class="menu__item">
-                                    <a asp-controller="Home" asp-action="Login">@Name</a>
-                                </li>
-                                <a asp-controller="Home" asp-action="Logout"> ВЫЙТИ</a>
+                                @*<li class="menu__item">
+                <a asp-controller="Home" asp-action="Login">@Name</a>
+            </li>
+            <a asp-controller="Home" asp-action="Logout"> ВЫЙТИ</a>*@
+                                <div class="col-lg-4 ml-auto">
+                                    <nav>
+                                        <ul class="menu d-flex">
+                                            <li class="menu__item"></li>
+
+                                            <li class="menu__item dropdown">
+                                                <a class="dropdown-toggler" data-toggle="dropdown" href="#" role="button"
+                                                   aria-haspopup="true" aria-expanded="false">@Name</a>
+                                                <div class="dropdown-menu dropdown__style">
+                                                    <a class="dropdown-item" asp-controller="Home" asp-action="Login" style="color: black;">Личный кабинет</a>
+
+                                                    <p class="dropdown-item">
+                                                        <a href="#" style="color: black;">Баланс 100 000р. </a><a href="balance.html"
+                                                                                            style="color: dodgerblue">Пополнить</a>
+                                                    </p>
+
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" asp-controller="Home" asp-action="Logout" style="color: black;">Выйти</a>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </nav>
+                                </div>
                             }
                             else
                             {

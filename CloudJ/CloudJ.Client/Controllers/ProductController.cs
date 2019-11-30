@@ -21,9 +21,13 @@ namespace CloudJ.Client.Controllers
     public class ProductController : Controller
     {
         private readonly ISolutionApiClient _solutionApiClient;
-        public ProductController(ISolutionApiClient solutionApiClient)
+        private readonly IBillingApiClient _billingApiClient;
+        private readonly IIdentityClient _identityClient;
+        public ProductController(ISolutionApiClient solutionApiClient, IBillingApiClient billingApiClient, IIdentityClient identityClient)
         {
             _solutionApiClient = solutionApiClient;
+            _billingApiClient = billingApiClient;
+            _identityClient = identityClient;
         }
 
         /// <summary>
@@ -39,8 +43,30 @@ namespace CloudJ.Client.Controllers
             {
                 SolutionId = id
             });
-            
-            return View(response.Data.FirstOrDefault());
+            var dto = response.Data.FirstOrDefault();
+
+            if (dto.Reviews.Any())
+            {
+                IDictionary<string, string> id_name = new Dictionary<string, string>();
+                foreach(ReviewDto rd in dto.Reviews)
+                {
+                    if (id_name.ContainsKey(rd.AuthorId))
+                        continue;
+
+                    var user = await _identityClient.GetUserInfoAsync(rd.AuthorId);
+                    var userData = user.Data;
+
+                    if (userData != null)
+                        id_name.Add(rd.AuthorId, userData.Email);
+                    else
+                        id_name.Add(rd.AuthorId, "User deleted");
+
+                }
+                ViewBag.ReviewAuthors = id_name;
+
+            }
+
+            return View(dto);
         }
 
         /// <summary>
