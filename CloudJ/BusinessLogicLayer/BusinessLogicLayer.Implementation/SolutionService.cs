@@ -242,5 +242,42 @@ namespace BusinessLogicLayer.Implementation
 
 
         }
+        /// <summary>
+        /// Удаление категории
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public async Task RemoveCategoryAsync(RemoveCategoryDto dto)
+        {
+            var cat = await _categoryRepository.GetAsync(dto.Id);
+            await _categoryRepository.RemoveAsync(cat);
+            await _categoryRepository.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Обновить категорию
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public async Task<CategoryDto> UpdateCategoryAsync(UpdateCategoryDto dto)
+        {
+            var cat = await _categoryRepository.GetAsync(dto.Id);
+            if (dto.Name != null)
+                cat.Name = dto.Name;
+            if (dto.Description != null)
+                cat.Description = dto.Description;
+            if (dto.ParentCategoryId != null)
+                cat.ParentCategoryId = dto.ParentCategoryId;
+            if (dto.Logo != null)
+            {
+                if (cat.Logo != null)
+                    cat.Logo.Data = dto.Logo.Data;
+                else
+                    cat.Logo = _mapper.Map<Photo>(dto.Logo);
+            }
+
+            await _categoryRepository.SaveChangesAsync();
+            return _mapper.Map<CategoryDto>(cat);
+        }
     }
 }

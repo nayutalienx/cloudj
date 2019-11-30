@@ -21,7 +21,7 @@
                                     <p class="category__p" style="text-align: left;">
                                         @c.Description
                                     </p>
-                                    <p><a href="#">Редактировать </a><a href="#" style="color: red;">Удалить</a></p>
+                                    <p><a href="~/Product/editCategory?id=@c.Id">Редактировать </a><a href="~/Product/deleteCategory?id=@c.Id" style="color: red;">Удалить</a></p>
                                 </div>
                                 <div class="col-lg-2">
                                     @if (c.Logo != null)
@@ -46,7 +46,7 @@
                             <div class="form-group">
 
                                 <label asp-for="ParentCategoryId">Родительская категория</label>
-                                <select required size="10" class="form-control" id="ParentCategoryId" name="ParentCategoryId" asp-for="ParentCategoryId">
+                                <select size="10" class="form-control" id="ParentCategoryId" name="ParentCategoryId" asp-for="ParentCategoryId">
                                     @foreach (CategoryDto cat in ViewBag.Categories)
                                     {
                                         @if (cat.ParentCategory != null)

@@ -69,6 +69,18 @@ namespace BusinessLogicLayer.Abstraction
         /// </summary>
         /// <returns></returns>
         Task<IReadOnlyCollection<CategoryDto>> GetAllCategoriesAsync();
+        /// <summary>
+        /// Удалить категорию
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        Task RemoveCategoryAsync(RemoveCategoryDto dto);
+        /// <summary>
+        /// Обновить категорию
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        Task<CategoryDto> UpdateCategoryAsync(UpdateCategoryDto dto);
         
         
     }

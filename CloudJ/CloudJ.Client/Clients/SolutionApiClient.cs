@@ -17,8 +17,10 @@ namespace CloudJ.Client.Clients
     public interface ISolutionApiClient
     {
         Task<ApiResponse<SolutionDto>> UpdateSolutionAsync(UpdateSolutionDto dto);
+        Task<ApiResponse<CategoryDto>> UpdateCategoryAsync(UpdateCategoryDto dto);
         Task<ApiResponse<SolutionDto>> AddSolutionAsync(NewSolutionDto dto);
         Task<ApiResponse> RemoveSolutionAsync(RemoveSolutionDto dto);
+        Task<ApiResponse> RemoveCategoryAsync(RemoveCategoryDto dto);
         Task<ApiResponse<IReadOnlyCollection<CategoryDto>>> GetAllCategoriesAsync();
         Task<ApiResponse<CategoryDto>> AddCategoryAsync(NewCategoryDto dto);
         Task<ApiResponse<SolutionLinkDto>> AddSolutionLinkAsync(NewSolutionLinkDto dto);
@@ -71,14 +73,25 @@ namespace CloudJ.Client.Clients
             return PostAsync<SolutionFilter, ApiResponse<IReadOnlyCollection<SolutionDto>>>(_clientOptions.GetSolutionsByFilterUrl, filter);
         }
 
+        public Task<ApiResponse> RemoveCategoryAsync(RemoveCategoryDto dto)
+        {
+            return DeleteAsync<RemoveCategoryDto, ApiResponse>(_clientOptions.DeleteCategoryUrl, dto);
+        }
+
         public Task<ApiResponse> RemoveSolutionAsync(RemoveSolutionDto dto)
         {
             return DeleteAsync<RemoveSolutionDto, ApiResponse>(_clientOptions.DeleteSolutionUrl, dto);
+        }
+
+        public Task<ApiResponse<CategoryDto>> UpdateCategoryAsync(UpdateCategoryDto dto)
+        {
+            return PutAsync<UpdateCategoryDto, ApiResponse<CategoryDto>>(_clientOptions.UpdateCategoryUrl, dto);
         }
 
         public Task<ApiResponse<SolutionDto>> UpdateSolutionAsync(UpdateSolutionDto dto)
         {
             return PutAsync<UpdateSolutionDto, ApiResponse<SolutionDto>>(_clientOptions.UpdateSolutionUrl, dto);
         }
+
     }
 }
