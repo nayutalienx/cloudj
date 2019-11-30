@@ -39,6 +39,8 @@ namespace CloudJ.Client.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Category()
         {
+            var response = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = response.Data;
             return View();
         }
 
@@ -48,6 +50,11 @@ namespace CloudJ.Client.Controllers
         /// <returns></returns>
         public async Task<IActionResult> MarketPlace()
         {
+            var response = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = response.Data;
+
+            var sols = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { });
+            ViewBag.Solutions = sols.Data;
             return View();
         }
 

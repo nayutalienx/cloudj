@@ -159,7 +159,9 @@ namespace BusinessLogicLayer.Implementation
                     {
                         Id = s.Id,
                         Name = s.Name,
-                        Photos = (s.Photos.Any()) ? new List<Photo> { s.Photos.FirstOrDefault(x => x.Type.Equals("Logo")) } : null
+                        Photos = (s.Photos.Any()) ? new List<Photo> { s.Photos.FirstOrDefault(x => x.Type.Equals("Logo")) } : null,
+                        Rate = s.Rate,
+                        Description = s.Description
                     }
                 );
             }

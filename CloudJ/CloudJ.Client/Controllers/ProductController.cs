@@ -1,7 +1,10 @@
 ﻿using CloudJ.Client.Clients;
 using CloudJ.Client.Models;
+using CloudJ.Contracts.DTOs.SolutionDtos.Category;
 using CloudJ.Contracts.DTOs.SolutionDtos.Cloud;
 using CloudJ.Contracts.DTOs.SolutionDtos.Photo;
+using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
+using CloudJ.Contracts.DTOs.SolutionDtos.Review;
 using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +44,21 @@ namespace CloudJ.Client.Controllers
         }
 
         /// <summary>
+        /// Добавление отзыва к решению
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("id:long")]
+        public async Task<IActionResult> AddReview(NewReviewDto dto)
+        {
+            dto.AuthorId = User.Claims.FirstOrDefault(c => c.Type.Contains("nameidentifier")).Value;
+            var result = await _solutionApiClient.AddReviewAsync(dto);
+            return Redirect($"~/Product/{dto.SolutionId}");
+
+        }
+
+        /// <summary>
         /// Добавить ссылку к решению
         /// </summary>
         /// <returns></returns>
@@ -48,14 +66,53 @@ namespace CloudJ.Client.Controllers
         [Route("links")]
         public async Task<IActionResult> AddLink([FromQuery]long id)
         {
-            return View();
+            var solution = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { SolutionId = id });
+            ViewBag.Links = solution.Data.FirstOrDefault().SolutionLinks;
+            return View(new NewSolutionLinkDto { SolutionId = id});
         }
 
+        /// <summary>
+        /// Запрос к апи на добавление ссылки решения
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("links")]
+        public async Task<IActionResult> AddLink(NewSolutionLinkDto dto)
+        {
+            var response = await _solutionApiClient.AddSolutionLinkAsync(dto);
+            var solution = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { SolutionId = dto.SolutionId});
+            ViewBag.Links = solution.Data.FirstOrDefault().SolutionLinks;
+            return View(dto);
+        }
+
+        /// <summary>
+        /// Страница добавления плана
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("plan")]
         public async Task<IActionResult> AddPlan([FromQuery]long id)
         {
-            return View();
+            var response = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { SolutionId = id});
+            ViewBag.Plans = response.Data.FirstOrDefault().Plans;
+            return View(new NewPlanDto { SolutionId = id });
+        }
+
+        /// <summary>
+        /// Запрос к апи на добавление плана к решению
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("plan")]
+        public async Task<IActionResult> AddPlan(NewPlanDto dto)
+        {
+            var response = await _solutionApiClient.AddSolutionPlanAsync(dto);
+            var sols = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { SolutionId = dto.SolutionId });
+            ViewBag.Plans = sols.Data.FirstOrDefault().Plans;
+            return View(dto);
         }
 
         /// <summary>
@@ -208,5 +265,55 @@ namespace CloudJ.Client.Controllers
 
             return Redirect($"~/Product/{id}");
         }
+
+        /// <summary>
+        /// [Администратор] Страница добавления категории
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("addCategory")]
+        public async Task<IActionResult> AddCategory()
+        {
+            var categories = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = categories.Data;
+            return View();
+        }
+
+        /// <summary>
+        /// [Администратор] Запрос к апи на добавление категории
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("addCategory")]
+        public async Task<IActionResult> AddCategory(NewCategoryModel model)
+        {
+            var categories = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = categories.Data;
+            var dto = new NewCategoryDto 
+            {
+                Name = model.Name,
+                Description = model.Description,
+                ParentCategoryId = model.ParentCategoryId
+            };
+
+            
+
+            var ph = model.Logo;
+            byte[] p1 = null;
+            using (var fs1 = ph.OpenReadStream())
+            using (var ms1 = new MemoryStream())
+            {
+                fs1.CopyTo(ms1);
+                p1 = ms1.ToArray();
+            }
+            dto.Logo = new NewPhotoDto { Data = p1, Type = "Logo" };
+
+            await _solutionApiClient.AddCategoryAsync(dto);
+
+            return Redirect("addCategory");
+        }
+
+        
     }
 }

@@ -3,891 +3,98 @@
     ViewData["Title"] = "MarketPlace";
 }
 
+@using CloudJ.Contracts.DTOs.SolutionDtos.Category
+@using CloudJ.Contracts.DTOs.SolutionDtos.Solution
+
     <section id="intro" class="intro intro__marg">
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-3">
-                    <button type="button" class="btn btn-outline-primary">Аналитика</button>
-                    <button type="button" class="btn btn-outline-primary">Базы данных</button>
-                    <button type="button" class="btn btn-outline-primary">Блокчейн</button>
-                    <button type="button" class="btn btn-outline-primary">ИИ + машинное обучение</button>
-                    <button type="button" class="btn btn-outline-primary">Интеграция</button>
-                    <button type="button" class="btn btn-outline-primary">Мобильные приложения</button>
+                    @foreach (CategoryDto c in ViewBag.Categories)
+                    {
+                        if (c.ParentCategory == null)
+                        {
+                            <button type="button" class="btn btn-outline-primary">@c.Name</button>
+                        }
+                    }
+
 
                 </div>
                 <div class="col-lg-9">
                     <div class="row">
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5"><a href="~/Product/1">Oracle Database 12.1.0.2 Enterprise Edition</a></h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
 
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="page_product.html" class="buy">Получить</a>
 
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
 
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
 
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
+                        @foreach (SolutionDto s in ViewBag.Solutions)
+                        {
+                            <div class="col-lg-3 product">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-1 mb-1 product__h5"><a href="~/Product/@s.Id">@s.Name</a></h5>
+                                    </div>
 
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
+                                    @{
+                                        byte[] logo = s.Photos.Where(p => p.Type.Equals("Logo")).FirstOrDefault()?.Data;
+                                    }
+                                    @if (logo != null)
+                                    {
+                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(logo)" style="width: 40px" class="mt-1 product__img" alt="Large">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/img/DB.png" style="width: 40px" class="mt-1 product__img" alt="Large">
 
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
+                                    }
                                 </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
+                                <p class="product__p">
+                                    @s.Description
+                                </p>
 
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
+                                <p class="product__p">Рейтинг: @s.Rate.0</p>
 
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
+                                <a href="page_product.html" class="buy">Получить</a>
 
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
                             </div>
-                            <a href="product_page.html" class="buy">Получить</a>
 
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
+                        }
 
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
 
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
 
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
 
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
 
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="col-lg-3 product">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-1 mb-1 product__h5">Oracle Database 12.1.0.2 Enterprise Edition</h5>
-                                </div>
-                                <img src="~/img/Large.png" class="mt-1 product__img" alt="Large">
-                            </div>
-                            <p class="product__p">
-                                Oracle Database 12c Enterprise Edition (12.1.0.2.0) is a
-                                next-generation database
-                                designed for the cloud.
-                            </p>
-
-                            <div class="row">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                        5
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                        4
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                        3
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                        2
-                                        stars
-                                    </label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                        1
-                                        star
-                                    </label>
-                                </div>
-                            </div>
-                            <a href="product_page.html" class="buy">Получить</a>
-
-                        </div>
-                        <div class="page-mr">
-                            <ul class="pagination pagination-sm">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#">&laquo;</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">4</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">5</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">&raquo;</a>
-                                </li>
-                            </ul>
-                        </div>
 
 
 
                     </div>
+                    <div class="page-mr">
+                        <ul class="pagination pagination-sm">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">&laquo;</a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">4</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">5</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">&raquo;</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </section>

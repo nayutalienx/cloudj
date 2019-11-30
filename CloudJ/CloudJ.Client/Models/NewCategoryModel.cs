@@ -1,15 +1,17 @@
-﻿using CloudJ.Contracts.DTOs.SolutionDtos.Photo;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CloudJ.Contracts.DTOs.SolutionDtos.Category
+namespace CloudJ.Client.Models
 {
-    public class NewCategoryDto
+    public class NewCategoryModel
     {
         public string Name { get; set; }
         public long? ParentCategoryId { get; set; }
         public string Description { get; set; }
-        public NewPhotoDto Logo { get; set; }
+        public IFormFile Logo { get; set; }
+       
     }
 }

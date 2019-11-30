@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "AddPlan";
+}
+
+@using CloudJ.Contracts.DTOs.SolutionDtos.Plan
+@model CloudJ.Contracts.DTOs.SolutionDtos.Plan.NewPlanDto
+
+    <section class="intro intro__marg">
+        <div class="container">
+            
+            <div class="row">
+                @foreach (PlanDto p in ViewBag.Plans)
+                {
+                <div class="col-lg-12">
+                    <div class="row col__plan align-items-center">
+                        <div class="col-lg-2 plan__p">@p.Name</div>
+                        <div class="col-lg-2 ml-auto plan__p">@p.Time</div>
+                        <div class="col-lg-2">
+                            @p.Price
+                        </div>
+                    </div>
+                </div>
+                }
+
+
+                <div class="col-lg-4">
+                    <form method="post" asp-controller="Product" asp-action="AddPlan">
+                        <fieldset>
+                            <input hidden="true" asp-for="SolutionId" value="@Model.SolutionId" />
+                            <div class="form-group">
+                                <label asp-for="Name" for="exampleInputEmail1">Название плана</label>
+                                <input asp-for="Name" type="text" class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="Введите название плана">
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description" for="exampleTextarea">Описание</label>
+                                <textarea asp-for="Description" class="form-control" id="exampleTextarea" rows="3"></textarea>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+
+                                <label asp-for="Time">Срок</label>
+                                <select required size="3" class="form-control" id="CategoryId" name="Time" asp-for="Time">
+                                    <option value="Час">Час</option>
+                                    <option value="Месяц">Месяц</option>
+                                    <option value="Год">Год</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Price" for="exampleInputEmail1">Стоимость</label>
+                                <input asp-for="Price" type="text" class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="0.00 р.">
+                            </div>
+
+
+                        </fieldset>
+                        
+                        
+                            <button type="submit" class="btn btn-primary rounded-0" style="width: 100%;">Добавить</button>
+                        
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        </div>
+    </section>
+

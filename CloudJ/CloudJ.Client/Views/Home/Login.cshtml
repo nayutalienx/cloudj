@@ -158,12 +158,13 @@
                             }
                         </div>
                         <p class="product__p">Действует до:<br>02.12.2019</p>
-                        <form action="add_plus.html" method="get">
+                        <form method="get">
                             <input hidden="true" name="id" value="@s.Id" />
                             <button type="submit" asp-controller="Product" asp-action="AddLink" class="btn btn-outline-primary rounded-0">Добавить ссылки</button>
                         </form>
-                        <form action="add_plan.html">
-                            <button type="submit" class="btn btn-primary rounded-0">Создать план</button>
+                        <form method="get">
+                            <input hidden="true" name="id" value="@s.Id" />
+                            <button type="submit" asp-controller="Product" asp-action="AddPlan" class="btn btn-primary rounded-0">Создать план</button>
                         </form>
                     </div>
 

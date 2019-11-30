@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "AddCategory";
+}
+@using CloudJ.Contracts.DTOs.SolutionDtos.Category
+@model CloudJ.Client.Models.NewCategoryModel
+
+    <section class="intro intro__marg">
+        <div class="container">
+            <h1>Категории</h1>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row">
+
+                        @foreach (CategoryDto c in ViewBag.Categories)
+                        {
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h2 class="category__h2" style="text-align: left;">@c.Name</h2>
+                                    <p class="category__p" style="text-align: left;">
+                                        @c.Description
+                                    </p>
+                                    <p><a href="#">Редактировать </a><a href="#" style="color: red;">Удалить</a></p>
+                                </div>
+                                <div class="col-lg-2">
+                                    @if (c.Logo != null)
+                                    {
+                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(c.Logo.Data)" style="width: 170px" class="img__center">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/img/DB.png" class="img__center">
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        }
+
+                    </div>
+                    
+                </div>
+                <div class="col-lg-6">
+                    <form method="post" asp-controller="Product" asp-action="AddCategory" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form-group">
+
+                                <label asp-for="ParentCategoryId">Родительская категория</label>
+                                <select required size="10" class="form-control" id="ParentCategoryId" name="ParentCategoryId" asp-for="ParentCategoryId">
+                                    @foreach (CategoryDto cat in ViewBag.Categories)
+                                    {
+                                        @if (cat.ParentCategory != null)
+                                        {
+                                            <option value="@cat.Id">@cat.ParentCategory.Name -> @cat.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@cat.Id">@cat.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Name" for="exampleInputEmail1">Название</label>
+                                <input asp-for="Name" type="theme" class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="Введите название">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" for="exampleTextarea">Описание</label>
+                                <textarea asp-for="Description" class="form-control" id="exampleTextarea" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Logo">Логотип</label>
+                                <input type="file" class="form-control-file" placeholder="Логотип" asp-for="Logo" autocomplete="off">
+                            </div>
+
+                        </fieldset>
+                        <button type="submit" class="btns btn-primary rounded-0">Добавить</button>
+                    </form>
+                    
+                </div>
+            </div>
+
+        </div>
+    </section>
+
