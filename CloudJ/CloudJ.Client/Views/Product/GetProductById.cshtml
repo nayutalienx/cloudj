@@ -12,7 +12,22 @@
 
             <div class="row">
                 <div class="col-lg-2">
-                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photos.Where(p => p.Type.Equals("Logo")).FirstOrDefault().Data)" alt="Large2">
+
+                    @{
+                        byte[] logo = Model.Photos.Where(p => p.Type.Equals("Logo")).FirstOrDefault()?.Data;
+                    }
+                    @if (logo != null)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(logo)"  class="mt-1 product__img" alt="Large">
+                    }
+                    else
+                    {
+                        <img src="~/img/DB.png"  class="mt-1 product__img" alt="Large">
+
+                    }
+
+
+                    
                     <button type="button" class="btn btn-primary mt-3 rounded-0">Получить</button>
                     <button type="button" class="btn btn-outline-primary rounded-0">В избранное</button>
                     <p>
@@ -22,45 +37,24 @@
                         <a href="marketplace.html">@Model.Category.Name</a>
                         @if (Model.SolutionLinks.Length > 0)
                         {
-                            
-                            
-                    <br>
-                    <b>Ссылки</b>
-                    <br />
-                    @foreach (SolutionLinkDto l in Model.SolutionLinks)
-                    {
-                        <a href="@l.Url">@l.Name</a>
-                        <br />
-                    }
-                }
+
+
+                            <br>
+                            <b>Ссылки</b>
+                            <br />
+                            @foreach (SolutionLinkDto l in Model.SolutionLinks)
+                            {
+                                <a href="@l.Url">@l.Name</a>
+                                <br />
+                            }
+                        }
                     </p>
                 </div>
                 <div class="col-lg-10">
                     <h1>@Model.Name</h1>
-                    <p>Oracle</p>
+                   
                     <div class="row">
-                        <div class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                5
-                                stars
-                            </label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                4
-                                stars
-                            </label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                3
-                                stars
-                            </label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                2
-                                stars
-                            </label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                1
-                                star
-                            </label>
-                        </div>
+                        <p>Рейтинг: @Model.Rate.0</p>
                     </div>
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -83,48 +77,68 @@
                         </div>
                         <div class="tab-pane fade" id="comment">
 
-                            <div class="row" style="margin-bottom: 10px;">
-                                @foreach (ReviewDto r in Model.Reviews)
-                                {
-                                    <div class="row" style="margin-bottom: 10px;">
-                                        <div class="col-3">
-                                            <div class="row">
-                                                <div class="rating">
-                                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">
-                                                        5
-                                                        stars
-                                                    </label>
-                                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">
-                                                        4
-                                                        stars
-                                                    </label>
-                                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">
-                                                        3
-                                                        stars
-                                                    </label>
-                                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">
-                                                        2
-                                                        stars
-                                                    </label>
-                                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">
-                                                        1
-                                                        star
-                                                    </label>
-                                                </div>
-                                                <p class="col-2-otzuv">16 ноября 2019г.</p>
-                                                <p class="col-2-otzuv">Пользователь CloudJ</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <p class="tab-pane-p" style="margin-top:-12px;">@r.AuthorId</p>
-                                            <p class="tab-pane-p-2">
-                                                @r.Text
-                                            </p>
+
+                            <form method="post" asp-controller="Product" asp-action="AddReview">
+
+                                <fieldset>
+                                    <input hidden="true" name="SolutionId" value="@Model.Id" />
+                                    <div class="form-group">
+                                        <h6>Оценка: </h6>
+                                        <input name="Rate" type="number" id="solrate" asp-for="Rate"
+                                               min="0" max="5">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleTextarea">Отзыв</label>
+                                        <textarea name="Text" class="form-control" id="exampleTextarea" rows="3"></textarea>
+                                    </div>
+
+                                </fieldset>
+
+                                <div class="row mt-1">
+                                    <div class="col-lg-3">
+                                        <button type="submit" class="btn btn-primary rounded-0"
+                                                style="margin-bottom: 30px;">
+                                            Добавить
+                                        </button>
+                                    </div>
+
+
+                                </div>
+                            </form>
+
+
+
+
+                            @foreach (ReviewDto r in Model.Reviews)
+                            {
+                                <hr />
+                                
+
+
+
+
+                                <div class="row" style="margin-bottom: 10px;">
+                                    <div class="col-3">
+                                        <div class="row">
+                                            <p class="col-2-otzuv">Оценил на @r.Rate.0</p>
+                                            <p class="col-2-otzuv">@r.PostedTime.ToString()</p>
+                                            <p class="col-2-otzuv">Пользователь CloudJ</p>
                                         </div>
                                     </div>
-                                }
+                                    <div class="col" style="word-break: break-all;">
+                                        <p class="tab-pane-p" style="margin-top:-12px;">@r.AuthorId</p>
+                                        <p class="tab-pane-p-2">
+                                            @r.Text
+                                        </p>
+                                    </div>
+                                </div>
 
-                            </div>
+
+
+                            }
+
+
                         </div>
                         <div class="tab-pane fade active" id="plan">
                             @foreach (PlanDto p in Model.Plans)

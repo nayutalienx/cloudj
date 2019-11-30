@@ -2,54 +2,34 @@
 @{
     ViewData["Title"] = "Category";
 }
-
+@using CloudJ.Contracts.DTOs.SolutionDtos.Category
     <section class="intro intro__marg">
         <div class="container">
 
+            
             <div class="row justify-content-md-center">
+
+                @foreach (CategoryDto c in ViewBag.Categories)
+                {
                 <div class="col-lg-4">
-                    <img src="~/img/kexi_database.png" class="img__center">
-                    <h2 class="category__h2">Базы данных</h2>
+                    @if (c.Logo != null)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(c.Logo.Data)" style="width: 170px" class="img__center">
+                    }
+                    else
+                    {
+                        <img src="~/img/DB.png" class="img__center">
+                    }
+                    <h2 class="category__h2">@c.Name</h2>
                     <p class="category__p">
-                        Программное обеспечение, позволяющие пользователю манипулировать информацией
-                        и совершать
-                        необходимые
-                        для решения Ваших задач действия.
+                        @c.Description
                     </p>
                 </div>
-                <div class="col-lg-4">
-                    <img src="~/img/blockchain.png" class="img__center">
-                    <h2 class="category__h2">Блокчейн</h2>
-                    <p class="category__p">
-                        Быстро разрабатывайте и развертывайте распределенные приложения в любом
-                        блокчейне
-                    </p>
+
+                }
+
+
                 </div>
-                <div class="col-lg-4">
-                    <img src="~/img/build once.png" class="img__center">
-                    <h2 class="category__h2">Мобильные приложения</h2>
-                    <p class="category__p">
-                        Общайтесь со своими клиентами, где бы они ни находились и какими устройствами
-                        ни пользовались, с помощью единой версии мобильного приложения.
-                    </p>
-                </div>
-                <div class="col-lg-4">
-                    <img src="~/img/document-report.png" class="img__center">
-                    <h2 class="category__h2">Аналитика</h2>
-                    <p class="category__p">
-                        Принимайте максимально обоснованные решения, анализируя все необходимые
-                        данные в реальном времени.
-                    </p>
-                </div>
-                <div class="col-lg-4">
-                    <img src="~/img/AI.png" class="img__center">
-                    <h2 class="category__h2">ИИ и машинное обучение</h2>
-                    <p class="category__p">
-                        Производительность искусственного интеллекта для каждого разработчика и
-                        каждого сценария
-                    </p>
-                </div>
-            </div>
         </div>
     </section>
 

@@ -4,6 +4,7 @@ using CloudJ.Contracts.DTOs.SolutionDtos.Category;
 using CloudJ.Contracts.DTOs.SolutionDtos.Cloud;
 using CloudJ.Contracts.DTOs.SolutionDtos.Photo;
 using CloudJ.Contracts.DTOs.SolutionDtos.Plan;
+using CloudJ.Contracts.DTOs.SolutionDtos.Review;
 using CloudJ.Contracts.DTOs.SolutionDtos.Solution;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,21 @@ namespace CloudJ.Client.Controllers
             });
             
             return View(response.Data.FirstOrDefault());
+        }
+
+        /// <summary>
+        /// Добавление отзыва к решению
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("id:long")]
+        public async Task<IActionResult> AddReview(NewReviewDto dto)
+        {
+            dto.AuthorId = User.Claims.FirstOrDefault(c => c.Type.Contains("nameidentifier")).Value;
+            var result = await _solutionApiClient.AddReviewAsync(dto);
+            return Redirect($"~/Product/{dto.SolutionId}");
+
         }
 
         /// <summary>
@@ -297,5 +313,7 @@ namespace CloudJ.Client.Controllers
 
             return Redirect("addCategory");
         }
+
+        
     }
 }
