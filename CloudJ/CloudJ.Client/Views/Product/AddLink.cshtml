@@ -34,14 +34,15 @@
                                     <tr>
                                         <th>Название</th>
                                         <th>Ссылка</th>
-
+                                        <th>Удаление</th>
                                     </tr>
                                     @foreach (SolutionLinkDto l in ViewBag.Links)
                                     {
-                                        <tr>
-                                            <td>@l.Name</td>
-                                            <td><a href="@l.Url">@l.Url</a></td>
-                                        </tr>
+                                    <tr>
+                                        <td>@l.Name</td>
+                                        <td><a href="@l.Url">@l.Url</a></td>
+                                        <td><a href="~/Product/deleteLink?solutionid=@Model.SolutionId&id=@l.Id">Удалить</a></td>
+                                    </tr>
                                     }
 
                                     

@@ -20,6 +20,7 @@ namespace BusinessLogicLayer.Implementation
         private readonly ISolutionRepository _solutionRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IPhotoRepository _photoRepository;
+        private readonly ISolutionLinkRepository _solutionLinkRepository;
         private readonly IMapper _mapper;
 
         /// <summary>
@@ -32,11 +33,13 @@ namespace BusinessLogicLayer.Implementation
             ISolutionRepository solutionRepository,
             ICategoryRepository categoryRepository,
             IPhotoRepository photoRepository,
+            ISolutionLinkRepository solutionLinkRepository,
             IMapper mapper)
         {
             _solutionRepository = solutionRepository;
             _categoryRepository = categoryRepository;
             _photoRepository = photoRepository;
+            _solutionLinkRepository = solutionLinkRepository;
             _mapper = mapper;
         }
         
@@ -241,6 +244,54 @@ namespace BusinessLogicLayer.Implementation
             return _mapper.Map<SolutionDto>(sol);
 
 
+        }
+        /// <summary>
+        /// Удаление категории
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public async Task RemoveCategoryAsync(RemoveCategoryDto dto)
+        {
+            var cat = await _categoryRepository.GetAsync(dto.Id);
+            await _categoryRepository.RemoveAsync(cat);
+            await _categoryRepository.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Обновить категорию
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public async Task<CategoryDto> UpdateCategoryAsync(UpdateCategoryDto dto)
+        {
+            var cat = await _categoryRepository.GetAsync(dto.Id);
+            if (dto.Name != null)
+                cat.Name = dto.Name;
+            if (dto.Description != null)
+                cat.Description = dto.Description;
+            if (dto.ParentCategoryId != null)
+                cat.ParentCategoryId = dto.ParentCategoryId;
+            if (dto.Logo != null)
+            {
+                if (cat.Logo != null)
+                    cat.Logo.Data = dto.Logo.Data;
+                else
+                    cat.Logo = _mapper.Map<Photo>(dto.Logo);
+            }
+
+            await _categoryRepository.SaveChangesAsync();
+            return _mapper.Map<CategoryDto>(cat);
+        }
+        /// <summary>
+        /// Удалить ссылку разработчика
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public async Task RemoveSolutionLink(RemoveSolutionLinkDto dto)
+        {
+            var link = await _solutionLinkRepository.GetAsync(dto.Id);
+            await _solutionLinkRepository.RemoveAsync(link);
+            await _solutionLinkRepository.SaveChangesAsync();
         }
     }
 }

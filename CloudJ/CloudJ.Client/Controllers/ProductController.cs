@@ -85,6 +85,18 @@ namespace CloudJ.Client.Controllers
             ViewBag.Links = solution.Data.FirstOrDefault().SolutionLinks;
             return View(dto);
         }
+        /// <summary>
+        /// Запрос к апи на удаление ссылки
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("deleteLink")]
+        public async Task<IActionResult> DeleteLink(RemoveSolutionLinkDto dto)
+        {
+            var response = await _solutionApiClient.RemoveSolutionLinkAsync(dto);
+            return Redirect($"~/Product/links?id={dto.SolutionId}");
+        }
 
         /// <summary>
         /// Страница добавления плана
@@ -311,6 +323,73 @@ namespace CloudJ.Client.Controllers
 
             await _solutionApiClient.AddCategoryAsync(dto);
 
+            return Redirect("addCategory");
+        }
+
+        /// <summary>
+        /// [Администратор] запрос к апи на удаление категории
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("deleteCategory")]
+        public async Task<IActionResult> DeleteCategory(RemoveCategoryDto dto)
+        {
+            await _solutionApiClient.RemoveCategoryAsync(dto);
+            return Redirect("addCategory");
+        }
+
+        /// <summary>
+        /// Страница изменения категории
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("editCategory")]
+        public async Task<IActionResult> EditCategory(long id)
+        {
+            var categories = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = categories.Data;
+            var cat = categories.Data.Where(c => c.Id == id).FirstOrDefault();
+            return View(new UpdateCategoryModel 
+            {
+                Id = cat.Id,
+                Name = cat.Name,
+                Description = cat.Description,
+                ParentCategoryId = cat.ParentCategory?.Id
+            });
+        }
+        /// <summary>
+        /// [Администратор] запрос к апи на изменение категории
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("editCategory")]
+        public async Task<IActionResult> EditCategory(UpdateCategoryModel model)
+        {
+            var categories = await _solutionApiClient.GetAllCategoriesAsync();
+            ViewBag.Categories = categories.Data;
+
+            var dto = new UpdateCategoryDto 
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                ParentCategoryId = model.ParentCategoryId
+            };
+
+            var ph = model.Logo;
+            byte[] p1 = null;
+            using (var fs1 = ph.OpenReadStream())
+            using (var ms1 = new MemoryStream())
+            {
+                fs1.CopyTo(ms1);
+                p1 = ms1.ToArray();
+            }
+            dto.Logo = new NewPhotoDto { Data = p1, Type = "Logo" };
+
+            var updated_cat = await _solutionApiClient.UpdateCategoryAsync(dto);
             return Redirect("addCategory");
         }
 

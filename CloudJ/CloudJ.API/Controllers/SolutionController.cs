@@ -59,6 +59,19 @@ namespace CloudJ.API.Controllers
         }
 
         /// <summary>
+        /// Удалить категорию
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("categories")]
+        public async Task<IActionResult> DeleteCategoryAsync([FromBody] RemoveCategoryDto category)
+        {
+            await _solutionService.RemoveCategoryAsync(category);
+            return ApiResult("Deleted.");
+        }
+
+        /// <summary>
         /// Добавить категорию
         /// </summary>
         /// <param name="category"></param>
@@ -80,6 +93,18 @@ namespace CloudJ.API.Controllers
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateSolutionDto solution)
         {
             return ApiResult(await _solutionService.UpdateAsync(solution));
+        }
+
+        /// <summary>
+        /// Обновить категорию
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("categories")]
+        public async Task<IActionResult> UpdateCategoryAsync([FromBody] UpdateCategoryDto category)
+        {
+            return ApiResult(await _solutionService.UpdateCategoryAsync(category));
         }
 
         /// <summary>
@@ -105,6 +130,18 @@ namespace CloudJ.API.Controllers
         {
             var result = await _solutionService.AddSolutionLink(link);
             return ApiResult(result);
+        }
+        /// <summary>
+        /// Удалить ссылку на решение
+        /// </summary>
+        /// <param name="link"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("links")]
+        public async Task<IActionResult> RemoveSolutionLinkAsync([FromBody]RemoveSolutionLinkDto link)
+        {
+            await _solutionService.RemoveSolutionLink(link);
+            return ApiResult("Deleted.");
         }
 
         /// <summary>

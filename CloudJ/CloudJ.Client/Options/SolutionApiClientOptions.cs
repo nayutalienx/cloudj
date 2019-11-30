@@ -8,6 +8,7 @@ namespace CloudJ.Client.Options
     public sealed class SolutionApiClientOptions
     {
         public string UpdateSolutionUrl { get; set; }
+        public string UpdateCategoryUrl { get; set; }
         public string AddSolutionUrl { get; set; }
         public string DeleteSolutionUrl { get; set; }
         public string GetAllCategoriesUrl { get; set; }
@@ -16,5 +17,7 @@ namespace CloudJ.Client.Options
         public string AddSolutionPlanUrl { get; set; }
         public string AddReviewUrl { get; set; }
         public string GetSolutionsByFilterUrl { get; set; }
+        public string DeleteCategoryUrl { get; set; }
+        public string DeleteSolutionLinkUrl { get; set; }
     }
 }
