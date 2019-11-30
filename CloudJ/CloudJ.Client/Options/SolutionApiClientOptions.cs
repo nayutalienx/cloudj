@@ -18,5 +18,6 @@ namespace CloudJ.Client.Options
         public string AddReviewUrl { get; set; }
         public string GetSolutionsByFilterUrl { get; set; }
         public string DeleteCategoryUrl { get; set; }
+        public string DeleteSolutionLinkUrl { get; set; }
     }
 }

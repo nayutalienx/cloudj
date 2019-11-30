@@ -85,6 +85,18 @@ namespace CloudJ.Client.Controllers
             ViewBag.Links = solution.Data.FirstOrDefault().SolutionLinks;
             return View(dto);
         }
+        /// <summary>
+        /// Запрос к апи на удаление ссылки
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("deleteLink")]
+        public async Task<IActionResult> DeleteLink(RemoveSolutionLinkDto dto)
+        {
+            var response = await _solutionApiClient.RemoveSolutionLinkAsync(dto);
+            return Redirect($"~/Product/links?id={dto.SolutionId}");
+        }
 
         /// <summary>
         /// Страница добавления плана

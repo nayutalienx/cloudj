@@ -21,6 +21,7 @@ namespace CloudJ.Client.Clients
         Task<ApiResponse<SolutionDto>> AddSolutionAsync(NewSolutionDto dto);
         Task<ApiResponse> RemoveSolutionAsync(RemoveSolutionDto dto);
         Task<ApiResponse> RemoveCategoryAsync(RemoveCategoryDto dto);
+        Task<ApiResponse> RemoveSolutionLinkAsync(RemoveSolutionLinkDto dto);
         Task<ApiResponse<IReadOnlyCollection<CategoryDto>>> GetAllCategoriesAsync();
         Task<ApiResponse<CategoryDto>> AddCategoryAsync(NewCategoryDto dto);
         Task<ApiResponse<SolutionLinkDto>> AddSolutionLinkAsync(NewSolutionLinkDto dto);
@@ -81,6 +82,11 @@ namespace CloudJ.Client.Clients
         public Task<ApiResponse> RemoveSolutionAsync(RemoveSolutionDto dto)
         {
             return DeleteAsync<RemoveSolutionDto, ApiResponse>(_clientOptions.DeleteSolutionUrl, dto);
+        }
+
+        public Task<ApiResponse> RemoveSolutionLinkAsync(RemoveSolutionLinkDto dto)
+        {
+            return DeleteAsync<RemoveSolutionLinkDto, ApiResponse>(_clientOptions.DeleteSolutionLinkUrl, dto);
         }
 
         public Task<ApiResponse<CategoryDto>> UpdateCategoryAsync(UpdateCategoryDto dto)

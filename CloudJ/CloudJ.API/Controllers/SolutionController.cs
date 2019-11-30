@@ -131,6 +131,18 @@ namespace CloudJ.API.Controllers
             var result = await _solutionService.AddSolutionLink(link);
             return ApiResult(result);
         }
+        /// <summary>
+        /// Удалить ссылку на решение
+        /// </summary>
+        /// <param name="link"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("links")]
+        public async Task<IActionResult> RemoveSolutionLinkAsync([FromBody]RemoveSolutionLinkDto link)
+        {
+            await _solutionService.RemoveSolutionLink(link);
+            return ApiResult("Deleted.");
+        }
 
         /// <summary>
         /// Добавить тарифный план для решения

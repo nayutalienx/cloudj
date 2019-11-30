@@ -20,6 +20,7 @@ namespace BusinessLogicLayer.Implementation
         private readonly ISolutionRepository _solutionRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IPhotoRepository _photoRepository;
+        private readonly ISolutionLinkRepository _solutionLinkRepository;
         private readonly IMapper _mapper;
 
         /// <summary>
@@ -32,11 +33,13 @@ namespace BusinessLogicLayer.Implementation
             ISolutionRepository solutionRepository,
             ICategoryRepository categoryRepository,
             IPhotoRepository photoRepository,
+            ISolutionLinkRepository solutionLinkRepository,
             IMapper mapper)
         {
             _solutionRepository = solutionRepository;
             _categoryRepository = categoryRepository;
             _photoRepository = photoRepository;
+            _solutionLinkRepository = solutionLinkRepository;
             _mapper = mapper;
         }
         
@@ -278,6 +281,17 @@ namespace BusinessLogicLayer.Implementation
 
             await _categoryRepository.SaveChangesAsync();
             return _mapper.Map<CategoryDto>(cat);
+        }
+        /// <summary>
+        /// Удалить ссылку разработчика
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public async Task RemoveSolutionLink(RemoveSolutionLinkDto dto)
+        {
+            var link = await _solutionLinkRepository.GetAsync(dto.Id);
+            await _solutionLinkRepository.RemoveAsync(link);
+            await _solutionLinkRepository.SaveChangesAsync();
         }
     }
 }

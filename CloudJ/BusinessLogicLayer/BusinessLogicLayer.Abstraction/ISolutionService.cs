@@ -53,6 +53,12 @@ namespace BusinessLogicLayer.Abstraction
         /// <returns></returns>
         Task<SolutionLinkDto> AddSolutionLink(NewSolutionLinkDto dto);
         /// <summary>
+        /// Удалить ссылку от разработчика
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        Task RemoveSolutionLink(RemoveSolutionLinkDto dto);
+        /// <summary>
         /// Добавить отзыв 
         /// </summary>
         /// <param name="dto"></param>
@@ -81,6 +87,7 @@ namespace BusinessLogicLayer.Abstraction
         /// <param name="dto"></param>
         /// <returns></returns>
         Task<CategoryDto> UpdateCategoryAsync(UpdateCategoryDto dto);
+        
         
         
     }
