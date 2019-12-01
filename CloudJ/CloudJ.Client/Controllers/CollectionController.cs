@@ -77,6 +77,15 @@ namespace CloudJ.Client.Controllers
             //ViewBag.Solutions = response.Data.FirstOrDefault().Solutions;
             return Ok(otvet);
 
+
+
+        }
+
+        [HttpGet]
+        [Route("collectionEdit")]
+        public async Task<IActionResult> EditCollection(long id)
+        {
+            return View();
         }
 
         /// <summary>

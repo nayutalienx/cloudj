@@ -33,8 +33,15 @@
                         </div>
                         <img src="~/img/Large.png" class="mt-3 product__img" alt="Large">
                     </div>
-                    <p class="product__p clip">
-                        @s.Description
+                    <p class="product__p" style="word-break: break-all;">
+                        @if (s.Description.Length > 150)
+                        {
+                            @Html.Raw(s.Description.Substring(0, 150) + "...").ToString()
+                        }
+                        else
+                        {
+                            @Html.Raw(s.Description).ToString()
+                        }
                     </p>
                     <div class="row">
                         <p>Рейтинг: @s.Rate.0</p>

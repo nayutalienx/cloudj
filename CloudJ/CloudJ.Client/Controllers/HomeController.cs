@@ -128,6 +128,27 @@ namespace CloudJ.Client.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("admin_panel")]
+        public async Task<IActionResult > AdminPanel()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Route("userdb")]
+        public async Task<IActionResult> UserDb()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Route("transaction")]
+        public async Task<IActionResult> Transaction()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

@@ -49,7 +49,7 @@
 
                                     }
                                 </div>
-                                <p class="product__p">
+                                <p class="product__p" style="word-break: break-all;">
                                     @if (s.Description.Length > 150)
                                     {
                                         @Html.Raw(s.Description.Substring(0,150) + "...").ToString()

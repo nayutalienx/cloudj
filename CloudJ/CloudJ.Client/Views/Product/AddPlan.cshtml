@@ -12,15 +12,25 @@
             <div class="row">
                 @foreach (PlanDto p in ViewBag.Plans)
                 {
-                <div class="col-lg-12">
-                    <div class="row col__plan align-items-center">
-                        <div class="col-lg-2 plan__p">@p.Name</div>
-                        <div class="col-lg-2 ml-auto plan__p">@p.Time</div>
-                        <div class="col-lg-2">
-                            @p.Price
+                    
+
+
+
+
+                    <div class="col-lg-12">
+                        <div class="row col__plan align-items-center">
+                            <div class="col-lg-2 plan__p">@p.Name</div>
+                            <div class="col-lg-5">
+                                <div style="word-break: break-all;">
+                                    @p.Description </div>
+                            </div>
+                            <div class="col-lg-2 plan__p">@p.Time</div>
+                            <div class="col-lg-1 ml-auto plan__p">@p.Price р.</div>
+                            
                         </div>
                     </div>
-                </div>
+
+
                 }
 
 
@@ -60,10 +70,10 @@
 
 
                         </fieldset>
-                        
-                        
-                            <button type="submit" class="btn btn-primary rounded-0" style="width: 100%;">Добавить</button>
-                        
+
+
+                        <button type="submit" class="btn btn-primary rounded-0" style="width: 100%;">Добавить</button>
+
                     </form>
                 </div>
             </div>

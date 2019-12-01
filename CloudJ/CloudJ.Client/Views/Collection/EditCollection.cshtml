@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "EditCollection";
+}
+
+<section class="intro intro__marg">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h1>Коллекции</h1>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="btn__img">
+                    <img src="~/img/collections1.png" alt="collections1" class="margin__top30px">
+                    <form>
+                        <button class="btn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+                <div class="btn__img">
+
+                    <img src="~/img/collections2.png" alt="collections2" class="margin__top30px">
+                    <form>
+                        <button class="btn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+                <div class="btn__img">
+                    <img src="~/img/collections1.png" alt="collections1" class="margin__top30px">
+                    <form>
+                        <button class="btn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <form method="get" asp-controller="Collection" asp-action="AddCollection">
+                    <button class="btn new__collections rounded-0 margin__top30px" type="submit">
+                        Новая подборка
+                        +
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+

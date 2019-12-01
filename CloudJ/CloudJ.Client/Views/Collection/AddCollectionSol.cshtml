@@ -7,41 +7,47 @@
 
 @model CloudJ.Client.Models.CollectionSolModel
 
-    <form method="post" asp-controller="Collection" asp-action="AddCollectionSol">
+<form method="post" asp-controller="Collection" asp-action="AddCollectionSol">
 
-        <fieldset>
-            <input asp-for="CollectionId" hidden="true" value="@Model.CollectionId" />
-            <div class="form-group">
-                <label for="exampleInputEmail1">Id решения</label>
-                <input asp-for="SolutionId" type="number" class="form-control" id="exampleInputEmail1"
-                       aria-describedby="emailHelp" placeholder="Введите id решения">
-            </div>
+    <fieldset>
+        <input asp-for="CollectionId" hidden="true" value="@Model.CollectionId" />
+        <div class="form-group">
+            <label for="exampleInputEmail1">Id решения</label>
+            <input asp-for="SolutionId" type="number" class="form-control" id="exampleInputEmail1"
+                   aria-describedby="emailHelp" placeholder="Введите id решения">
+        </div>
 
-            <button type="submit" class="btn btn-primary rounded-0" style="width: 100%;">Добавить</button>
-
-
-        </fieldset>
+        <button type="submit" class="btn btn-primary rounded-0" style="width: 100%;">Добавить</button>
 
 
-    </form>
+    </fieldset>
 
-    <table>
 
-        <colgroup>
-            <col span="2">
-            <col>
-        </colgroup>
+</form>
+
+
+
+
+
+
+
+<h2 for="exampleInputPassword1" style="margin-top: 10px;">Список всех id решений</h2>
+<table>
+    <colgroup>
+        <col span="2">
+        <col>
+    </colgroup>
+    <tr>
+
+        <th>Id решения</th>
+
+    </tr>
+    @foreach (TruncSolutionDto s in ViewBag.Solutions)
+    {
         <tr>
-            <th>Название</th>
-            <th>Id</th>
+            
+            <td>@s.SolutionId</td>
+        </tr>
+    }
+</table>
 
-        </tr>
-        @foreach (TruncSolutionDto s in ViewBag.Solutions)
-        {
-        <tr>
-            <td>@s.SolutionId</td>
-            <td>@s.SolutionId</td>
-        </tr>
-        }
-        
-    </table>

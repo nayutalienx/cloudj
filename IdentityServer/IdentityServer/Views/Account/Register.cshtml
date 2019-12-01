@@ -33,86 +33,86 @@
 
 <body class="text-center">
 
-        <div class="form-signin">
-            <form asp-action="RegisterRequest" method="post">
-                <input type="hidden" asp-for="ReturnUrl" value="@Model.ReturnUrl" />
-                <input type="hidden" asp-for="CaptchaId" value="@Model.CaptchaId" />
+    <div class="form-signin">
+        <form asp-action="RegisterRequest" method="post">
+            <input type="hidden" asp-for="ReturnUrl" value="@Model.ReturnUrl" />
+            <input type="hidden" asp-for="CaptchaId" value="@Model.CaptchaId" />
 
 
-                <img class="mb-4" src="~/sale.png" alt="" width="72" height="72">
+            <img class="mb-4" src="~/sale.png" alt="">
 
-                <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
 
-                <div class="form-group">
-                    <label for="inputUsername" asp-for="Username" class="sr-only">Никнейм</label>
-                    <input type="text" asp-for="Username" id="inputUsername" class="form-control is-invalid" placeholder="Никнейм" required autofocus>
-                    @if (Model?.UsernameError != null)
-                    {
-                        <div class="invalid-feedback">
-                            @Model.UsernameError
-                        </div>
-                    }
-                </div>
+            <div class="form-group">
+                <label for="inputUsername" asp-for="Username" class="sr-only">Никнейм</label>
+                <input type="text" asp-for="Username" id="inputUsername" class="form-control is-invalid" placeholder="Никнейм" required autofocus>
+                @if (Model?.UsernameError != null)
+                {
+                    <div class="invalid-feedback">
+                        @Model.UsernameError
+                    </div>
+                }
+            </div>
 
-                <div class="form-group">
-                    <label for="inputEmail" asp-for="Email" class="sr-only">Email</label>
-                    <input type="text" asp-for="Email" id="inputEmail" class="form-control is-invalid" placeholder="Email" required autofocus>
-                    @if (Model?.EmailError != null)
-                    {
-                        <div class="invalid-feedback">
-                            @Model.EmailError
-                        </div>
-                    }
-                </div>
+            <div class="form-group">
+                <label for="inputEmail" asp-for="Email" class="sr-only">Email</label>
+                <input type="text" asp-for="Email" id="inputEmail" class="form-control is-invalid" placeholder="Email" required autofocus>
+                @if (Model?.EmailError != null)
+                {
+                    <div class="invalid-feedback">
+                        @Model.EmailError
+                    </div>
+                }
+            </div>
 
-                <div class="form-group">
-                    <label for="inputPassword" asp-for="Password" class="sr-only">Пароль</label>
-                    <input asp-for="Password" type="password" id="inputPassword" class="form-control is-invalid" placeholder="Пароль" required>
-                    @if (Model?.PasswordError != null)
-                    {
-                        <div class="invalid-feedback">
-                            @Model.PasswordError
-                        </div>
-                    }
-                </div>
+            <div class="form-group">
+                <label for="inputPassword" asp-for="Password" class="sr-only">Пароль</label>
+                <input asp-for="Password" type="password" id="inputPassword" class="form-control is-invalid" placeholder="Пароль" required>
+                @if (Model?.PasswordError != null)
+                {
+                    <div class="invalid-feedback">
+                        @Model.PasswordError
+                    </div>
+                }
+            </div>
 
-                <div class="form-group">
-                    <label for="inputPhone" asp-for="PhoneNumber" class="sr-only">Телефон</label>
-                    <input type="text" asp-for="PhoneNumber" id="inputPhone" class="form-control is-invalid" placeholder="Телефон" required autofocus>
-                    @if (Model?.PhoneNumberError != null)
-                    {
-                        <div class="invalid-feedback">
-                            @Model.PhoneNumberError
-                        </div>
-                    }
-                </div>
-
-
-                <img class="card-img-top thumb-post" style="object-fit: cover; margin-bottom: 15px;" width="100" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Captcha.Data)" alt="Card image cap">
-                <div class="form-group">
-                    <label for="inputCaptcha" asp-for="CaptchaAnswer" class="sr-only">Капча</label>
-                    <input type="text" asp-for="CaptchaAnswer" id="inputCaptcha" class="form-control is-invalid" placeholder="Капча" required autofocus>
-                    @if (Model?.CaptchaError != null)
-                    {
-                        <div class="invalid-feedback">
-                            @Model.CaptchaError
-                        </div>
-                    }
-                </div>
+            <div class="form-group">
+                <label for="inputPhone" asp-for="PhoneNumber" class="sr-only">Телефон</label>
+                <input type="text" asp-for="PhoneNumber" id="inputPhone" class="form-control is-invalid" placeholder="Телефон" required autofocus>
+                @if (Model?.PhoneNumberError != null)
+                {
+                    <div class="invalid-feedback">
+                        @Model.PhoneNumberError
+                    </div>
+                }
+            </div>
 
 
-
-
-                <button class="btn btn-lg btn-primary btn-block" type="submit" name="button" value="register">Зарегистрироваться</button>
+            <img class="card-img-top thumb-post" style="object-fit: cover; margin-bottom: 15px;" width="100" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Captcha.Data)" alt="Card image cap">
+            <div class="form-group">
+                <label for="inputCaptcha" asp-for="CaptchaAnswer" class="sr-only">Капча</label>
+                <input type="text" asp-for="CaptchaAnswer" id="inputCaptcha" class="form-control is-invalid" placeholder="Капча" required autofocus>
+                @if (Model?.CaptchaError != null)
+                {
+                    <div class="invalid-feedback">
+                        @Model.CaptchaError
+                    </div>
+                }
+            </div>
 
 
 
 
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="button" value="register">Зарегистрироваться</button>
 
-            </form>
-            
-        </div>
-    
+
+
+
+
+        </form>
+
+    </div>
+
 
 
 
