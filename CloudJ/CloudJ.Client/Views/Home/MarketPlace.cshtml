@@ -16,7 +16,7 @@
                     {
                         if (c.ParentCategory == null)
                         {
-                            <button type="button" class="btn btn-outline-primary">@c.Name</button>
+                            <button type="button" class="btn btn-outline-primary rounded-0">@c.Name</button>
                         }
                     }
 
@@ -30,7 +30,7 @@
 
                         @foreach (SolutionDto s in ViewBag.Solutions)
                         {
-                            <div class="col-lg-3 product">
+                            <div class="col-lg-3 product " style="height: 300px">
                                 <div class="media">
                                     <div class="media-body">
                                         <h5 class="mt-1 mb-1 product__h5"><a href="~/Product/@s.Id">@s.Name</a></h5>
@@ -50,12 +50,19 @@
                                     }
                                 </div>
                                 <p class="product__p">
-                                    @s.Description
+                                    @if (s.Description.Length > 150)
+                                    {
+                                        @Html.Raw(s.Description.Substring(0,150) + "...").ToString()
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(s.Description).ToString()
+                                    }
                                 </p>
-
+                                
                                 <p class="product__p">Рейтинг: @s.Rate.0</p>
 
-                                <a href="~/Product/@s.Id" class="buy">Получить</a>
+                                <a href="~/Product/@s.Id" class="buy" style="display:block; position:absolute; bottom: 0; margin-bottom:10px;">Получить</a>
 
                             </div>
 

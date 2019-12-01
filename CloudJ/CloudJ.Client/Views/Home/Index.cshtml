@@ -39,6 +39,7 @@
 </head>
 
 <body>
+    
     <header id="header" class="header bg">
         <div class="container">
 
@@ -61,31 +62,34 @@
                             <li class="menu__item">
                                 <a asp-controller="Home" asp-action="Support">Поддержка</a>
                             </li>
+                            <li class="menu__item">
+                                <a asp-controller="Home" asp-action="Collection">Коллекции</a>
+                            </li>
                             @if (IsAuthenticated)
                             {
-                        <div class="col-lg-4 ml-auto">
-                            <nav>
-                                <ul class="menu d-flex">
-                                    <li class="menu__item"></li>
+                                <div class="col-lg-4 ml-auto">
+                                    <nav>
+                                        <ul class="menu d-flex">
+                                            <li class="menu__item"></li>
 
-                                    <li class="menu__item dropdown">
-                                        <a class="dropdown-toggler" data-toggle="dropdown" href="#" role="button"
-                                           aria-haspopup="true" aria-expanded="false">@Name</a>
-                                        <div class="dropdown-menu dropdown__style">
-                                            <a class="dropdown-item" asp-controller="Home" asp-action="Login" style="color: black;">Личный кабинет</a>
+                                            <li class="menu__item dropdown">
+                                                <a class="dropdown-toggler" data-toggle="dropdown" href="#" role="button"
+                                                   aria-haspopup="true" aria-expanded="false">@Name</a>
+                                                <div class="dropdown-menu dropdown__style">
+                                                    <a class="dropdown-item" asp-controller="Home" asp-action="Login" style="color: black;">Личный кабинет</a>
 
-                                            <p class="dropdown-item">
-                                                <a asp-controller="Store" asp-action="UpBalance" style="color: dodgerblue">Пополнить</a>
-                                            </p>
+                                                    <p class="dropdown-item">
+                                                        <a asp-controller="Store" asp-action="UpBalance" style="color: dodgerblue">Пополнить</a>
+                                                    </p>
 
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" asp-controller="Home" asp-action="Logout" style="color: black;">Выйти</a>
-                                        </div>
-                                    </li>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" asp-controller="Home" asp-action="Logout" style="color: black;">Выйти</a>
+                                                </div>
+                                            </li>
 
-                                </ul>
-                            </nav>
-                        </div>
+                                        </ul>
+                                    </nav>
+                                </div>
                             }
                             else
                             {

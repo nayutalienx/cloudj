@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.EntityFramework.Migrations
 {
     [DbContext(typeof(CloudjContext))]
-    [Migration("20191126210956_initialize")]
-    partial class initialize
+    [Migration("20191201004354_truncSol_added")]
+    partial class truncSol_added
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,10 +19,26 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("DataAccessLayer.Models.Billing.Balance", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("BalanceValue");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Balances");
+                });
+
             modelBuilder.Entity("DataAccessLayer.Models.Billing.Order", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedTime");
 
                     b.Property<string>("CustomerId");
 
@@ -39,10 +55,48 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.Collection", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long?>("PhotoPreviewId");
+
+                    b.Property<string>("Preview");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotoPreviewId");
+
+                    b.ToTable("Collections");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.TruncSolution", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long?>("CollectionId");
+
+                    b.Property<long>("SolutionId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("TruncSolution");
+                });
+
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Category", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
 
                     b.Property<long?>("LogoId");
 
@@ -66,9 +120,14 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<long>("SolutionId");
+
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SolutionId")
+                        .IsUnique();
 
                     b.ToTable("Clouds");
                 });
@@ -78,9 +137,14 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<byte[]>("Image");
+                    b.Property<long>("CloudId");
+
+                    b.Property<string>("Image");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CloudId")
+                        .IsUnique();
 
                     b.ToTable("DockerImages");
                 });
@@ -92,7 +156,7 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
                     b.Property<byte[]>("Data");
 
-                    b.Property<long>("SolutionId");
+                    b.Property<long?>("SolutionId");
 
                     b.Property<string>("Type");
 
@@ -204,6 +268,20 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.Collection", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Solution.Photo", "PhotoPreview")
+                        .WithMany()
+                        .HasForeignKey("PhotoPreviewId");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.TruncSolution", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Collection.Collection")
+                        .WithMany("Solutions")
+                        .HasForeignKey("CollectionId");
+                });
+
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Category", b =>
                 {
                     b.HasOne("DataAccessLayer.Models.Solution.Photo", "Logo")
@@ -215,12 +293,27 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         .HasForeignKey("ParentCategoryId");
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Models.Solution.Cloud", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Solution.Solution", "Solution")
+                        .WithOne("Cloud")
+                        .HasForeignKey("DataAccessLayer.Models.Solution.Cloud", "SolutionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Solution.DockerImage", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Solution.Cloud", "Cloud")
+                        .WithOne("Container")
+                        .HasForeignKey("DataAccessLayer.Models.Solution.DockerImage", "CloudId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Photo", b =>
                 {
                     b.HasOne("DataAccessLayer.Models.Solution.Solution", "Solution")
                         .WithMany("Photos")
-                        .HasForeignKey("SolutionId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SolutionId");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Plan", b =>

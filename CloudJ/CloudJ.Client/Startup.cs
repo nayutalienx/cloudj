@@ -41,6 +41,7 @@ namespace CloudJ.Client
             services.Configure<BillingApiClientOptions>(_configuration.GetSection("BillingApiClient"));
             services.Configure<IdentityClientOptions>(_configuration.GetSection("IdentityClient"));
             services.Configure<OpenIdConnectOptions>(_configuration.GetSection("OpenIdConnect"));
+            services.Configure<CollectionApiClientOptions>(_configuration.GetSection("CollectionApiClient"));
 
 
             services.AddAuthentication(options =>
@@ -87,6 +88,13 @@ namespace CloudJ.Client
             {
                 options.Timeout = TimeSpan.FromMinutes(1);
                 options.BaseAddress = new Uri(_identityClientOptions.BaseUrl);
+                options.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
+
+            services.AddHttpClient<ICollectionApiClient, CollectionApiClient>(options =>
+            {
+                options.Timeout = TimeSpan.FromMinutes(1);
+                options.BaseAddress = new Uri(_apiClientOptions.BaseUrl);
                 options.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 

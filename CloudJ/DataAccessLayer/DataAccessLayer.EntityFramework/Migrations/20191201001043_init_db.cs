@@ -4,35 +4,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.EntityFramework.Migrations
 {
-    public partial class initialize : Migration
+    public partial class init_db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Clouds",
+                name: "Balances",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Url = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
+                    BalanceValue = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clouds", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DockerImages",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Image = table.Column<byte[]>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DockerImages", x => x.Id);
+                    table.PrimaryKey("PK_Balances", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,11 +33,33 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     Rate = table.Column<byte>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     CreatedTime = table.Column<DateTime>(nullable: false),
-                    CategoryId = table.Column<long>(nullable: false)
+                    CategoryId = table.Column<long>(nullable: false),
+                    CurrentCollectionId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Solutions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clouds",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
+                    SolutionId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clouds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Clouds_Solutions_SolutionId",
+                        column: x => x.SolutionId,
+                        principalTable: "Solutions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,7 +70,7 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Data = table.Column<byte[]>(nullable: true),
                     Type = table.Column<string>(nullable: true),
-                    SolutionId = table.Column<long>(nullable: false)
+                    SolutionId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,7 +80,7 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         column: x => x.SolutionId,
                         principalTable: "Solutions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -143,6 +152,26 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DockerImages",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CloudId = table.Column<long>(nullable: false),
+                    Image = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DockerImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DockerImages_Clouds_CloudId",
+                        column: x => x.CloudId,
+                        principalTable: "Clouds",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -150,7 +179,8 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     LogoId = table.Column<long>(nullable: true),
-                    ParentCategoryId = table.Column<long>(nullable: true)
+                    ParentCategoryId = table.Column<long>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -170,6 +200,28 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Collections",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Preview = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    PhotoPreviewId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Collections", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Collections_Photos_PhotoPreviewId",
+                        column: x => x.PhotoPreviewId,
+                        principalTable: "Photos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -177,7 +229,8 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CustomerId = table.Column<string>(nullable: true),
                     SolutionId = table.Column<long>(nullable: false),
-                    PlanId = table.Column<long>(nullable: false)
+                    PlanId = table.Column<long>(nullable: false),
+                    CreatedTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,6 +258,23 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 name: "IX_Categories_ParentCategoryId",
                 table: "Categories",
                 column: "ParentCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clouds_SolutionId",
+                table: "Clouds",
+                column: "SolutionId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Collections_PhotoPreviewId",
+                table: "Collections",
+                column: "PhotoPreviewId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DockerImages_CloudId",
+                table: "DockerImages",
+                column: "CloudId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_PlanId",
@@ -241,6 +311,11 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 table: "Solutions",
                 column: "CategoryId");
 
+            migrationBuilder.CreateIndex(
+                name: "IX_Solutions_CurrentCollectionId",
+                table: "Solutions",
+                column: "CurrentCollectionId");
+
             migrationBuilder.AddForeignKey(
                 name: "FK_Solutions_Categories_CategoryId",
                 table: "Solutions",
@@ -248,6 +323,14 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 principalTable: "Categories",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Solutions_Collections_CurrentCollectionId",
+                table: "Solutions",
+                column: "CurrentCollectionId",
+                principalTable: "Collections",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -256,8 +339,12 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 name: "FK_Categories_Photos_LogoId",
                 table: "Categories");
 
+            migrationBuilder.DropForeignKey(
+                name: "FK_Collections_Photos_PhotoPreviewId",
+                table: "Collections");
+
             migrationBuilder.DropTable(
-                name: "Clouds");
+                name: "Balances");
 
             migrationBuilder.DropTable(
                 name: "DockerImages");
@@ -272,6 +359,9 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 name: "SolutionLinks");
 
             migrationBuilder.DropTable(
+                name: "Clouds");
+
+            migrationBuilder.DropTable(
                 name: "Plans");
 
             migrationBuilder.DropTable(
@@ -282,6 +372,9 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Collections");
         }
     }
 }

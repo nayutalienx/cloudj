@@ -1,5 +1,7 @@
 ﻿
+using DataAccessLayer.Models;
 using DataAccessLayer.Models.Billing;
+using DataAccessLayer.Models.Collection;
 using DataAccessLayer.Models.Solution;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,7 +31,9 @@ namespace DataAccessLayer.EntityFramework
         DbSet<Review> Reviews { get; set; }
         DbSet<Solution> Solutions { get; set; }
         DbSet<SolutionLink> SolutionLinks { get; set; } 
+        DbSet<Collection> Collections { get; set; }
+        
 
-       
+
     }
 }

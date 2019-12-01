@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.EntityFramework.Migrations
 {
     [DbContext(typeof(CloudjContext))]
-    [Migration("20191129104031_docker_edited")]
-    partial class docker_edited
+    [Migration("20191201001043_init_db")]
+    partial class init_db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,10 +19,26 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("DataAccessLayer.Models.Billing.Balance", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("BalanceValue");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Balances");
+                });
+
             modelBuilder.Entity("DataAccessLayer.Models.Billing.Order", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedTime");
 
                     b.Property<string>("CustomerId");
 
@@ -39,10 +55,32 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.Collection", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long?>("PhotoPreviewId");
+
+                    b.Property<string>("Preview");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotoPreviewId");
+
+                    b.ToTable("Collections");
+                });
+
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Category", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
 
                     b.Property<long?>("LogoId");
 
@@ -102,7 +140,7 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
                     b.Property<byte[]>("Data");
 
-                    b.Property<long>("SolutionId");
+                    b.Property<long?>("SolutionId");
 
                     b.Property<string>("Type");
 
@@ -168,6 +206,8 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
                     b.Property<DateTime>("CreatedTime");
 
+                    b.Property<long>("CurrentCollectionId");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
@@ -179,6 +219,8 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("CurrentCollectionId");
 
                     b.ToTable("Solutions");
                 });
@@ -214,6 +256,13 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.Collection", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Solution.Photo", "PhotoPreview")
+                        .WithMany()
+                        .HasForeignKey("PhotoPreviewId");
+                });
+
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Category", b =>
                 {
                     b.HasOne("DataAccessLayer.Models.Solution.Photo", "Logo")
@@ -245,8 +294,7 @@ namespace DataAccessLayer.EntityFramework.Migrations
                 {
                     b.HasOne("DataAccessLayer.Models.Solution.Solution", "Solution")
                         .WithMany("Photos")
-                        .HasForeignKey("SolutionId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SolutionId");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Plan", b =>
@@ -271,6 +319,11 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         .WithMany("Solutions")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DataAccessLayer.Models.Collection.Collection", "Collection")
+                        .WithMany("Solutions")
+                        .HasForeignKey("CurrentCollectionId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Solution.SolutionLink", b =>

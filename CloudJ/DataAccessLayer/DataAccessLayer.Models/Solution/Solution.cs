@@ -6,6 +6,7 @@ namespace DataAccessLayer.Models.Solution
 {
     public class Solution : BaseEntity
     {
+        
         public string Name { get; set; } 
         public string Description { get; set; }  
         public byte Rate { get; set; } 
@@ -18,5 +19,6 @@ namespace DataAccessLayer.Models.Solution
         public virtual Category Category { get; set; }
         public virtual ICollection<SolutionLink> SolutionLinks { get; set; }
         public virtual Cloud Cloud { get; set; }
+        
     }
 }

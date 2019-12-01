@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.EntityFramework.Migrations
 {
     [DbContext(typeof(CloudjContext))]
-    [Migration("20191130142438_order_updated")]
-    partial class order_updated
+    [Migration("20191201001622_otkat")]
+    partial class otkat
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,26 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.HasIndex("SolutionId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.Collection", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long?>("PhotoPreviewId");
+
+                    b.Property<string>("Preview");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotoPreviewId");
+
+                    b.ToTable("Collections");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Category", b =>
@@ -184,6 +204,8 @@ namespace DataAccessLayer.EntityFramework.Migrations
 
                     b.Property<long>("CategoryId");
 
+                    b.Property<long?>("CollectionId");
+
                     b.Property<DateTime>("CreatedTime");
 
                     b.Property<string>("Description");
@@ -197,6 +219,8 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("CollectionId");
 
                     b.ToTable("Solutions");
                 });
@@ -230,6 +254,13 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         .WithMany()
                         .HasForeignKey("SolutionId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.Collection", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Solution.Photo", "PhotoPreview")
+                        .WithMany()
+                        .HasForeignKey("PhotoPreviewId");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Category", b =>
@@ -288,6 +319,10 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         .WithMany("Solutions")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DataAccessLayer.Models.Collection.Collection")
+                        .WithMany("Solutions")
+                        .HasForeignKey("CollectionId");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Solution.SolutionLink", b =>

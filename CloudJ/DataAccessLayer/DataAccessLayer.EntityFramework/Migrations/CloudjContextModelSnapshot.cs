@@ -53,6 +53,42 @@ namespace DataAccessLayer.EntityFramework.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.Collection", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long?>("PhotoPreviewId");
+
+                    b.Property<string>("Preview");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotoPreviewId");
+
+                    b.ToTable("Collections");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.TruncSolution", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long?>("CollectionId");
+
+                    b.Property<long>("SolutionId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("TruncSolution");
+                });
+
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Category", b =>
                 {
                     b.Property<long>("Id")
@@ -228,6 +264,20 @@ namespace DataAccessLayer.EntityFramework.Migrations
                         .WithMany()
                         .HasForeignKey("SolutionId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.Collection", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Solution.Photo", "PhotoPreview")
+                        .WithMany()
+                        .HasForeignKey("PhotoPreviewId");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Collection.TruncSolution", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Collection.Collection")
+                        .WithMany("Solutions")
+                        .HasForeignKey("CollectionId");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Solution.Category", b =>

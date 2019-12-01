@@ -117,8 +117,16 @@ namespace CloudJ.Client.Controllers
             return SignOut("Cookies", "oidc");
         }
 
-       
-
+        /// <summary>
+        /// Страница коллекций
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("collections")]
+        public async Task<IActionResult> Collection()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

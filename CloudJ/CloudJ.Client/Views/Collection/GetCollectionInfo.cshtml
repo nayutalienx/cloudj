@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "GetCollectionInfo";
+}
+
+@model CloudJ.Contracts.DTOs.CollectionDtos.CollectionDto
+@using CloudJ.Contracts.DTOs.SolutionDtos.Solution
+
+<div class="container">
+    <div class="row">
+        <p class="col-lg-12 db">@Model.Name</p>
+       
+    </div>
+    <div class="row">
+        <div class="col-lg-9 selection-bottom-text">
+            
+            @Model.Description
+
+        </div>
+
+
+
+        <div class="col-lg-3">
+
+
+
+            @foreach(SolutionDto s in ViewBag.Solutions){
+            <div class="row">
+                <div class="col-lg-12 product">
+                    <div class="media">
+                        <div class="media-body">
+                            <h5 class="mt-3 mb-1 product__h5">@s.Name</h5>
+                        </div>
+                        <img src="~/img/Large.png" class="mt-3 product__img" alt="Large">
+                    </div>
+                    <p class="product__p clip">
+                        @s.Description
+                    </p>
+                    <div class="row">
+                        <p>Рейтинг: @s.Rate.0</p>
+                    </div>
+                    <div class="row">
+                        <p>Стоимость: от @s.Plans?.FirstOrDefault()?.Price р.</p>
+                    </div>
+                    <a href="page_product.html" class="buy">Получить</a>
+
+                </div>
+            </div>
+            }
+
+        </div>    </div>
+
+</div>
+    </div>

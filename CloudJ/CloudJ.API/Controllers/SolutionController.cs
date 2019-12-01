@@ -182,5 +182,7 @@ namespace CloudJ.API.Controllers
             var sols = await _solutionService.GetByFilterAsync(filter);
             return ApiResult(sols);
         }
+
+        
     }
 }
