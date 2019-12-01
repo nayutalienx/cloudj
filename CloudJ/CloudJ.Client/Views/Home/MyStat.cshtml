@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewData["Title"] = "MyStat";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 stat">
+            <p>Статистика решений</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="chart col-xl-6 col-lg-6 col-md-12 col-sm-12" id="curve_chart">
+            <script type="text/javascript">
+                    google.charts.load('current', { 'packages': ['corechart'] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                        let date;
+                        let visits_num;
+                        var data = google.visualization.arrayToDataTable([
+                            ['Дата', 'Посещения сайта'],
+                            ['28.11', 100],
+                            ['28.11', 150],
+                            ['28.11', 200],
+                            ['28.11', 100]
+                        ]);
+
+                        var options = {
+                            title: 'Посещение размещенных решений',
+                            curveType: 'function',
+                            legend: { position: 'bottom' }
+                        };
+
+                        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                        chart.draw(data, options);
+                    }
+            </script>
+        </div>
+
+        <div class="chart col-xl-6 col-lg-6 col-md-12 col-sm-12" id="curve_chart_2">
+            <script type="text/javascript">
+                    google.charts.load('current', { 'packages': ['corechart'] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                        let date;
+                        let views_num;
+                        var name1;
+                        var data = google.visualization.arrayToDataTable([
+                            ['Дата', 'Просмотры объявлений'],
+                            ['28.11', 100],
+                            ['28.11', 150],
+                            ['28.11', 200],
+                            ['28.11', 100]
+                        ]);
+
+                        var options = {
+                            title: 'Посещение {name1}'.replace('{name1}', name1),
+                            curveType: 'function',
+                            legend: { position: 'bottom' }
+                        };
+
+                        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_2'));
+
+                        chart.draw(data, options);
+                    }
+            </script>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="chart col-xl-6 col-lg-6 col-md-12 col-sm-12" id="curve_chart_3">
+            <script type="text/javascript">
+                    google.charts.load('current', { 'packages': ['corechart'] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                        let date;
+                        let visits_num;
+                        var name2;
+                        var data = google.visualization.arrayToDataTable([
+                            ['Дата', 'Посещения сайта'],
+                            ['28.11', 100],
+                            ['28.11', 150],
+                            ['28.11', 200],
+                            ['28.11', 100]
+                        ]);
+
+                        var options = {
+                            title: 'Посещение {name2}'.replace('{name2}', name2),
+                            curveType: 'function',
+                            legend: { position: 'bottom' }
+                        };
+
+                        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_3'));
+
+                        chart.draw(data, options);
+                    }
+            </script>
+        </div>
+
+        <div class="chart col-xl-6 col-lg-6 col-md-12 col-sm-12" id="curve_chart_4">
+            <script type="text/javascript">
+                    google.charts.load('current', { 'packages': ['corechart'] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                        let date;
+                        let views_num;
+                        var name3;
+                        var data = google.visualization.arrayToDataTable([
+                            ['Дата', 'Просмотры объявлений'],
+                            ['28.11', 100],
+                            ['28.11', 150],
+                            ['28.11', 200],
+                            ['28.11', 100]
+                        ]);
+
+                        var options = {
+                            title: 'Посещение {name3}'.replace('{name3}', name3),
+                            curveType: 'function',
+                            legend: { position: 'bottom' }
+                        };
+
+                        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_4'));
+
+                        chart.draw(data, options);
+                    }
+            </script>
+        </div>
+    </div>
+</div>
