@@ -31,6 +31,25 @@ section[class*=intro] {
     background: #1F78FF;
 }
 
+@media screen and (max-width: 992px) {
+    .logo {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .menu {
+        flex-direction: column;
+    }
+
+    .menu__item {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
+
 .menu__item {
     padding-top: 9px;
     margin: 0 auto;

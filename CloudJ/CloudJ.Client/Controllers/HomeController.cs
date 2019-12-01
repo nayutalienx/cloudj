@@ -51,13 +51,17 @@ namespace CloudJ.Client.Controllers
         /// Страница маркетплейса
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> MarketPlace()
+        public async Task<IActionResult> MarketPlace([FromQuery]long? category, [FromQuery]int page = 1)
         {
+            ViewData["Category"] = category;
+            ViewData["Page"] = page;
             var response = await _solutionApiClient.GetAllCategoriesAsync();
             ViewBag.Categories = response.Data;
+            
 
-            var sols = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { });
+            var sols = await _solutionApiClient.GetByFilterAsync(new SolutionFilter {Size=6, CategoryId = category, Page = page });
             ViewBag.Solutions = sols.Data;
+            
 
             string userid = User.Claims.FirstOrDefault(c => c.Type.Contains("nameidentifier")).Value;
             var bal = await _billingApiClient.GetBalanceByFilterAsync(new BalanceFilter { UserId = userid });
@@ -134,6 +138,10 @@ namespace CloudJ.Client.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [Route("myStat")]
+        public async Task<IActionResult> MyStat() => View();
 
         [HttpGet]
         [Route("userdb")]

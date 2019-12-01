@@ -16,7 +16,10 @@
                     {
                         if (c.ParentCategory == null)
                         {
-                            <button type="button" class="btn btn-outline-primary rounded-0">@c.Name</button>
+                            <form method="get" asp-controller="Home" asp-action="MarketPlace">
+                                <input hidden="true" name="category" value="@c.Id" />
+                                <button type="submit" class="btn btn-outline-primary rounded-0">@c.Name</button>
+                            </form>
                         }
                     }
 
@@ -30,41 +33,45 @@
 
                         @foreach (SolutionDto s in ViewBag.Solutions)
                         {
-                            <div class="col-lg-3 product " style="height: 300px">
-                                <div class="media">
-                                    <div class="media-body">
-                                        <h5 class="mt-1 mb-1 product__h5"><a href="~/Product/@s.Id">@s.Name</a></h5>
-                                    </div>
-
-                                    @{
-                                        byte[] logo = s.Photos.Where(p => p.Type.Equals("Logo")).FirstOrDefault()?.Data;
-                                    }
-                                    @if (logo != null)
-                                    {
-                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(logo)" style="width: 40px" class="mt-1 product__img" alt="Large">
-                                    }
-                                    else
-                                    {
-                                        <img src="~/img/DB.png" style="width: 40px" class="mt-1 product__img" alt="Large">
-
-                                    }
+                        <div class="col-lg-3 product " style="height: 300px">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h5 class="mt-1 mb-1 product__h5"><a href="~/Product/@s.Id">@s.Name</a></h5>
                                 </div>
-                                <p class="product__p" style="word-break: break-all;">
-                                    @if (s.Description.Length > 150)
-                                    {
-                                        @Html.Raw(s.Description.Substring(0,150) + "...").ToString()
-                                    }
-                                    else
-                                    {
-                                        @Html.Raw(s.Description).ToString()
-                                    }
-                                </p>
-                                
-                                <p class="product__p">Рейтинг: @s.Rate.0</p>
 
-                                <a href="~/Product/@s.Id" class="buy" style="display:block; position:absolute; bottom: 0; margin-bottom:10px;">Получить</a>
+                                @{
+                                    byte[] logo = s.Photos.Where(p => p.Type.Equals("Logo")).FirstOrDefault()?.Data;
+                                }
+                                @if (logo != null)
+                                {
+                                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(logo)" style="width: 40px" class="mt-1 product__img" alt="Large">
+                                }
+                                else
+                                {
+                                    <img src="~/img/DB.png" style="width: 40px" class="mt-1 product__img" alt="Large">
 
+                                }
                             </div>
+                            <p class="product__p" style="word-break: break-all;">
+                                @if (s.Description.Length > 150)
+                                {
+                                    @Html.Raw(s.Description.Substring(0, 150) + "...").ToString()
+                                }
+                                else
+                                {
+                                    @Html.Raw(s.Description).ToString()
+                                }
+                            </p>
+
+                            <p class="product__p">Рейтинг: @s.Rate.0</p>
+
+                            @if(s.Plans.Any()){
+                                <p class="product__p">Стоимость: от @s.Plans?.FirstOrDefault()?.Price р.</p>
+                            }
+
+                            <a href="~/Product/@s.Id" class="buy" style="display:block; position:absolute; bottom: 0; margin-bottom:10px;">Получить</a>
+
+                        </div>
 
                         }
 
@@ -76,31 +83,76 @@
 
 
                     </div>
+
+
+
+
                     <div class="page-mr">
                         <ul class="pagination pagination-sm">
                             <li class="page-item disabled">
                                 <a class="page-link" href="#">&laquo;</a>
                             </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">5</a>
-                            </li>
+
+                            @{ 
+                                 int end = (int)ViewData["Page"] - 1;
+                                int mid = (int)ViewData["Page"];
+                                int top = (int)ViewData["Page"] + 1;
+                            }
+
+
+                            @if ((int)ViewData["Page"] == 1)
+                            {
+                                <li class="page-item active">
+                                    <a class="page-link" href="~/Home/MarketPlace?page=1&category=@ViewData["Category"]">1</a>
+                                </li>
+                                if (ViewBag.Solutions.Count == 6)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="~/Home/MarketPlace?page=2&category=@ViewData["Category"]">2</a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                
+                               
+
+
+
+
+                                <li class="page-item">
+                                    <a class="page-link" href="~/Home/MarketPlace?page=@end&category=@ViewData["Category"]">@end</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="~/Home/MarketPlace?page=@mid&category=@ViewData["Category"]">@mid</a>
+                                </li>
+                                @if (ViewBag.Solutions.Count == 6)
+                                {
+                                <li class="page-item">
+                                    <a class="page-link" href="~/Home/MarketPlace?page=@top&category=@ViewData["Category"]">@top</a>
+                                </li>
+                                    }
+                                }
+
+
+
+
+
+
+
+
+
                             <li class="page-item">
                                 <a class="page-link" href="#">&raquo;</a>
                             </li>
                         </ul>
                     </div>
+
+
+
+
+
+
                 </div>
                 
             </div>

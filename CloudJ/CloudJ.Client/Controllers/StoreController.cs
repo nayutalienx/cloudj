@@ -64,19 +64,22 @@ namespace CloudJ.Client.Controllers
         [Route("makeOrder")]
         public async Task<IActionResult> MakeOrder(NewOrderDto dto)
         {
+            var solutionResponse = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { SolutionId = dto.SolutionId });
+            var sol = solutionResponse.Data.FirstOrDefault();
+            var plan = sol.Plans.Where(p => p.Id == dto.PlanId).FirstOrDefault();
             dto.CustomerId = User.Claims.FirstOrDefault(c => c.Type.Contains("nameidentifier")).Value;
+            var balanceResponse = await _billingApiClient.GetBalanceByFilterAsync(new BalanceFilter { UserId = dto.CustomerId });
+            var balance = balanceResponse.Data.FirstOrDefault();
+            if (balance.BalanceValue < plan.Price)
+                return Redirect("~/Home/Login");
             var response = await _billingApiClient.AddOrderAsync(dto);
             if (response.HasErrors)
                 return View("Error", new ErrorViewModel { RequestId = "Ошибка при обработке заказа" });
 
-            var solutionResponse = await _solutionApiClient.GetByFilterAsync(new SolutionFilter { SolutionId = dto.SolutionId });
-            var sol = solutionResponse.Data.FirstOrDefault();
-            var plan = sol.Plans.Where(p => p.Id == dto.PlanId).FirstOrDefault();
-            var balanceResponse = await _billingApiClient.GetBalanceByFilterAsync(new BalanceFilter { UserId = dto.CustomerId });
-            var balance = balanceResponse.Data.FirstOrDefault();
-            if(balance.BalanceValue < plan.Price)
-                return Redirect("~/Home/Login");
-            else
+            
+            
+            
+            
                 await _billingApiClient.UpdateBalanceAsync(new UpdateBalanceDto { UserId = dto.CustomerId, BalanceValue = balance.BalanceValue - plan.Price });
             
             return Redirect("~/Home/Login");

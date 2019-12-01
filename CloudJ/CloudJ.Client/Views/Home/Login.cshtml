@@ -20,7 +20,7 @@
         </div>
         <div class="row">
 
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <h2 class="view__h3">@Name</h2>
 
                 <div id="summary">
@@ -29,18 +29,22 @@
                        aria-controls="collapseSummary"></a>
                 </div>
             </div>
-            <div class="col-lg-2">
-                <p class="category__p">
-                    <a href="#">Изменить профиль</a>
-                    <a href="support.html">Обращение в службу поддержки</a>
-                    <br />
-                    <a href="~/admin_panel">Панель администратора</a>
-                </p>
+            <div class="col-lg-4">
+
+
+               
+                <ul style="list-style-type: none">
+                    <li ><a href="#">Изменить профиль</a></li>
+                    <li><a href="~/Home/Support">Обращение в службу поддержки</a></li>
+                    <li><a href="~/admin_panel">Панель администратора</a></li>
+                </ul>
+
+
             </div>
         </div>
         <div class="row">
             <div class="col-lg">
-                <a href="#" class="lk__static align-items-center">Посмотреть личную статистику</a>
+                <a href="~/myStat" class="lk__static align-items-center">Посмотреть личную статистику</a>
             </div>
         </div>
         <div class="row intro__marg">
@@ -75,11 +79,11 @@
                         </div>
                         @if (s.Photos.Length > 0)
                         {
-                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(s.Photos[0].Data)" class="mt-1 product__img" alt="Large">
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(s.Photos[0].Data)" style="width: 40px" class="mt-1 product__img" alt="Large">
                         }
                         else
                         {
-                            <img src="~/img/logo.png" class="mt-1 product__img" alt="Large">
+                            <img src="~/img/logo.png" style="width: 40px" class="mt-1 product__img" alt="Large">
 
                         }
                     </div>
@@ -125,34 +129,36 @@
 
             @foreach (SolutionDto s in ViewBag.PushedSolutions)
             {
-                <div class="col-lg-3 product" style="margin: 0;">
+                <div class="col-lg-3 product" style="margin: 0; height: 250px">
                     <div class="media">
                         <div class="media-body">
                             <h5 class="mt-1 mb-1 product__h5"><a href="~/Product/@s.Id">@s.Name</a></h5>
                         </div>
                         @if (s.Photos.Length > 0)
                         {
-                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(s.Photos[0].Data)" class="mt-1 product__img" alt="Large">
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(s.Photos[0].Data)" style="width: 40px" class="mt-1 product__img" alt="Large">
                         }
                         else
                         {
-                            <img src="~/img/logo.png" class="mt-1 product__img" alt="Large">
+                            <img src="~/img/logo.png" class="mt-1 product__img" style="width: 40px" alt="Large">
 
                         }
                     </div>
                     <p class="product__p">Действует до:<br>02.12.2019</p>
-                    <form method="get">
-                        <input hidden="true" name="id" value="@s.Id" />
-                        <button type="submit" asp-controller="Product" asp-action="AddLink" class="btn btn-outline-primary rounded-0">Добавить ссылки</button>
-                    </form>
-                    <form method="get">
-                        <input hidden="true" name="id" value="@s.Id" />
-                        <button type="submit" asp-controller="Product" asp-action="AddPlan" class="btn btn-primary rounded-0">Создать план</button>
-                    </form>
+                    <div  style="display:block; position:absolute; bottom: 0; margin-bottom:10px; width: 240px">
+                        <form method="get" >
+                            <input hidden="true" name="id" value="@s.Id" />
+                            <button type="submit" asp-controller="Product" asp-action="AddLink" class="btn btn-outline-primary rounded-0">Добавить ссылки</button>
+                        </form>
+                        <form method="get">
+                            <input hidden="true" name="id" value="@s.Id" />
+                            <button type="submit" asp-controller="Product" asp-action="AddPlan" class="btn btn-primary rounded-0">Создать план</button>
+                        </form>
+                    </div>
                 </div>
 
             }
-            <div class="col-lg-3 product" style="margin: 0;">
+            <div class="col-lg-3 product" style="margin: 0; height:250px">
                 <div class="add__center">
                     <a asp-controller="Product" asp-action="AddSolution"><img src="~/img/add.png" alt="add"></a>
                 </div>
@@ -213,7 +219,7 @@
 </section>
 
 
-@{
+@*@{
     var props = (await Context.AuthenticateAsync()).Properties.Items;
 }
 
@@ -233,5 +239,5 @@
         <dt>@key</dt>
         <dd>@value</dd>
     }
-</dl>
+</dl>*@
 
